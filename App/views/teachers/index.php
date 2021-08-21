@@ -8,6 +8,6 @@
 </head>
 <body>
     
-    hellooo there
-</body>
+    <h1>This is teachers home page</h1>
+    <a href="<?=ROOT?>logout"> Logout</a>
 </html>
