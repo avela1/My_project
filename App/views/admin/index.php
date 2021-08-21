@@ -8,7 +8,7 @@
 						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
 							<div>
 								<h2 class="text-white pb-2 fw-bold"> <?=$_SESSION['userrole']?> </h2>
-								<h5 class="text-white op-7 mb-2"> Welcome back ->   <?=$_SESSION['name']?>!</h5>
+								<h5 class="text-white op-7 mb-2"> Welcome back ->  <?= $data['user_data'][0] -> Name ?></h5>
 							</div>
 							
 						</div>
