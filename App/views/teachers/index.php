@@ -1,8 +1,6 @@
 <?php $this->view('includes/header', $data); ?>
 
-
 		<div class="main-panel">
-			
             <div class="panel-header bg-primary-gradient mt-5">
                 <div class="page-inner py-5 mt-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
@@ -28,7 +26,7 @@
                                 </h3>
                                 <div class="separator-solid"></div>
                                 <p class="card-text">Some quick example text to build on the card title </p>
-                                <a href="<?= ROOT ?>teacher_dashboard/" class="btn btn-primary btn-rounded btn-sm">Manage</a>
+                                <a href="<?= ROOT ?>teacher/dashboard" class="btn btn-primary btn-rounded btn-sm">Manage</a>
                             </div>
                         </div>
                     </div>
@@ -44,40 +42,7 @@
                                 </h3>
                                 <div class="separator-solid"></div>
                                 <p class="card-text">Some quick example text to build on the card title </p>
-                                <a href="#" class="btn btn-primary btn-rounded btn-sm">Manage</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card card-post card-round">
-                            <img class="card-img-top" src="../assets/img/blogpost.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <div class="separator-solid"></div>
-                                <h3 class="card-title">
-                                    <a href="#">
-                                        Cource Name
-                                    </a>
-                                </h3>
-                                <div class="separator-solid"></div>
-                                <p class="card-text">Some quick example text to build on the card title </p>
-
-                                <a href="#" class="btn btn-primary btn-rounded btn-sm">Manage</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card card-post card-round">
-                            <img class="card-img-top" src="../assets/img/blogpost.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <div class="separator-solid"></div>
-                                <h3 class="card-title">
-                                    <a href="#">
-                                        Cource Name
-                                    </a>
-                                </h3>
-                                <div class="separator-solid"></div>
-                                <p class="card-text">Some quick example text to build on the card title </p>
-                                <a href="#" class="btn btn-primary btn-rounded btn-sm">Manage</a>
+                                <a href="<?= ROOT ?>teacher/dashboard" class="btn btn-primary btn-rounded btn-sm">Manage</a>
                             </div>
                         </div>
                     </div>
@@ -94,7 +59,40 @@
                                 <div class="separator-solid"></div>
                                 <p class="card-text">Some quick example text to build on the card title </p>
 
-                                <a href="#" class="btn btn-primary btn-rounded btn-sm">Manage</a>
+                                <a href="<?= ROOT ?>teacher/dashboard" class="btn btn-primary btn-rounded btn-sm">Manage</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-post card-round">
+                            <img class="card-img-top" src="../assets/img/blogpost.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <div class="separator-solid"></div>
+                                <h3 class="card-title">
+                                    <a href="#">
+                                        Cource Name
+                                    </a>
+                                </h3>
+                                <div class="separator-solid"></div>
+                                <p class="card-text">Some quick example text to build on the card title </p>
+                                <a href="<?= ROOT ?>teacher/dashboard" class="btn btn-primary btn-rounded btn-sm">Manage</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-post card-round">
+                            <img class="card-img-top" src="../assets/img/blogpost.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <div class="separator-solid"></div>
+                                <h3 class="card-title">
+                                    <a href="#">
+                                        Cource Name
+                                    </a>
+                                </h3>
+                                <div class="separator-solid"></div>
+                                <p class="card-text">Some quick example text to build on the card title </p>
+
+                                <a href="<?= ROOT ?>teacher/dashboard" class="btn btn-primary btn-rounded btn-sm">Manage</a>
                             </div>
                         </div>
                     </div>
@@ -111,7 +109,7 @@
                                 <div class="separator-solid"></div>
                                  <p class="card-text">Some quick example text to build on the card title </p>
 
-                                <a href="#" class="btn btn-primary btn-rounded btn-sm">Manage</a>
+                                <a href="<?= ROOT ?>teacher/dashboard" class="btn btn-primary btn-rounded btn-sm">Manage</a>
                             </div>
                         </div>
                     </div>
@@ -128,7 +126,7 @@
                                 <div class="separator-solid"></div>
                                  <p class="card-text">Some quick example text to build on the card title </p>
 
-                                <a href="#" class="btn btn-primary btn-rounded btn-sm">Manage</a>
+                                <a href="<?= ROOT ?>teacher/dashboard" class="btn btn-primary btn-rounded btn-sm">Manage</a>
                             </div>
                         </div>
                     </div>
@@ -145,7 +143,7 @@
                                 <div class="separator-solid"></div>
                                  <p class="card-text">Some quick example text to build on the card title </p>
 
-                                <a href="#" class="btn btn-primary btn-rounded btn-sm">Manage</a>
+                                <a href="<?= ROOT ?>teacher/dashboard" class="btn btn-primary btn-rounded btn-sm">Manage</a>
                             </div>
                         </div>
                     </div>

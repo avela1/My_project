@@ -41,42 +41,41 @@
                 </div>
             </div>
             <ul class="nav nav-primary">
-                <li class="nav-item active">
-                    <a href="./index" class="collapsed" aria-expanded="false">
+                <li class="nav-item ">
+                    <a href="teacher/index" class="collapsed" aria-expanded="false">
                         <i class="fas fa-home"></i>
                         <p>Home Page</p>
                     </a>	
                 </li>
+                <li class="nav-item active">
+                    <a href="<?= ROOT ?>teacher/course_material">
+                        <i class="fas fa-book-reader"></i>
+                        <p>Manage Course Material</p>
+                    </a>
+                </li>
                 <li class="nav-item">
-                    <a href="./index" class="collapsed" aria-expanded="false">
-                        <i class="fas fa-home"></i>
+                    <a href="<?=ROOT?>teacher/enr_student" class="collapsed" aria-expanded="false">
+                    <i class="fas fa-list-ol"></i>
                         <p>Enrolled Student</p>
                     </a>	
                 </li>
 
                 <li class="nav-item">
-                    <a href="<?= ROOT ?>admin/course_list">
-                        <i class="fas fa-book-reader"></i>
-                        <p>Manage Course</p>
+                    <a href="<?= ROOT ?>teacher/online_lec">
+                        <i class="fas fa-video"></i>
+                        <p>Manage Online Lecturing</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="<?= ROOT ?>admin/course_list">
-                        <i class="fas fa-book-reader"></i>
-                        <p>Manage Course Material</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="<?= ROOT ?>admin/course_list">
-                        <i class="fas fa-book-reader"></i>
+                    <a href="<?= ROOT ?>teacher/message">
+                        <i class="far fa-envelope"></i>
                         <p>Messages</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a data-toggle="" href="#dashboard" class="collapsed" aria-expanded="false">
+                    <a data-toggle="" href="forum" class="collapsed" aria-expanded="false">
                         <i class="fas fa-comments"></i>
                         <p>Forums</p>
                     </a>

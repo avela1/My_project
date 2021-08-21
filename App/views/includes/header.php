@@ -4,7 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>AAU ELearning Admin Dashboard</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="<?= ASSETS ?>/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="<?= ASSETS ?>/images/logo2.png" type="image/x-icon"/>
 
 	<link rel="stylesheet" href="<?= ASSETS ?>/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?= ASSETS ?>/css/atlantis.min.css">

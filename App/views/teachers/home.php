@@ -19,124 +19,42 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Card Title</div>
-                            <div class="card-category">Card Category</div>
+                        <div class="d-flex align-items-center">
+                            <div class="card-title">Course Name -> Uploaded Course Materials</div>
+                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                                    <i class="fa fa-plus"></i>
+                                    Upload New
+                                </a>
+                            </div>
+							
                         </div>
                         <div class="card-body">
-                            <table class="table table-typo">
+                            <table class="table display table-striped table-hover table-head-bg-danger mt-4 table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%"><span class="h2 b">Description</span></th>
+                                        <th><span class="h2 b">File</span></th>
+                                        <th style="width: 10%"><span class="h2 b ml-3">Actions</span></th>
+                                    </tr>
+                                </thead>
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <p>Header 2</p>
+                                            <span class="h4">Chapter 1</span>
                                         </td>
-                                        <td><span class="h1">Chapter 1</span></td>
-                                    </tr>
-                                    <tr>
+                                        <td><span class="h4">This is where the file is putted</span></td>
                                         <td>
-                                            <p>Header 2</p>
+                                            <div class="form-button-action">
+                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Disable">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
                                         </td>
-                                        <td><span class="h2">h2. Bootstrap heading</span></td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Header 3</p>
-
-                                        </td>
-                                        <td><span class="h3">h3. Bootstrap heading</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Header 4</p>
-
-                                        </td>
-                                        <td><span class="h4">h4. Bootstrap heading</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Header 5</p>
-
-                                        </td>
-                                        <td><span class="h5">h5. Bootstrap heading</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Header 5</p>
-
-                                        </td>
-                                        <td><span class="h6">h6. Bootstrap heading</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Paragraph</p>
-
-                                        </td>
-                                        <td><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Paragraph Lead</p>
-
-                                        </td>
-                                        <td><p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Quote</p>
-
-                                        </td>
-                                        <td><blockquote>
-                                            <p class="blockquote blockquote-primary">
-                                                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                                                <br>
-                                                <br>
-                                                <small>
-                                                    - Noaa
-                                                </small>
-                                            </p>
-                                        </blockquote></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Primary Text</p>
-
-                                        </td>
-                                        <td><p class="text-primary">Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Info Text</p>
-
-                                        </td>
-                                        <td><p class="text-info">Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Success Text</p>
-
-                                        </td>
-                                        <td><p class="text-success">Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Warning Text</p>
-
-                                        </td>
-                                        <td><p class="text-warning">Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Danger Text</p>
-
-                                        </td>
-                                        <td><p class="text-danger">Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Muted Text</p>
-
-                                        </td>
-                                        <td><p class="text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p></td>
-                                    </tr>
+                                   
                                 </tbody>
                             </table>
                         </div>
