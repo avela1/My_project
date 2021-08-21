@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
 <body>
 
     <h2>This is from stundent home page</h2>
-    <a href="<?=ROOT?>logout"> Logout</a>
+    <a href="<?=ROOT?>logout"> Logout</a> 
 
 </body>
 </html>
