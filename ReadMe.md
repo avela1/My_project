@@ -9,4 +9,8 @@ steps in github rep0sitory
 2. git add .
 3. git commit -m "comment"
 4. git push
-5. 
+
+
+## Branch 
+
+git checkout Myproject
