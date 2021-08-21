@@ -33,10 +33,10 @@ class User_account {
                     header("Location: ". ROOT . "admin/");
                     die;
                 } else if($_SESSION['userrole'] == "Student") {
-                    header("Location: ". ROOT . "students/");
+                    header("Location: ". ROOT . "student/");
                     die;
                 } else if($_SESSION['userrole'] == "Teacher") {
-                    header("Location: ". ROOT . "teachers/");
+                    header("Location: ". ROOT . "teacher/");
                     die;
                 }
               
