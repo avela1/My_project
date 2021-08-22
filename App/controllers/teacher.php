@@ -44,4 +44,28 @@ class Teacher extends Controller {
         $this->view('teachers/enr_student', $data);
     }
 
+    public function sched_online() {
+        $User = $this -> load_model('user_account');
+        $user_data = $User -> check_login();
+        
+        if(is_array($user_data)) {
+            $data['user_data'] = $user_data;
+        }
+        
+        $data['page_title'] = "Scheduled class";
+        $this->view('teachers/sched_online', $data);
+    }
+
+    public function message() {
+        $User = $this -> load_model('user_account');
+        $user_data = $User -> check_login();
+        
+        if(is_array($user_data)) {
+            $data['user_data'] = $user_data;
+        }
+        
+        $data['page_title'] = "Scheduled class";
+        $this->view('teachers/message', $data);
+    }
+
 }

@@ -94,18 +94,5 @@
 
 
 	<?php $this->view('includes/footer'); ?>
-	<script >
-
-		
-		$(document).ready(function() {
-
-			$('#add-row').DataTable( {
-				"pageLength": 5,
-				
-			});
-
-			
-		});
-	</script>
 </body>
 </html>

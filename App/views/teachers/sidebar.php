@@ -61,7 +61,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="<?= ROOT ?>teacher/online_lec">
+                    <a href="<?= ROOT ?>teacher/sched_online">
                         <i class="fas fa-video"></i>
                         <p>Manage Online Lecturing</p>
                     </a>
