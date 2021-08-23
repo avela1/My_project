@@ -13,7 +13,7 @@ Class Student {
         $data['username'] = trim($POST['username']);			
         $data['batch'] = trim($POST['batch']);			
         $data['image'] = trim($POST['image']);			
-        $data['addedBy'] = $_SESSION['ID'];	
+        $data['addedBy'] = 2;	
 		$data['date'] = date("Y-m-d H:i:s");
 		
 
@@ -51,9 +51,9 @@ Class Student {
             $query2 = "insert into studentinfo (Username, Name, StudEmail, Image, StudContactNo, AddedByAdminID, Batch, CreatedDateTime) values (:username, :name, :email, :image, :contact, :addedBy, :batch, :date)";
             $result2 = $DB->write($query2, $data);
             if($result2) {
-                echo "string added";
+                return true;
             } else {
-                echo "Not Added";
+                return false;
             }
             
         }

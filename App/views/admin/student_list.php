@@ -33,14 +33,14 @@
 								<div class="card-header">
 									<div class="d-flex align-items-center">
 										<h4 class="card-title">Add Student</h4>
-										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addStud">
 											<i class="fa fa-plus"></i>
 											Add Student
                                         </a>
 									</div>
 								</div>
 								<div class="card-body" >
-									<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal fade" id="addStud" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header no-bd">
@@ -111,6 +111,69 @@
 											</div>
 										</div>
 									</div>
+
+									<!-- Update Modal  -->
+
+									<div class="modal fade" id="updateStud" tabindex="-1" role="dialog" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header no-bd">
+													<h5 class="modal-title">
+														<span class="fw-mediumbold">
+														UPDATE</span> 
+														<span class="fw-light">
+															Student
+														</span>
+													</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body bg-dark">
+													<form method="POST" >
+														<div class="row" >
+															<div class="col-md-12 col-lg-12"  >
+
+																<div class="form-group">
+																	<label for="exampleFormControlFile1">Username</label>
+																	<div class="input-icon">
+																		<span class="input-icon-addon">
+																			<i class="fa fa-user"></i>
+																		</span>
+																		<input id="usernameu" type="text" class="form-control" placeholder="Username" required>
+																	</div>
+																</div>
+
+																<div class="form-group">
+																	<label for="name">Full Name</label>
+																	<input id="nameu" type="text" class="form-control" placeholder="Fill Name" required>
+																</div>
+
+																<div class="form-group">
+																	<label for="email">Email Address</label>
+																	<input type="email" class="form-control" id="emailu" placeholder="Enter Email" required>
+																</div>
+																
+																<div class="form-group">
+																	<label for="exampleFormControlSelect1">Student Batch</label> 
+																	<select class="form-control" id="batchu" required>
+																		<option>1</option>
+																		<option>2</option>
+																		<option>3</option>
+																		<option>4</option>
+																	</select>
+																</div>
+															</div>
+														</div>
+													</form>
+												</div>
+												<div class="modal-footer no-bd">
+													<button type="button" id="addRowButton" class="btn btn-primary">Add</button>
+													<button type="button" class="btn btn-danger" data-dismiss="modal">Clear</button>
+												</div>
+											</div>
+										</div>
+									</div>
 									<div class="table-responsive">
 										<table id="add-row" class="display table table-striped table-hover" >
 											<thead>
@@ -121,7 +184,7 @@
 													<th>Image</th>
 													<th>Contact No</th>
 													<th>Batch</th>
-													
+													<th style="width: 10%">Action</th>
 												</tr>
 											</thead>
 											
@@ -136,28 +199,6 @@
 												</tr>
 											</tfoot>
 											
-											
-											
-											<!-- <tbody id="table_body">
-												<tr>
-													<td>Tiger Nixon</td>
-													<td>System Architect</td>
-													<td>Edinburgh</td>
-													<td>Edinburgh</td>
-													<td>Edinburgh</td>
-													<td>Edinburgh</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Disable">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-											</tbody> -->
 										</table>
 									</div>
 								</div>
@@ -174,34 +215,17 @@
 		$(document).ready(function() {
 
 			function handle_result(result) {
-				
-
 				if(result != ""){
 
-					if(result == "Student added successfully!")
+					if(result == '"Student added successfully!"')
 					{
-							alert(result);
-							$('#addRowModal').modal('hide');
+						$('#addStud').modal('hide');
+						alert(result);
+						$('#add-row').DataTable().ajax.reload();
 					}else {
 							alert(result);
 					}
 				}
-			}
-
-			function display() {
-				var ajax = new XMLHttpRequest();
-				ajax.addEventListener('readystatechange', function(){
-
-					if(ajax.readyState == 4 && ajax.status == 200)
-					{
-						alert(ajax.responseText);
-					}
-				});
-				ajax.open("POST","<?=ROOT?>student_controller",true); 
-				
-				var table_body = document.querySelector("#table_body");
-				// table_body.innerHTML = obj.data;
-
 			}
 
 			$.ajax({
@@ -220,7 +244,6 @@
 			});
 
 			$('#addRowButton').click(function() {
-				
 				$.post("<?=ROOT?>student_controller", {
 						name: $("#name").val(),					
 						email: $("#email").val(),
@@ -235,6 +258,10 @@
 						handle_result(data);
 					}
 				);
+			});
+
+			$('#updateStud').click(function (event) {
+				
 			});
 		});
 	</script>
