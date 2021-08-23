@@ -5,7 +5,7 @@
                 <div class="page-inner py-5 mt-5">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                         <div>
-                            <h2 class="text-white pb-2 fw-bold"> <?=$_SESSION['userrole']?> </h2>
+                            <h2 class="text-white pb-2 fw-bold"> Teacher </h2>
                             <h5 class="text-white op-7 mb-2"> Welcome back -> Abel Birhane </h5>
                         </div>
                         
@@ -19,7 +19,7 @@
                             <img class="card-img-top" src="../assets/img/blogpost.jpg" alt="Card image cap">
                             <div class="card-body">
                                 <div class="separator-solid"></div>
-                                <h3 class="card-title">
+                                <h3 class="card-title"> 
                                     <a href="#">
                                         Cource Name
                                     </a>

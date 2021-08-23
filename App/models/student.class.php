@@ -48,11 +48,12 @@ Class Student {
             $query = "INSERT INTO `useraccount`(`Username`, `Pass`, `UserType`) VALUES  (:username, :encrypted_pwd, :usertype)";
             $result = $DB->write($query, $arr);
     
-    
             $query2 = "insert into studentinfo (Username, Name, StudEmail, Image, StudContactNo, AddedByAdminID, Batch, CreatedDateTime) values (:username, :name, :email, :image, :contact, :addedBy, :batch, :date)";
             $result2 = $DB->write($query2, $data);
             if($result2) {
-                return true;
+                echo "string added";
+            } else {
+                echo "Not Added";
             }
             
         }

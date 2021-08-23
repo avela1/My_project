@@ -28,6 +28,7 @@ class User_account {
                
                 $_SESSION['username'] = $result[0]->Username;
                 $_SESSION['userrole'] = $result[0]->UserType;
+                $_SESSION['ID'] = $result[0]->ID;
 
                 if($_SESSION['userrole'] == "Administrator") {
                     header("Location: ". ROOT . "admin/");
@@ -75,7 +76,6 @@ class User_account {
         if(isset($_SESSION['username']) && isset($_SESSION['userrole'])) {
             unset($_SESSION['username']);
             unset($_SESSION['userrole']);
-
             header("Location: ". ROOT . "login");
             die;
         }

@@ -121,9 +121,10 @@
 													<th>Image</th>
 													<th>Contact No</th>
 													<th>Batch</th>
-													<th style="width: 10%">Action</th>
+													
 												</tr>
 											</thead>
+											
 											<tfoot>
 												<tr>
 													<th>Username</th>
@@ -135,13 +136,7 @@
 												</tr>
 											</tfoot>
 											
-											<tbody>
-												<?php 
-													 $DB = Database::newInstance();
-													 $result = $DB->read("SELECT `Username`, `Name`, `StudEmail`, `Image`, `StudContactNo`, `Batch` FROM `studentinfo`");
-
-												?>
-											</tbody>
+											
 											
 											<!-- <tbody id="table_body">
 												<tr>
@@ -176,7 +171,6 @@
 	<?php $this->view('includes/footer'); ?>
 	<script >
 
-		
 		$(document).ready(function() {
 
 			function handle_result(result) {
@@ -188,9 +182,6 @@
 					{
 							alert(result);
 							$('#addRowModal').modal('hide');
-
-							// var table_body = document.querySelector("#table_body");
-							// table_body.innerHTML = obj.data;
 					}else {
 							alert(result);
 					}
@@ -212,24 +203,20 @@
 				// table_body.innerHTML = obj.data;
 
 			}
-		
-			$('#add-row').DataTable( {
-				"pageLength": 5,
-				// "processing": true,
-				// "serverSide": true,
-				// "order" : [],
-				// "ajax": {
-				// 	url: '<?=ROOT?>student_controller',
-				// 	type: "POST"
-				// },
-				// columns : [
-				// 	{ data: "Username"},
-				// 	{ data: "Name" },
-				// 	{ data: "StudEmail" },
-				// 	{ data: "Image" },
-				// 	{ data: "StudContactNo" },
-				// 	{ data: "Batch" }
-				// ]
+
+			$.ajax({
+				url: "<?=ROOT?>student_controller/display",
+				method: "POST",
+				success: function (data) {
+					$('#add-row').DataTable( {
+						"pageLength": 5,
+						"ajax": "<?=ROOT?>student_controller/display",
+						"columnDefs": [{
+							"defaultContent": "-",
+							"targets": "_all"
+						}]
+					});
+				}
 			});
 
 			$('#addRowButton').click(function() {
