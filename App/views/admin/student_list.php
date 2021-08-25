@@ -140,7 +140,7 @@
 																		<span class="input-icon-addon">
 																			<i class="fa fa-user"></i>
 																		</span>
-																		<input id="usernameu" type="text" class="form-control" placeholder="Username" required>
+																		<input id="usernameu" type="text" class="form-control" placeholder="Username" disabled>
 																	</div>
 																</div>
 
@@ -168,8 +168,8 @@
 													</form>
 												</div>
 												<div class="modal-footer no-bd">
-													<button type="button" id="addRowButton" class="btn btn-primary">Add</button>
-													<button type="button" class="btn btn-danger" data-dismiss="modal">Clear</button>
+													<button type="button" id="updateBtn" class="btn btn-primary">Add</button>
+													<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 												</div>
 											</div>
 										</div>
@@ -222,7 +222,13 @@
 						$('#addStud').modal('hide');
 						alert(result);
 						$('#add-row').DataTable().ajax.reload();
-					}else {
+					}else if(result == '"Student Updated successfully!"') {
+						$('#updateStud').modal('hide');
+						alert(result);
+						$('#add-row').DataTable().ajax.reload();
+					}
+					
+					else {
 							alert(result);
 					}
 				}
@@ -243,15 +249,32 @@
 				}
 			});
 
-			$('#addRowButton').click(function() {
+			$('#addRowButton').click(function(event) {
+				event.preventDefault();
+				var name = $("#name").val();
+				var email = $("#email").val();
+				var contact = $("#contact").val();
+				var username = $("#username").val();
+				var password = $("#password").val();
+				var batch = $("#batch").val();
+				var image = $("#image").val();
+				var extension = image.split('.').pop().toLowerCase();
+				if(extension != '') {
+					if($.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+						alert("Invalid Image File");
+						$("#image").val('');
+						return false;
+					}
+				}
+
 				$.post("<?=ROOT?>student_controller", {
-						name: $("#name").val(),					
-						email: $("#email").val(),
-						image: $("#image").val(),
-						contact: $("#contact").val(),
-						username:$("#username").val(),
-						password: $("#password").val(),
-						batch: $("#batch").val(),
+						name: name,					
+						email: email,
+						image: image,
+						contact: contact,
+						username:username,
+						password: password,
+						batch: batch,
 						data_type: 'add_student'
 					},
 					function (data, status) {
@@ -260,8 +283,29 @@
 				);
 			});
 
-			$('#updateStud').click(function (event) {
-				
+			$('body').on('click', '.update', function () {
+				var id = $(this).data('id');
+				var a = $(this).attr('info');
+				var info = JSON.parse(a.replaceAll("'", '"'));
+				console.log(info);
+				$("#nameu").val(info.Name);	
+				$("#emailu").val(info.StudEmail);
+				$("#usernameu").val(info.Username);
+				$("#batchu").val(info.Batch);
+			});
+
+			$('#updateBtn').click(function() {
+				$.post("<?=ROOT?>student_controller", {
+						name: $("#nameu").val(),					
+						email: $("#emailu").val(),
+						username:$("#usernameu").val(),
+						batch: $("#batchu").val(),
+						data_type: 'update_student'
+					},
+					function (data, status) {
+						handle_result(data);
+					}
+				);
 			});
 		});
 	</script>
