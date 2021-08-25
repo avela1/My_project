@@ -9,4 +9,9 @@ steps in github rep0sitory
 2. git add .
 3. git commit -m "comment"
 4. git push
-5. 
+
+
+// creating branch and switching
+
+1. git branch branchname//creating new
+2. git checkout branchname (master, myproject, newbranch) // switch bn branchs 
