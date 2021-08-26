@@ -33,14 +33,14 @@
 								<div class="card-header">
 									<div class="d-flex align-items-center">
 										<h4 class="card-title">Add Student</h4>
-										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#userModal">
 											<i class="fa fa-plus"></i>
 											Add Student
                                         </a>
 									</div>
 								</div>
 								<div class="card-body" >
-									<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header no-bd">
@@ -55,25 +55,25 @@
 														<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
-												<div class="modal-body bg-dark">
-													<form method="POST" >
+												<form method="POST" action="" id="addform" enctype="multipart/form-data">
+													<div class="modal-body bg-dark">
 														<div class="row" >
 															<div class="col-md-12 col-lg-12"  >
 																<div class="form-group">
 																	<label for="name">Full Name</label>
-																	<input id="name" type="text" class="form-control" placeholder="Fill Name" required>
+																	<input name="name" id="name" type="text" class="form-control" placeholder="Fill Name" required>
 																</div>
 																<div class="form-group">
 																	<label for="email">Email Address</label>
-																	<input type="email" class="form-control" id="email" placeholder="Enter Email" required>
+																	<input name="email" type="email" class="form-control" id="email" placeholder="Enter Email" required>
 																</div>
 																<div class="form-group">
 																	<label for="exampleFormControlFile1">Load Photo</label>
-																	<input type="file" class="form-control-file" id="image" required>
+																	<input name="photo" type="file" class="form-control-file" id="image" required>
 																</div>
 																<div class="form-group">
 																	<label for="exampleFormControlFile1">Contact Number</label>
-																	<input type="number" class="form-control-file" id="contact" required>
+																	<input name="contact" type="number" class="form-control-file" id="contact" required>
 																</div>
 					
 																<div class="form-group">
@@ -82,18 +82,83 @@
 																		<span class="input-icon-addon">
 																			<i class="fa fa-user"></i>
 																		</span>
-																		<input id="username" type="text" class="form-control" placeholder="Username" required>
+																		<input name="username" id="username" type="text" class="form-control" placeholder="Username" required>
 																	</div>
 																</div>
 					
 																<div class="form-group">
 																	<label for="password">Password</label>
-																	<input id="password" type="password" class="form-control" placeholder="Password" required>
+																	<input name="password" id="password" type="password" class="form-control" placeholder="Password" required>
 																</div>
 					
 																<div class="form-group">
 																	<label for="exampleFormControlSelect1">Select Student Batch</label> 
-																	<select class="form-control" id="batch" required>
+																	<select class="form-control" name = "batch" id="batch" required>
+																		<option>1</option>
+																		<option>2</option>
+																		<option>3</option>
+																		<option>4</option>
+																	</select>
+																</div>
+															</div>
+														</div>
+														<div class="modal-footer no-bd">
+															<button type="submit" id="addButton" class="btn btn-primary">Add</button>
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Clear</button>
+															<input type="hidden" name="action" value="add_student">
+														</div>
+													</form>
+													
+												</div>
+												
+											</div>
+										</div>
+									</div>
+
+									<!-- Update Modal  -->
+
+									<div class="modal fade" id="updateStud" tabindex="-1" role="dialog" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header no-bd">
+													<h5 class="modal-title">
+														<span class="fw-mediumbold">
+														UPDATE</span> 
+														<span class="fw-light">
+															Student
+														</span>
+													</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body bg-dark">
+													<form method="POST" >
+														<div class="row" >
+															<div class="col-md-12 col-lg-12"  >
+																<div class="form-group">
+																	<label for="exampleFormControlFile1">Username</label>
+																	<div class="input-icon">
+																		<span class="input-icon-addon">
+																			<i class="fa fa-user"></i>
+																		</span>
+																		<input name="usernameu" id="usernameu" type="text" class="form-control" placeholder="Username" disabled>
+																	</div>
+																</div>
+
+																<div class="form-group">
+																	<label for="name">Full Name</label>
+																	<input name="nameu" id="nameu" type="text" class="form-control" placeholder="Fill Name" required>
+																</div>
+
+																<div class="form-group">
+																	<label for="email">Email Address</label>
+																	<input name="emailu" type="email" class="form-control" id="emailu" placeholder="Enter Email" required>
+																</div>
+																
+																<div class="form-group">
+																	<label for="exampleFormControlSelect1">Student Batch</label> 
+																	<select class="form-control" name= "batchu" id="batchu" required>
 																		<option>1</option>
 																		<option>2</option>
 																		<option>3</option>
@@ -105,8 +170,9 @@
 													</form>
 												</div>
 												<div class="modal-footer no-bd">
-													<button type="button" id="addRowButton" class="btn btn-primary">Add</button>
-													<button type="button" class="btn btn-danger" data-dismiss="modal">Clear</button>
+													<button type="button" id="updateBtn" class="btn btn-primary">Add</button>
+													<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+													<input type="hidden" id = "updateinfo" name="action" value="update_student">
 												</div>
 											</div>
 										</div>
@@ -124,6 +190,7 @@
 													<th style="width: 10%">Action</th>
 												</tr>
 											</thead>
+											
 											<tfoot>
 												<tr>
 													<th>Username</th>
@@ -135,34 +202,6 @@
 												</tr>
 											</tfoot>
 											
-											<tbody>
-												<?php 
-													 $DB = Database::newInstance();
-													 $result = $DB->read("SELECT `Username`, `Name`, `StudEmail`, `Image`, `StudContactNo`, `Batch` FROM `studentinfo`");
-
-												?>
-											</tbody>
-											
-											<!-- <tbody id="table_body">
-												<tr>
-													<td>Tiger Nixon</td>
-													<td>System Architect</td>
-													<td>Edinburgh</td>
-													<td>Edinburgh</td>
-													<td>Edinburgh</td>
-													<td>Edinburgh</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Disable">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-											</tbody> -->
 										</table>
 									</div>
 								</div>
@@ -176,73 +215,86 @@
 	<?php $this->view('includes/footer'); ?>
 	<script >
 
-		
 		$(document).ready(function() {
 
 			function handle_result(result) {
-				
-
 				if(result != ""){
 
-					if(result == "Student added successfully!")
+					if(result == '"Student added successfully!"')
 					{
-							alert(result);
-							$('#addRowModal').modal('hide');
-
-							// var table_body = document.querySelector("#table_body");
-							// table_body.innerHTML = obj.data;
-					}else {
+						$('#userModal').modal('hide');
+						alert(result);
+						$('#add-row').DataTable().ajax.reload();
+						
+					}else if(result == '"Student updated successfully!"') {
+						$('#updateStud').modal('hide');
+						alert(result);
+						$('#add-row').DataTable().ajax.reload();
+					}
+					
+					else {
 							alert(result);
 					}
 				}
 			}
 
-			function display() {
-				var ajax = new XMLHttpRequest();
-				ajax.addEventListener('readystatechange', function(){
-
-					if(ajax.readyState == 4 && ajax.status == 200)
-					{
-						alert(ajax.responseText);
-					}
-				});
-				ajax.open("POST","<?=ROOT?>student_controller",true); 
-				
-				var table_body = document.querySelector("#table_body");
-				// table_body.innerHTML = obj.data;
-
-			}
-		
-			$('#add-row').DataTable( {
-				"pageLength": 5,
-				// "processing": true,
-				// "serverSide": true,
-				// "order" : [],
-				// "ajax": {
-				// 	url: '<?=ROOT?>student_controller',
-				// 	type: "POST"
-				// },
-				// columns : [
-				// 	{ data: "Username"},
-				// 	{ data: "Name" },
-				// 	{ data: "StudEmail" },
-				// 	{ data: "Image" },
-				// 	{ data: "StudContactNo" },
-				// 	{ data: "Batch" }
-				// ]
+			$.ajax({
+				url: "<?=ROOT?>student_controller/display",
+				method: "POST",
+				success: function (data) {
+					$('#add-row').DataTable( {
+						"pageLength": 5,
+						"ajax": "<?=ROOT?>student_controller/display",
+						"columnDefs": [{
+							"defaultContent": "-",
+							"targets": "_all"
+						}]
+					});
+				}
 			});
 
-			$('#addRowButton').click(function() {
-				
+			$(document).on('submit', '#addform', function (event) { 
+				event.preventDefault();
+
+				$.ajax({
+					url: "<?=ROOT?>student_controller",
+					type: 'POST',
+					dataType: 'json',
+					data: new FormData(this),  
+					processData: false,
+					contentType: false,
+					beforeSend: function (){
+						console.log("waiting....");
+					},
+					success: function(response){
+						console.log(response);
+					},
+					error: function (){
+						console.log("OOOPs something is wrong");
+					},
+
+				});
+			});
+
+			
+			$('body').on('click', '.update', function () {
+				var id = $(this).data('id');
+				var a = $(this).attr('info');
+				var info = JSON.parse(a.replaceAll("'", '"'));
+				console.log(info);
+				$("#nameu").val(info.Name);	
+				$("#emailu").val(info.StudEmail);
+				$("#usernameu").val(info.Username);
+				$("#batchu").val(info.Batch);
+			});
+
+			$('#updateBtn').click(function() {
 				$.post("<?=ROOT?>student_controller", {
-						name: $("#name").val(),					
-						email: $("#email").val(),
-						image: $("#image").val(),
-						contact: $("#contact").val(),
-						username:$("#username").val(),
-						password: $("#password").val(),
-						batch: $("#batch").val(),
-						data_type: 'add_student'
+						name: $("#nameu").val(),					
+						email: $("#emailu").val(),
+						username:$("#usernameu").val(),
+						batch: $("#batchu").val(),
+						action: 'update_student'
 					},
 					function (data, status) {
 						handle_result(data);
