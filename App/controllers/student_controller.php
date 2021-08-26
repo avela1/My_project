@@ -2,47 +2,83 @@
 
 class  Student_controller extends Controller {
 
-    public function index() {
+    // public function index() {
        
+    //     $_SESSION['error'] = "";
+    //     $stu = $this -> load_model('student');
+        
+
+    //     if($_POST['data_type'] == 'add_student') {
+
+    //         $stu->create($_POST);
+
+    //         if($_SESSION['error'] != "")
+    //         {
+    //             $arr = $_SESSION['error'];
+    //             $_SESSION['error'] = "";
+    //             show($arr);
+              
+    //         }else
+    //         {
+    //             $arr = "Student added successfully!";
+    //             echo json_encode($arr);
+    //         }
+
+    //     } else if($_POST['data_type'] == 'update_student') {
+    //         $stu->update($_POST);
+            
+    //         if($_SESSION['error'] != "")
+    //         {
+    //             $arr = $_SESSION['error'];
+    //             $_SESSION['error'] = "";
+    //             show($arr);
+              
+    //         }else
+    //         {
+    //             $arr = "Student updated successfully!";
+    //             echo json_encode($arr);
+    //         }
+    //     } else {
+  
+    //     }
+    // }
+
+     public function index() {
+    
         $_SESSION['error'] = "";
         $stu = $this -> load_model('student');
-       
 
-        if($_POST['data_type'] == 'add_student') {
+        if($_REQUEST['action'] == 'add_student' && !empty($_POST)) {
 
-            $stu->create($_POST);
-
+            $stu->create($_POST, $_FILES);
             if($_SESSION['error'] != "")
             {
                 $arr = $_SESSION['error'];
                 $_SESSION['error'] = "";
                 show($arr);
-              
+                
             }else
             {
                 $arr = "Student added successfully!";
                 echo json_encode($arr);
             }
-
-        } else if($_POST['data_type'] == 'update_student') {
+        } else if($_REQUEST['action'] == 'update_student') {
             $stu->update($_POST);
-            
             if($_SESSION['error'] != "")
             {
                 $arr = $_SESSION['error'];
                 $_SESSION['error'] = "";
                 show($arr);
-              
+                
             }else
             {
                 $arr = "Student updated successfully!";
                 echo json_encode($arr);
             }
         } else {
-  
+        
         }
-    }
-
+     }
     public function display() {
         $stu = $this -> load_model('student');
         $resultlist = $stu -> get_all();
@@ -53,7 +89,8 @@ class  Student_controller extends Controller {
                 $value['Username'],
                 $value['Name'],
                 $value['StudEmail'],
-                $value['Image'],
+                '<img src="'.ROOT.$value['Image'].'" class="rounded responsive" style = "width:50px; height:50px"/>',
+               
                 $value['StudContactNo'],
                 $value['Batch'],
 
@@ -70,7 +107,6 @@ class  Student_controller extends Controller {
         }
 
         echo json_encode($result);
-
         
     }
 }
