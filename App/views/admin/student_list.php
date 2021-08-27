@@ -107,10 +107,8 @@
 															<button type="button" class="btn btn-danger" data-dismiss="modal">Clear</button>
 															<input type="hidden" name="action" value="add_student">
 														</div>
-													</form>
-													
-												</div>
-												
+													</div>
+												</form>
 											</div>
 										</div>
 									</div>
@@ -137,7 +135,7 @@
 														<div class="row" >
 															<div class="col-md-12 col-lg-12"  >
 																<div class="form-group">
-																	<label for="exampleFormControlFile1">Username</label>
+																	<label for="usernameu">Username</label>
 																	<div class="input-icon">
 																		<span class="input-icon-addon">
 																			<i class="fa fa-user"></i>
@@ -220,7 +218,7 @@
 			function handle_result(result) {
 				if(result != ""){
 
-					if(result == '"Student added successfully!"')
+					if(result == 'Student added successfully!')
 					{
 						$('#userModal').modal('hide');
 						alert(result);
@@ -233,7 +231,7 @@
 					}
 					
 					else {
-							alert(result);
+						alert(result);
 					}
 				}
 			}
@@ -267,7 +265,7 @@
 						console.log("waiting....");
 					},
 					success: function(response){
-						console.log(response);
+						handle_result(response);
 					},
 					error: function (){
 						console.log("OOOPs something is wrong");
@@ -277,11 +275,10 @@
 			});
 
 			
-			$('body').on('click', '.update', function () {
+			$(document).on('click', '.update', function () {
 				var id = $(this).data('id');
 				var a = $(this).attr('info');
 				var info = JSON.parse(a.replaceAll("'", '"'));
-				console.log(info);
 				$("#nameu").val(info.Name);	
 				$("#emailu").val(info.StudEmail);
 				$("#usernameu").val(info.Username);

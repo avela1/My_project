@@ -33,20 +33,90 @@
 								<div class="card-header">
 									<div class="d-flex align-items-center">
 										<h4 class="card-title">Add Row</h4>
-										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#userModal">
 											<i class="fa fa-plus"></i>
 											Add Instructor
                                         </a>
 									</div>
 								</div>
 								<div class="card-body">
-									<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header no-bd">
 													<h5 class="modal-title">
 														<span class="fw-mediumbold">
 														New</span> 
+														<span class="fw-light">
+															Lecturers
+														</span>
+													</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<form method="POST" action="" id="addform" enctype="multipart/form-data">
+													<div class="modal-body">
+														<div class="row">
+															<div class="col-md-12 col-lg-12">
+																<div class="form-group">
+																	<label for="name">Full Name</label>
+																	<input id="name" name="name" type="text" class="form-control" placeholder="Fill Name" >
+																</div>
+																<div class="form-group">
+																	<label for="email">Email Address</label>
+																	<input type="email" name="email" class="form-control" id="email" placeholder="Enter Email" >
+																</div>
+																<div class="form-group">
+																	<label for="image">Load Photo</label>
+																	<input type="file" name="photo" class="form-control-file" id="image" >
+																</div>
+																<div class="form-group">
+																	<label for="contact">Contact Number</label>
+																	<input type="number" name="contact" class="form-control-file" id="contactt" >
+																</div>
+																<div class="form-group">
+																	<label for="qualification">Qualification</label> 
+																	<select class="form-control" name="qualification" id="qualification" >
+																		<option>Degree</option>
+																		<option>Masters</option>
+																		<option>PHD</option>
+																	</select>
+																</div>
+																<div class="form-group">
+																	<label for="username">Username</label>
+																	<div class="input-icon">
+																		<span class="input-icon-addon">
+																			<i class="fa fa-user"></i>
+																		</span>
+																		<input type="text" name="username" class="form-control" placeholder="Username" >
+																	</div>
+																</div>
+					
+																<div class="form-group">
+																	<label for="password">Password</label>
+																	<input type="password" name="password" class="form-control" id="password" placeholder="Password" >
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="modal-footer no-bd">
+														<button type="submit" id="addButton" class="btn btn-primary">Add</button>
+														<button type="button" class="btn btn-danger" data-dismiss="modal">Clear</button>
+														<input type="hidden" name="action" value="add_teacher">
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+
+									<div class="modal fade" id="updateTech" tabindex="-1" role="dialog" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header no-bd">
+													<h5 class="modal-title">
+														<span class="fw-mediumbold">
+														UPDATE</span> 
 														<span class="fw-light">
 															Student
 														</span>
@@ -55,229 +125,74 @@
 														<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
-												<div class="modal-body">
-													<form>
-														<div class="row">
-															<div class="col-md-12 col-lg-12">
+												<form method="POST" id = "updateform">
+													<div class="modal-body bg-dark">
+														<div class="row" >
+															<div class="col-md-12 col-lg-12"  >
 																<div class="form-group">
-																	<label for="fname1">Full Name</label>
-																	<input id="fname1" type="text" class="form-control" placeholder="Fill Name">
+																	<label for="username">Username</label>
+																	<div class="input-icon">
+																		<span class="input-icon-addon">
+																			<i class="fa fa-user"></i>
+																		</span>
+																		<input name="username" id="username_u" type="text" class="form-control" placeholder="Username" disabled>
+																	</div>
 																</div>
+
 																<div class="form-group">
-																	<label for="email2">Email Address</label>
-																	<input type="email" class="form-control" id="email2" placeholder="Enter Email">
+																	<label for="name">Full Name</label>
+																	<input name="name" id="name_u" type="text" class="form-control" placeholder="Fill Name" required>
 																</div>
+
 																<div class="form-group">
-																	<label for="exampleFormControlFile1">Load Photo</label>
-																	<input type="file" class="form-control-file" id="exampleFormControlFile1">
+																	<label for="email">Email Address</label>
+																	<input name="email" type="email" class="form-control" id="email_u" placeholder="Enter Email" required>
 																</div>
+																
 																<div class="form-group">
-																	<label for="exampleFormControlFile1">Contact Number</label>
-																	<input type="number" class="form-control-file" id="exampleFormControlFile1">
-																</div>
-																<div class="form-group">
-																	<label for="exampleFormControlSelect2">Qualification</label> 
-																	<select class="form-control" id="exampleFormControlSelect2">
+																	<label for="qualification">Qualification</label> 
+																	<select class="form-control" name="qualification" id="qualification_u">
 																		<option>Degree</option>
 																		<option>Masters</option>
 																		<option>PHD</option>
 																	</select>
 																</div>
-																<div class="form-group">
-																	<label for="exampleFormControlFile1">Username</label>
-																	<div class="input-icon">
-																		<span class="input-icon-addon">
-																			<i class="fa fa-user"></i>
-																		</span>
-																		<input type="text" class="form-control" placeholder="Username">
-																	</div>
-																</div>
-					
-																<div class="form-group">
-																	<label for="password">Password</label>
-																	<input type="password" class="form-control" id="password" placeholder="Password">
-																</div>
 															</div>
 														</div>
-													</form>
-												</div>
-												<div class="modal-footer no-bd">
-													<button type="button" id="addRowButton" class="btn btn-primary">Add</button>
-													<button type="button" class="btn btn-danger" data-dismiss="modal">Clear</button>
-												</div>
+													</div>
+													<div class="modal-footer no-bd">
+														<button type="submit" id="updateBtn" class="btn btn-primary">Add</button>
+														<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+														<input type="hidden" id = "updateinfo" name="action" value="update_teacher">
+													</div>
+												</form>
+
+												
 											</div>
 										</div>
 									</div>
+
 									<div class="table-responsive">
 										<table id="add-row" class="display table table-striped table-hover" >
 											<thead>
 												<tr>
+													<th>Username</th>
 													<th>Name</th>
-													<th>Position</th>
-													<th>Office</th>
+													<th>Email</th>
+													<th>Image</th>
+													<th>Contact No</th>
+													<th>Qualification</th>
 													<th style="width: 10%">Action</th>
 												</tr>
 											</thead>
 											<tfoot>
-												<tr>
-													<th>Name</th>
-													<th>Position</th>
-													<th>Office</th>
-													<th>Action</th>
-												</tr>
+												<th>Username</th>
+												<th>Name</th>
+												<th>Email</th>
+												<th>Image</th>
+												<th>Contact No</th>
+												<th>Qualification</th>
 											</tfoot>
-											<tbody>
-												<tr>
-													<td>Tiger Nixon</td>
-													<td>System Architect</td>
-													<td>Edinburgh</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Garrett Winters</td>
-													<td>Accountant</td>
-													<td>Tokyo</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Ashton Cox</td>
-													<td>Junior Technical Author</td>
-													<td>San Francisco</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Cedric Kelly</td>
-													<td>Senior Javascript Developer</td>
-													<td>Edinburgh</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Airi Satou</td>
-													<td>Accountant</td>
-													<td>Tokyo</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Brielle Williamson</td>
-													<td>Integration Specialist</td>
-													<td>New York</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Herrod Chandler</td>
-													<td>Sales Assistant</td>
-													<td>San Francisco</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Rhona Davidson</td>
-													<td>Integration Specialist</td>
-													<td>Tokyo</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Colleen Hurst</td>
-													<td>Javascript Developer</td>
-													<td>San Francisco</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Sonya Frost</td>
-													<td>Software Engineer</td>
-													<td>Edinburgh</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-											</tbody>
 										</table>
 									</div>
 								</div>
@@ -291,49 +206,99 @@
 	
 	<script >
 		$(document).ready(function() {
-			$('#basic-datatables').DataTable({
-			});
 
-			$('#multi-filter-select').DataTable( {
-				"pageLength": 5,
-				initComplete: function () {
-					this.api().columns().every( function () {
-						var column = this;
-						var select = $('<select class="form-control"><option value=""></option></select>')
-						.appendTo( $(column.footer()).empty() )
-						.on( 'change', function () {
-							var val = $.fn.dataTable.util.escapeRegex(
-								$(this).val()
-								);
+			function handle_result(result) {
+				if(result != ""){
 
-							column
-							.search( val ? '^'+val+'$' : '', true, false )
-							.draw();
-						} );
+					if(result == 'Teacher added successfully!')
+					{
+						$('#userModal').modal('hide');
+						alert(result);
+						$('#add-row').DataTable().ajax.reload();
+						
+					}else if(result == 'Teacher updated successfully!') {
+						$('#updateTech').modal('hide');
+						alert(result);
+						$('#add-row').DataTable().ajax.reload();
+					}
+					
+					else {
+							alert(result);
+					}
+				}
+			}
 
-						column.data().unique().sort().each( function ( d, j ) {
-							select.append( '<option value="'+d+'">'+d+'</option>' )
-						} );
-					} );
+			$.ajax({
+				url: "<?=ROOT?>teachers_controller/display",
+				method: "POST",
+				success: function (data) {
+					$('#add-row').DataTable( {
+						"pageLength": 5,
+						"ajax": "<?=ROOT?>teachers_controller/display",
+						"columnDefs": [{
+							"defaultContent": "-",
+							"targets": "_all"
+						}]
+					});
 				}
 			});
 
-			// Add Row
-			$('#add-row').DataTable({
-				"pageLength": 5,
+			$(document).on('submit', '#addform', function (event) { 
+				event.preventDefault();
+
+				$.ajax({
+					url: "<?=ROOT?>teachers_controller",
+					type: 'POST',
+					dataType: 'json',
+					data: new FormData(this),  
+					processData: false,
+					contentType: false,
+					beforeSend: function (){
+						console.log("waiting....");
+					},
+					success: function(response){
+						handle_result(response);
+						// console.log(response);
+					},
+					error: function (){
+						console.log("OOOPs something is wrong");
+					},
+				});
 			});
 
-			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+			$(document).on('click', '.update', function () {
+				var id = $(this).data('id');
+				var a = $(this).attr('info');
+				var info = JSON.parse(a.replaceAll("'", '"'));
+				$("#name_u").val(info.Name);	
+				$("#email_u").val(info.InstEmail);
+				$("#username_u").val(info.Username);
+				$("#qualification_u").val(info.Qualification);
+			});
 
-			$('#addRowButton').click(function() {
-				$('#add-row').dataTable().fnAddData([
-					$("#addName").val(),
-					$("#addPosition").val(),
-					$("#addOffice").val(),
-					action
-					]);
-				$('#addRowModal').modal('hide');
 
+			$(document).on('submit', '#updateform', function (event) { 
+				event.preventDefault();
+				var $data = new FormData(this);
+				$data.append("username", $("#username_u").val());
+				console.log($data);
+				$.ajax({
+					url: "<?=ROOT?>teachers_controller",
+					type: 'POST',
+					dataType: 'json',
+					data: $data,  
+					processData: false,
+					contentType: false,
+					beforeSend: function (){
+						console.log("waiting....");
+					},
+					success: function(response){
+						handle_result(response);
+					},
+					error: function (){
+						console.log("OOOPs something is wrong");
+					},
+				});
 			});
 		});
 	</script>
