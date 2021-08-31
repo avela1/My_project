@@ -1,6 +1,6 @@
-<?php $this->view('includes/header'); ?>
-<?php $this->view('admin/sidebar'); ?>
-
+	<?php $this->view('includes/header', $data); ?>
+	<?php $this->view('admin/sidebar', $data); ?>
+	
 		<div class="main-panel">
 			<div class="content">
 				<div class="page-inner">

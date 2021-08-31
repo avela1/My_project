@@ -1,11 +1,12 @@
-		<?php $this->view('includes/header'); ?>
-		<?php $this->view('admin/sidebar'); ?>
-		
+	<?php $this->view('includes/header', $data); ?>
+	<?php $this->view('admin/sidebar', $data); ?>
+	
+
 		<div class="main-panel">
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">Students List</h4>
+						<h4 class="page-title">Course List</h4>
 						<ul class="breadcrumbs">
 							<li class="nav-home">
 								<a href="#">
@@ -33,7 +34,7 @@
 								<div class="card-header">
 									<div class="d-flex align-items-center">
 										<h4 class="card-title">Add Row</h4>
-										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#courseModal">
 											<i class="fa fa-plus"></i>
 											Add Course
                                         </a>
@@ -41,7 +42,7 @@
 								</div>
 								
 								<div class="card-body">
-									<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header no-bd">
@@ -56,21 +57,21 @@
 														<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
-												<div class="modal-body">
-													<form>
+												<form method="POST" action="" id="addform" enctype="multipart/form-data">
+													<div class="modal-body bg-dark">
 														<div class="row">
 															<div class="col-md-12 col-lg-12">
 																<div class="form-group">
 																	<label for="CrsCode">Course Code</label>
-																	<input id="CrsCode" type="text" class="form-control" placeholder="Fill Name">
+																	<input name="CrsCode" id="CrsCode" type="text" class="form-control" placeholder="Fill Course code" required> 
 																</div>
 																<div class="form-group">
 																	<label for="CrsName">Course Name</label>
-																	<input id="CrsName" type="text" class="form-control" placeholder="Fill Name">
+																	<input id="CrsName" name="CrsName" type="text" class="form-control" placeholder="Fill Course Name" required> 
 																</div>
 																<div class="form-group">
 																	<label for="CrsCreditHrs">Credit Hours</label> 
-																	<select class="form-control" id="CrsCreditHrs">
+																	<select class="form-control" name="CrsCreditHrs" id="CrsCreditHrs">
 																		<option>1</option>
 																		<option>2</option>
 																		<option>3</option>
@@ -79,7 +80,7 @@
 																</div>
 																<div class="form-group">
 																	<label for="CrsYr">Given Year</label> 
-																	<select class="form-control" id="CrsYr">
+																	<select class="form-control" name="CrsYr" id="CrsYr">
 																		<option>1</option>
 																		<option>2</option>
 																		<option>3</option>
@@ -88,22 +89,72 @@
 																</div>
 																<div class="form-group">
 																	<label for="CrsImage">Cource Image</label>
-																	<input type="file" class="form-control-file" id="CrsImage">
+																	<input type="file" class="form-control-file" name="photo" id="CrsImage">
+																	<input type="hidden" name="oldimage" id="oldimage">
+																
 																</div>
 																<div class="form-group">
 																	<label for="CrsDesc">Course Description</label>
-																	<textarea class="form-control" id="CrsDesc" rows="3">
-																	</textarea>
+																	<textarea class="form-control" name="CrsDesc" id="CrsDesc" rows="3" required></textarea>
 																</div>
-					
 															</div>
 														</div>
-													</form>
+													</div>
+													<div class="modal-footer no-bd">
+														<button type="submit" id="addRowButton" class="btn btn-primary">Add</button>
+														<button type="button" class="btn btn-danger" data-dismiss="modal">Clear</button>
+														<input type="hidden" name="action" value="add_course">
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+
+									<div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header no-bd">
+													<h5 class="modal-title">
+														<span class="fw-mediumbold">
+														Assign</span> 
+														<span class="fw-light">
+															Course
+														</span>
+													</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
 												</div>
-												<div class="modal-footer no-bd">
-													<button type="button" id="addRowButton" class="btn btn-primary">Add</button>
-													<button type="button" class="btn btn-danger" data-dismiss="modal">Clear</button>
-												</div>
+												<form method="POST" action="" id="assignform">
+													<div class="modal-body">
+														<div class="row">
+															<div class="col-md-12 col-lg-12">
+																<div class="form-group">
+																	<label for="CrsCode_a">Course Code</label>
+																	<input name="CrsCode_a" id="CrsCode_a" type="text" class="form-control" disabled> 
+																</div>
+																
+																<div class="form-group">
+																	<label for="assignedTech">Credit Hours</label> 
+																	<?php if(is_array($data['rows'])): ?>
+
+																	<select class="form-control text-dark" name="assignedTech" id="assignedTech">
+																	<?php foreach($data['rows'] as $row):?>
+																		<option  class="text-dark" value="<?= $row -> InstID ?>"><?php show($row -> Name);  ?></option>
+
+																		<?php endforeach;?>
+
+																	</select>
+																	<?php endif; ?>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="modal-footer no-bd">
+														<button type="submit" class="btn btn-primary">Add</button>
+														<button type="button" class="btn btn-danger" data-dismiss="modal">Clear</button>
+													</div>
+												</form>
 											</div>
 										</div>
 									</div>
@@ -111,175 +162,28 @@
 										<table id="add-row" class="display table table-striped table-hover" >
 											<thead>
 												<tr>
-													<th>Name</th>
-													<th>Position</th>
-													<th>Office</th>
+													<th>Crs Code</th>
+													<th>Crs Name</th>
+													<th>Credit Hrs</th>
+													<th>Given Year</th>
+													<th>Image</th>
+													<th>Crs Desc</th>
+													<th>Assigned To</th>
 													<th style="width: 10%">Action</th>
 												</tr>
 											</thead>
 											<tfoot>
 												<tr>
-													<th>Name</th>
-													<th>Position</th>
-													<th>Office</th>
-													<th>Action</th>
+													<th>Crs Code</th>
+													<th>Crs Name</th>
+													<th>Credit Hrs</th>
+													<th>Given Year</th>
+													<th>Image</th>
+													<th>Crs Desc</th>
+													<th>Assigned To</th>
 												</tr>
 											</tfoot>
-											<tbody>
-												<tr>
-													<td>Tiger Nixon</td>
-													<td>System Architect</td>
-													<td>Edinburgh</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Delete">
-																<i class="fa fa-times"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Assign">
-																<i class="fas fa-tasks"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Garrett Winters</td>
-													<td>Accountant</td>
-													<td>Tokyo</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Ashton Cox</td>
-													<td>Junior Technical Author</td>
-													<td>San Francisco</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Cedric Kelly</td>
-													<td>Senior Javascript Developer</td>
-													<td>Edinburgh</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Airi Satou</td>
-													<td>Accountant</td>
-													<td>Tokyo</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Brielle Williamson</td>
-													<td>Integration Specialist</td>
-													<td>New York</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Herrod Chandler</td>
-													<td>Sales Assistant</td>
-													<td>San Francisco</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Rhona Davidson</td>
-													<td>Integration Specialist</td>
-													<td>Tokyo</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Colleen Hurst</td>
-													<td>Javascript Developer</td>
-													<td>San Francisco</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>Sonya Frost</td>
-													<td>Software Engineer</td>
-													<td>Edinburgh</td>
-													<td>
-														<div class="form-button-action">
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-																<i class="fa fa-edit"></i>
-															</button>
-															<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-																<i class="fa fa-times"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-											</tbody>
+											
 										</table>
 									</div>
 								</div>
@@ -293,49 +197,133 @@
 	
 	<script >
 		$(document).ready(function() {
-			$('#basic-datatables').DataTable({
-			});
 
-			$('#multi-filter-select').DataTable( {
-				"pageLength": 5,
-				initComplete: function () {
-					this.api().columns().every( function () {
-						var column = this;
-						var select = $('<select class="form-control"><option value=""></option></select>')
-						.appendTo( $(column.footer()).empty() )
-						.on( 'change', function () {
-							var val = $.fn.dataTable.util.escapeRegex(
-								$(this).val()
-								);
+			function handle_result(result) {
+				if(result != ""){
 
-							column
-							.search( val ? '^'+val+'$' : '', true, false )
-							.draw();
-						} );
+					if(result == 'Course added successfully!')
+					{
+						$('#courseModal').modal('hide');
+						alert(result);
+						$('#add-row').DataTable().ajax.reload();
+						
+					}else if(result == 'Course updated successfully!') {
+						$('#courseModal').modal('hide');
+						alert(result);
+						$('#add-row').DataTable().ajax.reload();
+					}else if(result == 'Course Assigned successfully!') {
+						$('#assignModal').modal('hide');
+						alert(result);
+						$('#add-row').DataTable().ajax.reload();
+					}
+					
+					else {
+						alert(result);
+					}
+				}
+			}
 
-						column.data().unique().sort().each( function ( d, j ) {
-							select.append( '<option value="'+d+'">'+d+'</option>' )
-						} );
-					} );
+			$.ajax({
+				url: "<?=ROOT?>course_controller/display",
+				method: "POST",
+				success: function (data) {
+					$('#add-row').DataTable( {
+						"pageLength": 5,
+						"ajax": "<?=ROOT?>course_controller/display",
+						"columnDefs": [{
+							"defaultContent": "-",
+							"targets": "_all"
+						}]
+					});
 				}
 			});
 
-			// Add Row
-			$('#add-row').DataTable({
-				"pageLength": 5,
+			$(document).on('submit', '#addform', function (event) { 
+				event.preventDefault();
+				$.ajax({
+					url: "<?=ROOT?>course_controller/add",
+					type: 'POST',
+					dataType: 'json',
+					data: new FormData(this),  
+					processData: false,
+					contentType: false,
+					beforeSend: function (){
+						console.log("waiting....");
+					},
+					success: function(response){
+						handle_result(response);
+					},
+					error: function (){
+						console.log("OOOPs something is wrong");
+					},
+				});
 			});
 
-			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+			$(document).on('click', '.update', function () {
+				var a = $(this).attr('info');
+				var info = JSON.parse(a.replaceAll("'", '"'));
 
-			$('#addRowButton').click(function() {
-				$('#add-row').dataTable().fnAddData([
-					$("#addName").val(),
-					$("#addPosition").val(),
-					$("#addOffice").val(),
-					action
-					]);
-				$('#addRowModal').modal('hide');
+				$("#CrsCode").val(info.CourseCode);	
+				$("#CrsName").val(info.CourseName);
+				$("#CrsCreditHrs").val(info.CourseCrdHrs);
+				$("#CrsYr").val(info.CourseGivenYear);
+				$("#CrsDesc").val(info.CourseDescription);
+				$("#oldimage").val(info.CourseImage);
+				$('#addform').attr("id", "updateform");
+				$("#CrsCode").attr("disabled", "disabled");
+			});
 
+			$(document).on('submit', '#updateform', function (event) { 
+				event.preventDefault();
+				var $data = new FormData(this);
+				$data.append("CrsCode", $("#CrsCode").val());
+
+				$.ajax({
+					url: "<?=ROOT?>course_controller/update",
+					type: 'POST',
+					dataType: 'json',
+					data: $data,  
+					processData: false,
+					contentType: false,
+					beforeSend: function (){
+						console.log("waiting....");
+					},
+					success: function(response){
+						handle_result(response);
+					},
+					error: function (){
+						console.log("OOOPs something is wrong");
+					},
+				});
+			});
+
+			$(document).on('click', '.assign', function () {
+				var a = $(this).data('id');
+				$("#CrsCode_a").val(a);	
+			});
+
+			$(document).on('submit', '#assignform', function (event) { 
+				event.preventDefault();
+				var $data = new FormData(this);
+				$data.append("CrsCode_a", $("#CrsCode_a").val());
+
+				$.ajax({
+					url: "<?=ROOT?>course_controller/assign",
+					type: 'POST',
+					dataType: 'json',
+					data: $data,  
+					processData: false,
+					contentType: false,
+					beforeSend: function (){
+						console.log("waiting....");
+					},
+					success: function(response){
+						handle_result(response);
+					},
+					error: function (){
+						console.log("OOOPs something is wrong");
+					},
+				});
 			});
 		});
 	</script>
