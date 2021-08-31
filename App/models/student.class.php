@@ -135,28 +135,4 @@ Class Student {
 		$DB->write($query);
 	}
 
-    public function get_one($uname)
-	{
-
-		$uname = addslashes($uname);
-		$DB = Database::newInstance();
-		$data = $DB->read("SELECT `Username`, `Name`, `StudEmail`, `StudContactNo`, `Batch` FROM `studentinfo` where `Username` = '$uname' limit 1");
-		return $data[0];
-	}
-
-	public function get_one_by_name($name)
-	{
-
-		$name = addslashes($name);
-
-		$DB = Database::newInstance();
-		$data = $DB->read("select * from categories where category like :name limit 1",["name"=>$name]);
-		
-		if(is_array($data)){
-			$DB->write("update categories set views = views + 1 where id = :id limit 1",["id"=>$data[0]->id]);
-		}
-		
-		return $data[0];
-	}
-
 }

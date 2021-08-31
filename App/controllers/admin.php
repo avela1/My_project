@@ -38,7 +38,12 @@ class Admin extends Controller {
             $data['user_data'] = $user_data;
         }
 
+        $DB = Database::newInstance();
+        $rows = $DB -> read("SELECT `InstID`, `Name` FROM `instructorinfo` WHERE  `status` = 1");
+        $data['rows'] = $rows;
+       
         $data['page_title'] = "Admin Home";
+
         $this->view('admin/course_list', $data);
 
     }
