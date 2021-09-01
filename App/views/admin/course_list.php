@@ -135,12 +135,13 @@
 																</div>
 																
 																<div class="form-group">
+																
 																	<label for="assignedTech">Credit Hours</label> 
 																	<?php if(is_array($data['rows'])): ?>
 
 																	<select class="form-control text-dark" name="assignedTech" id="assignedTech">
 																	<?php foreach($data['rows'] as $row):?>
-																		<option  class="text-dark" value="<?= $row -> InstID ?>"><?php show($row -> Name);  ?></option>
+																		<option  class="text-dark" value="<?= $row -> ID ?>"><?php show($row -> Name);  ?></option>
 
 																		<?php endforeach;?>
 
@@ -206,15 +207,18 @@
 						$('#courseModal').modal('hide');
 						alert(result);
 						$('#add-row').DataTable().ajax.reload();
+						$("#addform")[0].reset();
 						
 					}else if(result == 'Course updated successfully!') {
 						$('#courseModal').modal('hide');
 						alert(result);
 						$('#add-row').DataTable().ajax.reload();
+						$("#updateform")[0].reset();
 					}else if(result == 'Course Assigned successfully!') {
 						$('#assignModal').modal('hide');
 						alert(result);
 						$('#add-row').DataTable().ajax.reload();
+						$("#assignform")[0].reset();
 					}
 					
 					else {

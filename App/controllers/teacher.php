@@ -9,10 +9,13 @@ class Teacher extends Controller {
         if(is_array($user_data)) {
             $data['user_data'] = $user_data;
         }
+        $id = $user_data[0]->ID;
 
+        $DB = Database::newInstance();
+        $rows = $DB -> read("SELECT `CourseCode`, `CourseName`, `CourseImage`, `CourseDescription` FROM `courceinfo` where AssignedFor = '$id'");
+        $data['rows'] = $rows;
+        
         $data['page_title'] = "Teacher Home";
-        // show($data['user_data'][0] -> Name);
-
         $this->view('teachers/index', $data);
     }
 
@@ -23,10 +26,24 @@ class Teacher extends Controller {
         if(is_array($user_data)) {
             $data['user_data'] = $user_data;
         }
-        
-        $data['page_title'] = "Teacher Home";
-        // show($data['user_data'][0] -> Name);
 
+        $course_id = $_GET['data-id'];
+
+        $folder = "course_materials/$course_id";
+        if(!file_exists($folder)) {
+            mkdir($folder, 0777, true);
+        }
+        // $folder = "course_materials";
+        $folders = array_filter(glob("$folder/*"), 'is_dir');
+        $folders1 = array();
+
+        foreach($folders as $fold) {
+            array_push($folders1, str_replace("$folder/","", $fold) ); 
+        }
+        show($folders1);
+        $data['folders'] = $folders1;
+        $data['folder_name'] = $folder;
+        
         $this->view('teachers/home', $data);
     }
 
@@ -51,7 +68,6 @@ class Teacher extends Controller {
         if(is_array($user_data)) {
             $data['user_data'] = $user_data;
         }
-        
         $data['page_title'] = "Scheduled class";
         $this->view('teachers/sched_online', $data);
     }

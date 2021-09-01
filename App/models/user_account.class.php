@@ -28,15 +28,37 @@ class User_account {
                
                 $_SESSION['username'] = $result[0]->Username;
                 $_SESSION['userrole'] = $result[0]->UserType;
-                $_SESSION['ID'] = $result[0]->ID;
 
                 if($_SESSION['userrole'] == "Administrator") {
+                    $arry = array();
+                    $arry['username'] = $_SESSION['username'];
+
+                    $sql1 = "SELECT `ID` FROM instructorinfo where Username=:username limit 1";
+                    $result = $db -> read($sql1, $arry);
+                    $_SESSION['ID'] = $result[0]->ID;
+
                     header("Location: ". ROOT . "admin/");
                     die;
                 } else if($_SESSION['userrole'] == "Student") {
+
+                    $arry = array();
+                    $arry['username'] = $_SESSION['username'];
+
+                    $sql1 = "SELECT `ID` FROM instructorinfo where Username=:username limit 1";
+                    $result = $db -> read($sql1, $arry);
+                    $_SESSION['ID'] = $result[0]->ID;
+
+
                     header("Location: ". ROOT . "student/");
                     die;
                 } else if($_SESSION['userrole'] == "Teacher") {
+
+                    $arry = array();
+                    $arry['username'] = $_SESSION['username'];
+                    $sql1 = "SELECT `ID` FROM instructorinfo where Username=:username limit 1";
+                    $result = $db -> read($sql1, $arry);
+                    $_SESSION['ID'] = $result[0]->ID;
+
                     header("Location: ". ROOT . "teacher/");
                     die;
                 }
@@ -61,14 +83,12 @@ class User_account {
             } else {
                 $sql = "select * from instructorinfo where Username = :username limit 1";
             }
+            
             $check = $db->read($sql, $arr);
 
             if(is_array($check)) {
                 return $check;
             }
-            // $_SESSION['name'] = $check[0]->Name;
-            // $_SESSION['image'] = $check[0]->Image;
-            // $_SESSION['ID'] = $check[0]->ID;
         }
         return false;
     }
@@ -76,6 +96,7 @@ class User_account {
         if(isset($_SESSION['username']) && isset($_SESSION['userrole'])) {
             unset($_SESSION['username']);
             unset($_SESSION['userrole']);
+            unset($_SESSION['ID']);
             header("Location: ". ROOT . "login");
             die;
         }

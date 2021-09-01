@@ -19,6 +19,7 @@
     </div>
 </div>
 
+<!-- <script src="<?= ASSETS ?>/js/accordion.js"></script> -->
 
 <script src="<?= ASSETS ?>/js/core/jquery.3.2.1.min.js"></script>
 <script src="<?= ASSETS ?>/js/core/popper.min.js"></script>
