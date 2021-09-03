@@ -40,10 +40,8 @@ class Teacher extends Controller {
         foreach($folders as $fold) {
             array_push($folders1, str_replace("$folder/","", $fold) ); 
         }
-        show($folders1);
         $data['folders'] = $folders1;
         $data['folder_name'] = $folder;
-        
         $this->view('teachers/home', $data);
     }
 
