@@ -13,6 +13,8 @@ Class Course_file {
         $data['location'] = $POST['folder'].'/'.$POST['foldername'];
         $data['lectid'] = $_SESSION['username'];
         $data['crscode'] = trim($POST['crs_code']);
-        show($data);
+
+        $files = array();
+        $files = $FILES['photo'];
     }
 }
