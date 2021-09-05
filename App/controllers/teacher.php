@@ -33,7 +33,6 @@ class Teacher extends Controller {
         if(!file_exists($folder)) {
             mkdir($folder, 0777, true);
         }
-        // $folder = "course_materials";
         $folders = array_filter(glob("$folder/*"), 'is_dir');
         $folders1 = array();
 
@@ -42,6 +41,7 @@ class Teacher extends Controller {
         }
         $data['folders'] = $folders1;
         $data['folder_name'] = $folder;
+
         $this->view('teachers/home', $data);
     }
 

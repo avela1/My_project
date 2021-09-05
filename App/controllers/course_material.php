@@ -33,7 +33,6 @@ class Course_material extends Controller {
     public function upload_file() {
       $_SESSION['error'] = "";
       $crs_file = $this -> load_model('course_file');
-      show($_FILES['fileloc']);
       if(!empty($_FILES['fileloc']["name"])) {
           $crs_file->upload($_POST, $_FILES);
 
@@ -53,37 +52,53 @@ class Course_material extends Controller {
           echo json_encode($arr);
       }
     }
+    public function update_file() {
+      $_SESSION['error'] = "";
+      $crs_file = $this -> load_model('course_file');
+     
+      if(!empty($_POST['fname'])) {
+       
+          $crs_file->update($_POST, $_FILES);
+         
+          if($_SESSION['error'] != "")
+          {
+              $arr = $_SESSION['error'];
+              $_SESSION['error'] = "";
+              show($arr);
+              
+          }else
+          {
+              $arr = "Course material updated successully!";
+              echo json_encode($arr);
+          }
+      } else {
+          $arr = "Please enter file name!!!";
+          echo json_encode($arr);
+      }
+    }
+    public function delete_file() {
+      // echo json_encode($_POST['path']);
+      $_SESSION['error'] = "";
+      $crs_file = $this -> load_model('course_file');
 
-    public function display() {
-      // $crsfile = $this -> load_model('course_file');
-      // $resultlist = $crsfile -> get_all();
-      // $column = json_decode(json_encode($resultlist), true);
-      // $result = array();
-      // foreach ($column as $key => $value) {
-      //     $result['data'][] = array(
-      //         $value['CourseCode'],
-      //         $value['CourseName'],
-      //         $value['CourseCrdHrs'],
-      //         $value['CourseGivenYear'],
-      //         '<img src="'.ROOT.$value['CourseImage'].'" class="rounded responsive" style = "width:50px; height:50px"/>',
-      //         $value['CourseDescription'],
-      //         $value['AssignedFor'],
-
-      //         '<div class="form-button-action">
-      //             <a type="button" data-toggle="modal" href="#courseModal" class="btn btn-link btn-primary btn-lg  update" data-id="'.$value['CourseCode'].'" info="'.str_replace('"',"'", json_encode($value)).'" data-original-title="Edit">
-      //                 <i class="fa fa-edit"></i>
-      //             </a>
-      //             <a type="button" data-toggle="modal" href="#assignModal" class="btn btn-link btn-success btn-lg  assign" data-id="'.$value['CourseCode'].'" data-original-title="Assign">
-      //                 <i class="fas fa-book-open"></i>
-      //             </a>
-      //             <button type="button" data-toggle="tooltip" id="deleteStud" class="btn btn-link btn-danger" data-id="'.$value['CourseCode'].'" data-original-title="Disable">
-      //                 <i class="fa fa-times"></i>
-      //             </button>
-      //         </div>',
-      //     );
-      // }
-
-      echo json_encode($_POST);
-      
-  }
+      if(file_exists($_POST['path'])) {
+        $crs_file->delete_file($_POST);
+        
+        if($_SESSION['error'] != "")
+          {
+              $arr = $_SESSION['error'];
+              $_SESSION['error'] = "";
+              show($arr);
+              
+          }else
+          {
+              $arr = "Course material deleted successully!";
+              echo json_encode($arr);
+          }
+        
+      } else {
+        echo json_encode("wrong path to file");
+      }
+     
+    }
 }
