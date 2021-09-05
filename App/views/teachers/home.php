@@ -49,8 +49,11 @@
                                                 aria-expanded="false"><i class="fas fa-pencil-alt"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-info">
-                                                <a class="dropdown-item"  data-toggle="modal" id="upload"  data-name="<?= $data['folders'][$i]?>" href="#fileModal">Upload File</a>
-                                                <a class="dropdown-item" data-toggle="modal" id="renamefolder"  data-name="<?= $data['folders'][$i]?>" href="#folderModal">Rename
+                                                <a class="dropdown-item" data-toggle="modal" id="upload"
+                                                    data-name="<?= $data['folders'][$i]?>" href="#fileModal">Upload
+                                                    File</a>
+                                                <a class="dropdown-item" data-toggle="modal" id="renamefolder"
+                                                    data-name="<?= $data['folders'][$i]?>" href="#folderModal">Rename
                                                     folder</a>
                                                 <a class="dropdown-item" href="#">Delete folder</a>
                                             </div>
@@ -69,47 +72,27 @@
                                         aria-labelledby="folder_collapse" data-parent="#accordionEx78">
                                         <div class="card-body">
                                             <div class="table-responsive">
-                                                <div id="add-row_wrapper"
-                                                    class="dataTables_wrapper container-fluid dt-bootstrap4">
-
+                                                <div id="add-row_wrapper"  class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                                    
                                                     <div class="row">
                                                         <div class="col-sm-12">
-                                                            <table id="add-row"
-                                                                class="display table table-striped table-hover dataTable"
-                                                                role="grid" aria-describedby="add-row_info">
+                                                            <table id="add-row" class="display table table-striped table-hover dataTable"  role="grid" aria-describedby="add-row_info">
                                                                 <thead>
                                                                     <tr role="row">
-                                                                        <th class="sorting_asc" tabindex="0"
-                                                                            aria-controls="add-row" rowspan="1"
-                                                                            colspan="1" aria-sort="ascending"
-                                                                            aria-label="Name: activate to sort column descending"
-                                                                            style="width: 187.984px;">File Name</th>
-                                                                        <th class="sorting" tabindex="0"
-                                                                            aria-controls="add-row" rowspan="1"
-                                                                            colspan="1"
-                                                                            aria-label="Position: activate to sort column ascending"
-                                                                            style="width: 283.844px;">File Description
-                                                                        </th>
-
-                                                                        <th style="width: 126.281px;" class="sorting"
-                                                                            tabindex="0" aria-controls="add-row"
-                                                                            rowspan="1" colspan="1"
-                                                                            aria-label="Action: activate to sort column ascending">
-                                                                            Action</th>
+                                                                        <th ><i>File Name</th>
+                                                                        <th style="width: 10%">Action</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tfoot>
                                                                     <tr>
                                                                         <th rowspan="1" colspan="1">File Name</th>
-                                                                        <th rowspan="1" colspan="1">File Description
                                                                         </th>
-
                                                                     </tr>
                                                                 </tfoot>
                                                                 <tbody>
                                                                     <tr role="row" class="odd">
-                                                                        <td class="sorting_1">Airi Satou</td>
-                                                                        <td>Accountant</td>
+                                                                        
+                                                                        <td class="sorting_1"> <a href="#"><i class="fas fa-file p-3"></i>Airi Satou</a> </td>
                                                                         <td>
                                                                             <div class="form-button-action">
                                                                                 <button type="button"
@@ -142,8 +125,7 @@
                                                     <div class="row">
 
                                                         <div class="col-sm-12 col-md-7">
-                                                            <div class="dataTables_paginate paging_simple_numbers"
-                                                                id="add-row_paginate">
+                                                            <div class="dataTables_paginate paging_simple_numbers" id="add-row_paginate">
                                                                 <ul class="pagination">
                                                                     <li class="paginate_button page-item previous disabled"
                                                                         id="add-row_previous"><a href="#"
@@ -165,11 +147,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -236,7 +215,7 @@
                                     <span class="fw-mediumbold">
                                         New</span>
                                     <span class="fw-light">
-                                        Lecturers
+                                        File
                                     </span>
                                 </h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -256,15 +235,11 @@
                                                 <input id="fname" name="fname" type="text" class="form-control"
                                                     placeholder="Fill File Name" required>
                                             </div>
-                                           
-                                            <div class="form-group">
-                                                <label for="fdesc">File Description</label>
-                                                <textarea class="form-control" name="fdesc" id="fdesc" rows="3" placeholder="Fill File Description" required></textarea>
-                                            </div>
-                                           
+
                                             <div class="form-group">
                                                 <label for="fileloc">Load File</label>
-                                                <input type="file" name="fileloc" class="form-control-file" id="fileloc">
+                                                <input type="file" name="fileloc" class="form-control-file"
+                                                    id="fileloc">
                                             </div>
                                         </div>
                                     </div>
@@ -292,6 +267,22 @@
                 if (result == 'Folder created successfully!') {
                     $('#folderModal').modal('hide');
                     alert(result);
+                    $("#addfolderform")[0].reset();
+                } else if (result == 'Folder Name updated successfully!') {
+                    $('#folderModal').modal('hide');
+                    alert(result);
+                    $("#addfolderform")[0].reset();
+
+                } else if (result == 'Course material uploaded successully!') {
+                    $('#fileModal').modal('hide');
+                    alert(result);
+                    $("#uploadForm")[0].reset();
+
+                } else if (result == 'FCourse material updated successully!') {
+                    $('#folderModal').modal('hide');
+                    alert(result);
+                    $("#uploadForm")[0].reset();
+
                 } else if (result == 'Folder Name updated successfully!') {
                     $('#folderModal').modal('hide');
                     alert(result);
@@ -364,6 +355,22 @@
         $(document).on('click', '#upload', function() {
             var name1 = $(this).data('name');
             $("#loc").val(name1);
+        });
+
+        $.ajax({
+            url: "<?=ROOT?>course_material/display",
+            method: "POST",
+            data: $(this).data('name'),
+            success: function (data) {
+                // $('#add-row').DataTable( {
+                //     "pageLength": 5,
+                //     "ajax": "<?=ROOT?>course_material/display",
+                //     "columnDefs": [{
+                //         "defaultContent": "-",
+                //         "targets": "_all"
+                //     }]
+                // });
+            }
         });
 
     });
