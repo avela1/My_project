@@ -39,7 +39,7 @@ class Admin extends Controller {
         }
 
         $DB = Database::newInstance();
-        $rows = $DB -> read("SELECT `InstID`, `Name` FROM `instructorinfo` WHERE  `status` = 1");
+        $rows = $DB -> read("SELECT `ID`, `Name` FROM `instructorinfo` WHERE  `status` = 1");
         $data['rows'] = $rows;
        
         $data['page_title'] = "Admin Home";

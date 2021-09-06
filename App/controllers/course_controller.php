@@ -24,7 +24,6 @@ class  Course_controller extends Controller {
         } else {
         
         }
-
     }
 
     public function update() {
