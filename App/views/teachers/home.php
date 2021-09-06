@@ -173,7 +173,44 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="folderModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header no-bd">
+                                <h5 class="modal-title">
+                                    <span class="fw-mediumbold">
+                                        New</span>
+                                    <span class="fw-light">
+                                        Folder
+                                    </span>
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form method="POST" action="" id="addfolderform">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label for="name">Folder Name</label>
+                                                <input id="name" name="name" type="text" class="form-control"
+                                                    placeholder="Fill Name">
+                                                <input type="hidden" name="oldVal" id="oldVal" value="oldVal">
 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer no-bd">
+                                    <button type="submit" id="addButton" class="btn btn-primary">Add</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Clear</button>
+                                    <input type="hidden" name="action" id="action" value="create_folder">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal fade" id="fileModal" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
