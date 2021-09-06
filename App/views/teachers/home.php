@@ -123,7 +123,7 @@
                                                                         <td class="sorting_1"> <a href="#"><?php echo $icon; print_r($file)?></a> </td>
                                                                         <td>
                                                                             <div class="form-button-action">
-                                                                                <a type="button"  data-toggle="" title=""  class="btn btn-link btn-info btn-lg" data-original-title="Download file">
+                                                                                <a type="button" href="<?= ROOT.$data['folder_name'].'/'.$data['folders'][$i].'/'. $file ?>" class="btn btn-link btn-info btn-lg" data-original-title="Download file"> 
                                                                                     <i class="fas fa-download"></i>
                                                                                 </a>
                                                                                 <a type="button"  id="update" data-name="<?= str_replace("$extension", "", $file)?>" data-loc="<?= $data['folder_name'].'/'.$data['folders'][$i].'/'. $file ?>"  data-folder="<?= $data['folders'][$i]?>" class="btn btn-link btn-primary"  data-toggle="modal" href="#fileModal" data-original-title="Update file">
@@ -136,7 +136,6 @@
                                                                         </td>
                                                                     </tr>
                                                                     <?php endforeach; ?>
-
                                                                 </tbody>
 
                                                             </table>
