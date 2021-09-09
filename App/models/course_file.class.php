@@ -129,6 +129,21 @@ Class Course_file {
             return false;
         }
     }
+    public function delete_folder($POST = []) {
+
+        // $data = array();
+        // $data['path'] = $POST['path'];
+        // $DB = Database::newInstance();
+        // $query = "DELETE FROM `crsmaterial` WHERE `FileLoc` = :path limit 1";
+        // $result = $DB->write($query, $data);
+        // if($result) {
+        //     unlink($POST['path']);
+        //     return true;
+        // } else {
+        //     $_SESSION['error'] = "file is not deleted";
+        //     return false;
+        // }
+    }
     public function get_all(){
 
         $DB = Database::newInstance();
