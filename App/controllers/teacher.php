@@ -81,5 +81,15 @@ class Teacher extends Controller {
         $data['page_title'] = "Scheduled class";
         $this->view('teachers/message', $data);
     }
+    public function forum() {
+        $User = $this -> load_model('user_account');
+        $user_data = $User -> check_login();
+        
+        if(is_array($user_data)) {
+            $data['user_data'] = $user_data;
+        }
+        $data['page_title'] = "Forum";
+        $this->view('forum/forum', $data);
+    }
 
 }

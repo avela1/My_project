@@ -1,6 +1,6 @@
 
 
-<div class="sidebar sidebar-style-2 mt-10" data-background-color="dark">			
+<div class="sidebar sidebar-style-2" data-background-color="blue" style="margin-top: 110px">			
     <div class="sidebar-wrapper scrollbar scrollbar-inner ">
         <div class="sidebar-content">
             <div class="user">
@@ -75,7 +75,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a data-toggle="" href="forum" class="collapsed" aria-expanded="false">
+                    <a data-toggle="" href="<?= ROOT ?>teacher/forum" class="collapsed" aria-expanded="false">
                         <i class="fas fa-comments"></i>
                         <p>Forums</p>
                     </a>

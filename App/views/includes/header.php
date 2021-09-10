@@ -48,7 +48,7 @@
 
 
 <body data-background-color="white">
-	<div class="wrapper">
+	<div class="wrapper" id="wrapper">
 		<div class="main-header">
 			<!-- logo -->
 			<div class="logo-header" data-background-color="white">
