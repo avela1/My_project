@@ -24,10 +24,23 @@ class Course_material extends Controller {
         } else {
           echo json_encode("Folder already there!");
         }
+      }else if($_POST['action'] == 'delete_folder'){
+        if(file_exists($_POST['path'])) {
+          $dir = $_POST['path'];
+         
+          if(count(glob("$dir/*")) != 0) {
+            echo json_encode("Please Frist Delete Inside files please!");
+          } else {
+            if(rmdir($_POST['path'])) {
+              echo json_encode("Folder Deleted successfully!!!");
+            };
+          }
+        }else {
+         
+          echo json_encode("Folder is not exist!!!");
+        
+        }
       }
-
-      else
-      echo json_encode("eroor");
     }
 
     public function upload_file() {

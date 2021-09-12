@@ -59,13 +59,9 @@
                                                 aria-expanded="false"><i class="fas fa-pencil-alt"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-info">
-                                                <a class="dropdown-item" data-toggle="modal" id="upload"
-                                                    data-name="<?= $data['folders'][$i]?>" href="#fileModal">Upload
-                                                    File</a>
-                                                <a class="dropdown-item" data-toggle="modal" id="renamefolder"
-                                                    data-name="<?= $data['folders'][$i]?>" href="#folderModal">Rename
-                                                    folder</a>
-                                                <a class="dropdown-item" href="#">Delete folder</a>
+                                                <a class="dropdown-item" data-toggle="modal" id="upload" data-name="<?= $data['folders'][$i]?>" href="#fileModal">Upload File</a>
+                                                <a class="dropdown-item" data-toggle="modal" id="renamefolder" data-name="<?= $data['folders'][$i]?>" href="#folderModal">Rename folder</a>
+                                                <a id = "deletefolder" data-path="<?= $data['folder_name'].'/'.$data['folders'][$i]?>" class="dropdown-item" href="#">Delete folder</a>
                                             </div>
                                         </div>
                                        
@@ -119,6 +115,7 @@
                                                                             $icon = '<i class="fas fa-file text-secondary p-3"></i>';
                                                                         }
                                                                     ?>
+
                                                                     <tr role="row" class="odd">
                                                                         <td class="sorting_1"> <a href="#"><?php echo $icon; print_r($file)?></a> </td>
                                                                         <td>
@@ -282,13 +279,11 @@
                     $("#uploadForm")[0].reset();
 
                 } else if (result == 'Course material deleted successully!') {
-                   
                     alert(result);
-                    $("#uploadForm")[0].reset();
-
                 } else if (result == 'Course material updated successully!') {
+                    $('#fileModal').modal('hide');
                     alert(result);
-                    $("#uploadForm")[0].reset();
+                    $("#updateform")[0].reset();
                 } else {
                     alert(result);
                 }
@@ -387,6 +382,7 @@
             // $("#fileloc").val(path);
             $("#fpath").val(path);
             $('#uploadForm').attr("id", "updateform");
+            $("#uploadFile").html("Update");
 
         });
         $(document).on('submit', '#updateform', function(event) {
@@ -414,10 +410,28 @@
                 },
             });
         });
-        $(document).on('click', '#upload', function() {
-            var name1 = $(this).data('name');
-            $("#loc").val(name1); 
+
+        $(document).on('click', '#deletefolder', function() {
+            var path = $(this).data('path');
+            $data = new FormData();
+            $data.append("path", path);
+            $data.append("action", 'delete_folder');
+            
+            if(confirm("Are you sure you want to delete the whole folder??")) {
+                $.ajax({
+                    url: "<?=ROOT?>course_material/manage_folder",
+                    method: "POST",
+                    data: $data,
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    success: function(data) {
+                        handle_result(data);
+                    }
+                });
+            }            
         });
+       
 
     });
     </script>

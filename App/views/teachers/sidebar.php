@@ -1,11 +1,12 @@
 
 
-<div class="sidebar sidebar-style-2 mt-10" data-background-color="dark">			
+
+<div class="sidebar sidebar-style-2 pt-2" data-background-color="blue">			
     <div class="sidebar-wrapper scrollbar scrollbar-inner ">
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="<?= ASSETS ?>/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                    <img src="<?= ROOT.$data['user_data'][0]->Image?>" alt="..." class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
                     <?php if(isset($data['user_data'])) : ?>
@@ -59,7 +60,6 @@
                         <p>Enrolled Student</p>
                     </a>	
                 </li>
-
                 <li class="nav-item">
                     <a href="<?= ROOT ?>teacher/sched_online">
                         <i class="fas fa-video"></i>
@@ -75,7 +75,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a data-toggle="" href="forum" class="collapsed" aria-expanded="false">
+                    <a data-toggle="" href="<?= ROOT ?>teacher/forum" class="collapsed" aria-expanded="false">
                         <i class="fas fa-comments"></i>
                         <p>Forums</p>
                     </a>

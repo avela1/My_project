@@ -4,9 +4,7 @@
 <div class="main-panel">
     <div class="content">
         <div class="page-inner">
-
             <div class="row">
-                
             <div class="col-md-4">
                 <div class="card card-round">
                     <div class="card-body">
