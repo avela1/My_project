@@ -22,6 +22,7 @@
 	</script>
 
 	<style>
+		
 		.navbar {
 			background-image: url("<?= ASSETS ?>/images/logo1.png");
 			background-position: left;
@@ -29,10 +30,13 @@
 			background-size: 100% 100%;
 			height: 110px;
 		}	
-		.sidebar {
-			position: fixed;
-			margin-top: 100px
+		@media only screen and (min-width: 1000px) {
+			.sidebar {
+				position: fixed;
+				margin-top: 110px
+			}
 		}
+		
 		.more {
 			padding-top:50px;
 		}
@@ -42,20 +46,23 @@
 		.logofont{
 			font-size: 30px
 		}
+		.main-header {
+			background-color: #1572e8;
+		}
 	</style>
 
 </head>
 
 
-<body data-background-color="white">
-	<div class="wrapper" id="wrapper">
-		<div class="main-header">
+<body data-background-color="blue">
+	<div class="wrapper" id="wrapper"data-background-color="blue">
+		<div class="main-header"data-background-color="blue">
 			<!-- logo -->
-			<div class="logo-header" data-background-color="white">
+			<div class="logo-header p-2" data-background-color="blue">
 				
 				<a href="<?= ROOT ?>admin/" class="logo">
 					<img src="<?= ASSETS ?>/images/elogo.png" alt="navbar brand" class="navbar-brand w-50"> 
-					<span class="text-primary fw-extrabold logofont">AAU</span>
+					<span class="text-white fw-extrabold logofont">AAU</span>
 				</a>
 				
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +78,7 @@
 				</div>
 			</div>
 
-			<nav class="navbar navbar-header py-3" >
+			<nav class="navbar navbar-header py-3">
 				
 			</nav>
 		</div>
