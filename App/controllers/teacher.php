@@ -89,7 +89,14 @@ class Teacher extends Controller {
             $data['user_data'] = $user_data;
         }
         $data['page_title'] = "Forum";
+
+        $id = $user_data[0]->ID;
+        $DB = Database::newInstance();
+        $rows = $DB -> read("SELECT `CourseCode`, `CourseName`, `CourseImage` FROM `courceinfo` where AssignedFor = '$id'");
+        $data['rows'] = $rows;
+
         $this->view('forum/forum', $data);
+
     }
 
 }

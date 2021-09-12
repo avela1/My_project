@@ -49,10 +49,7 @@
 									<span class="msg_time_send">8:55 AM, Today</span>
 								</div>
 								<div class="avatar">
-                               
-                                <img src="../assets/img/talha.jpg" alt="..." class="avatar-img rounded-circle">
-
-							
+                                    <img src="../assets/img/talha.jpg" alt="..." class="avatar-img rounded-circle">
 								</div>
 							</div>
 							<div class="d-flex justify-content-start mb-4">
@@ -69,8 +66,10 @@
                         <div class="card-footer">
 							<div class="input-group">
 								<div class="input-group-append">
-									<span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
-								</div>
+                                    
+									<button type="text" id="btnfile" class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></button>
+                                    <input type='file' name="uploadfile" id="uploadfile" style="display:none"></input>
+                                </div>
 								<textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
 								<div class="input-group-append">
 									<span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
@@ -94,61 +93,22 @@
                                 </div>
                             </form>
                             <div class="card-list">
+                                <?php if(is_array($data['rows'])): ?>
+                                    <?php foreach($data['rows'] as $row):?>
                                 <div class="item-list">
                                     <div class="avatar">
-                                        <img src="../assets/img/jm_denis.jpg" alt="..." class="avatar-img rounded-circle">
+                                        <img src="<?= ROOT.$row -> CourseImage ?>" alt="..." class="avatar-img rounded-circle">
                                     </div>
                                     <div class="info-user ml-3">
-                                        <div class="username">Jimmy Denis</div>
+                                        <div class="username"><?= $row -> CourseName;?></div>
                                     </div>
                                     <button class="btn btn-icon btn-primary btn-round btn-xs">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
-                                <div class="item-list">
-                                    <div class="avatar">
-                                        <img src="../assets/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle">
-                                    </div>
-                                    <div class="info-user ml-3">
-                                        <div class="username">Chad</div>
-                                    </div>
-                                    <button class="btn btn-icon btn-primary btn-round btn-xs">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                                <div class="item-list">
-                                    <div class="avatar">
-                                        <img src="../assets/img/talha.jpg" alt="..." class="avatar-img rounded-circle">
-                                    </div>
-                                    <div class="info-user ml-3">
-                                        <div class="username">Talha</div>
-                                    </div>
-                                    <button class="btn btn-icon btn-primary btn-round btn-xs">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                                <div class="item-list">
-                                    <div class="avatar">
-                                        <img src="../assets/img/talha.jpg" alt="..." class="avatar-img rounded-circle">
-                                    </div>
-                                    <div class="info-user ml-3">
-                                        <div class="username">Talha</div>
-                                    </div>
-                                    <button class="btn btn-icon btn-primary btn-round btn-xs">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                                <div class="item-list">
-                                    <div class="avatar">
-                                        <img src="../assets/img/jm_denis.jpg" alt="..." class="avatar-img rounded-circle">
-                                    </div>
-                                    <div class="info-user ml-3">
-                                        <div class="username">Jimmy Denis</div>
-                                    </div>
-                                    <button class="btn btn-icon btn-primary btn-round btn-xs">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
+                                    <?php endforeach;?>
+
+                                <?php endif; ?>
                                 
                             </div>
                         </div>
@@ -165,6 +125,9 @@
 $(document).ready(function () {
    $('#wrapper').addClass('sidebar_minimize');
 
+   $("#btnfile").click(function () {
+       $('#uploadfile').click();
+   })
 
    function mediaSize() {
 		if (window.matchMedia("(max-width: 1000px)").matches) {
@@ -178,13 +141,9 @@ $(document).ready(function () {
 	mediaSize();
 	window.addEventListener("resize", mediaSize, false);
 
-
-
 });
 
 </script>
-
 </body>
-
 
 </html>
