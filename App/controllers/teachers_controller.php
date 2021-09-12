@@ -4,13 +4,10 @@ class  teachers_controller extends Controller {
 
     public function index() {
         $_SESSION['error'] = "";
+        $_SESSION['crs_id'] ="";
         $teacher = $this -> load_model('teachers');
-
-        
         if($_REQUEST['action'] == 'add_teacher' && !empty($_POST)) {
-
             $teacher->create($_POST, $_FILES);
-
             if($_SESSION['error'] != "")
             {
 
@@ -71,7 +68,6 @@ class  teachers_controller extends Controller {
               
             );
         }
-
         echo json_encode($result);
     }
 }

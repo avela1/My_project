@@ -64,17 +64,19 @@
 							</div>
 						</div>
                         <div class="card-footer">
-							<div class="input-group">
-								<div class="input-group-append">
-                                    
-									<button type="text" id="btnfile" class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></button>
-                                    <input type='file' name="uploadfile" id="uploadfile" style="display:none"></input>
+                            <form method="POST" action="" id="sendchatform"  enctype="multipart/form-data">
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        
+                                        <button type="text" id="btnfile" class="input-group-text attach_btn text-success"><i class="fas fa-paperclip"></i></button>
+                                        <input type='file' name="uploadfile" id="uploadfile" style="display:none"></input>
+                                    </div>
+                                    <textarea name="chattext" id="chattext" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                                    <div class="input-group-append">
+                                        <button class="input-group-text send_btn" type="submit" id="sendchat"><i class="fas fa-location-arrow"></i></button>
+                                    </div>
                                 </div>
-								<textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
-								<div class="input-group-append">
-									<span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
-								</div>
-							</div>
+                            </form>
 						</div>
                     </div>
                 </div>
@@ -100,19 +102,16 @@
                                         <img src="<?= ROOT.$row -> CourseImage ?>" alt="..." class="avatar-img rounded-circle">
                                     </div>
                                     <div class="info-user ml-3">
-                                        <div class="username"><?= $row -> CourseName;?></div>
+                                        <div class="username"><?= $row -> CourseName; ?></div>
                                     </div>
                                     <button class="btn btn-icon btn-primary btn-round btn-xs">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
                                     <?php endforeach;?>
-
-                                <?php endif; ?>
-                                
+                                <?php endif; ?>  
                             </div>
                         </div>
-                       
                     </div>
                 </div>
             </div>
@@ -129,6 +128,30 @@ $(document).ready(function () {
        $('#uploadfile').click();
    })
 
+   $(document).on('submit', '#sendchatform', function(event) {
+        event.preventDefault();
+        $data = new FormData(this);
+        $data.append("crs_code", "<?php echo($data['crs_code']);?>");
+        $data.append("user_id", "<?php echo($data['user_id']);?>");
+        $.ajax({
+                url: "<?=ROOT?>chat_controller/sendchat",
+                type: 'POST',
+                dataType: 'json',
+                data: $data,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    console.log("waiting....");
+                },
+                success: function(response) {
+                    // handle_result(response);
+                    console.log(response);
+                },
+                error: function() {
+                    console.log("OOOPs something is wrong");
+                },
+            });
+    })
    function mediaSize() {
 		if (window.matchMedia("(max-width: 1000px)").matches) {
             $('#mainchat').addClass('col-md-12');
