@@ -29,39 +29,84 @@
             </div>
             <div class="row">
                 <div class="col-md-9" id="mainchat">
-                    <div class="card card-round">
+                    <div class="card card-round ">
                        <div class="card-header">Forum</div>
-                        <div class="card-body msg_card_body">
-							<div class="d-flex justify-content-start mb-4">
-								<div class="avatar">
-                                <img src="../assets/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle">
-								</div>
-								<div class="msg_cotainer">
-                                    <h4>Chad</h4> 
-                                    <p>Hey man how are you doing????????????????</p>
-									<span class="msg_time">8:40 AM, Today</span>
-								</div>
-							</div>
-							<div class="d-flex justify-content-end mb-4">
-								<div class="msg_cotainer_send">
-                                        <h4>Jiimmy Smith</h4> 
-                                        <p>I am good man how are doing</p>
-									<span class="msg_time_send">8:55 AM, Today</span>
-								</div>
-								<div class="avatar">
-                                    <img src="../assets/img/talha.jpg" alt="..." class="avatar-img rounded-circle">
-								</div>
-							</div>
-							<div class="d-flex justify-content-start mb-4">
-								<div class="avatar">
-                                <img src="../assets/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle">
-								</div>
-								<div class="msg_cotainer">
-                                    <h4>Jiimmy Smith</h4> 
-                                    <p> I am good too, thank you for your chat template</p>
-									<span class="msg_time">9:00 AM, Today</span>
-								</div>
-							</div>
+                        <div class="card-body msg_card_body"  id="chatBox">
+                        <?php if(is_array($data['chats'])): ?>
+                            <?php foreach($data['chats'] as $row):?>
+                                
+                                <?php if($row->sender !== $data['user_id'] && $row->roles !== $_SESSION['userrole']):?>
+                                <div class="d-flex justify-content-start mb-4">
+                                    <div class="avatar">
+                                        <img src="<?= ROOT.$row -> Image ?>" alt="..." class="avatar-img rounded-circle">
+                                    </div>
+                                    <div class="msg_cotainer">
+                                        <h4><?php echo($row -> Name); ?></h4> 
+                                        <?php 
+                                            if($row->files != ""):
+                                                $extension = pathinfo($row->files, PATHINFO_EXTENSION);
+                                                $imageextension = array("jpg", "jpeg", "gif", "png");
+                                                $videoextension = array("mp4", "mpeg", "ogg", "avi", "mov");
+                                                $audioextension = array("mp3", "wmv", "aac", "amr", "wav","m4a","flv");
+                                                if(in_array($extension, $imageextension)):?>
+                                                    <img src="<?= ROOT.$row -> files ?>" alt="..." style="width:300px; height:200px">
+                                                <?php elseif(in_array($extension, $videoextension)): ?>
+                                                    <video width="300" height="200" controls>
+                                                        <source src="<?= ROOT.$row -> files ?>" type="video/<?php echo $extension ?>">
+                                                    </video>
+                                                <?php elseif(in_array($extension, $audioextension)): ?>
+                                                    <audio controls>
+                                                        <source src="<?= ROOT.$row -> files ?>" type="audio/<?php echo $extension ?>">
+                                                    </audio>
+                                                <?php else: ?>
+                                                    <a type="button" href="<?= ROOT.$row -> files?>" class="btn btn-link btn-info btn-lg" data-original-title="Download file"> 
+                                                        <i class="fas fa-download"></i> <? echo $row -> files?>
+                                                    </a>
+                                                <?php endif;  ?>
+                                            <?php endif;  ?>
+                                        <p><i><?php echo($row -> message); ?></i></p>
+                                    
+                                        <span class="msg_time"><?php echo($row -> date); ?></span>
+
+                                    </div>
+                                </div>
+                                <?php else:?>
+                                <div class="d-flex justify-content-end mb-4">
+                                    <div class="msg_cotainer_send">
+                                            <h4><?php echo($row -> Name); ?></h4> 
+                                            <?php 
+                                            if($row->files != ""):
+                                                $extension = pathinfo($row->files, PATHINFO_EXTENSION);
+                                                $imageextension = array("jpg", "jpeg", "gif", "png");
+                                                $videoextension = array("mp4", "mpeg", "ogg", "avi", "mov");
+                                                $audioextension = array("mp3", "wmv", "aac", "amr", "wav","m4a","flv");
+                                                if(in_array($extension, $imageextension)):?>
+                                                    <img src="<?= ROOT.$row -> files ?>" alt="..." style="width:300px; height:200px">
+                                                <?php elseif(in_array($extension, $videoextension)):  ?>
+                                                    <video width="300" height="200" controls>
+                                                        <source src="<?= ROOT.$row -> files ?>" type="video/<?php echo $extension ?>">
+                                                    </video>
+                                                <?php elseif(in_array($extension, $audioextension)): ?>
+                                                    <audio controls>
+                                                        <source src="<?= ROOT.$row -> files ?>" type="audio/<?php echo $extension ?>">
+                                                    </audio>
+                                                <?php else: ?>
+                                                    <a type="button" href="<?= ROOT.$row -> files?>" class="btn btn-link btn-info btn-lg" data-original-title="Download file"> 
+                                                        <i class="fas fa-download"></i> <?php echo $row -> files?>
+                                                    </a>
+                                                <?php endif;  ?>
+                                            <?php endif;  ?>
+                                            <p><i><?php echo($row -> message); ?></i></p>
+                                        <span class="msg_time_send"><?php echo($row -> date); ?></span>
+                                    </div>
+                                    <div class="avatar">
+                                        <img src="<?= ROOT.$row -> Image ?>" alt="..." class="avatar-img rounded-circle">
+                                    </div>
+                                </div>
+                                <?php endif; ?>
+                            <?php endforeach;?>
+                        <?php endif; ?>
+						
 						</div>
                         <div class="card-footer">
                             <form method="POST" action="" id="sendchatform"  enctype="multipart/form-data">
@@ -69,7 +114,7 @@
                                     <div class="input-group-append">
                                         
                                         <button type="text" id="btnfile" class="input-group-text attach_btn text-success"><i class="fas fa-paperclip"></i></button>
-                                        <input type='file' name="uploadfile" id="uploadfile" style="display:none"></input>
+                                        <input type='file' name="uploadfile" id="uploadfile"></input>
                                     </div>
                                     <textarea name="chattext" id="chattext" class="form-control type_msg" placeholder="Type your message..."></textarea>
                                     <div class="input-group-append">
@@ -121,6 +166,14 @@
 <?php $this->view('includes/footer'); ?>
 
 <script>
+    var scrollDown = function(){
+        let chatBox = document.getElementById('chatBox');
+        chatBox.scrollTop = chatBox.scrollHeight;
+	}
+
+	scrollDown();
+
+
 $(document).ready(function () {
    $('#wrapper').addClass('sidebar_minimize');
 
@@ -144,8 +197,9 @@ $(document).ready(function () {
                     console.log("waiting....");
                 },
                 success: function(response) {
-                    // handle_result(response);
-                    console.log(response);
+                    $("#sendchatform")[0].reset();
+                    location.reload(true); 
+                    scrollDown();
                 },
                 error: function() {
                     console.log("OOOPs something is wrong");
