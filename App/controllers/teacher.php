@@ -5,6 +5,7 @@ class Teacher extends Controller {
     public function index() {
         $User = $this -> load_model('user_account');
         $user_data = $User -> check_login();
+        $_SESSION['crs_id'] ="";
         
         if(is_array($user_data)) {
             $data['user_data'] = $user_data;
@@ -26,10 +27,10 @@ class Teacher extends Controller {
         if(is_array($user_data)) {
             $data['user_data'] = $user_data;
         }
-
-        $course_id = $_GET['data-id'];
-        $_SESSION['crs_id'] = $course_id;
-
+        if($_SESSION['crs_id'] == ""){
+            $_SESSION['crs_id'] = $_GET['data-id'];
+        }
+        $course_id = $_SESSION['crs_id'];
         $folder = "course_materials/$course_id";
         if(!file_exists($folder)) {
             mkdir($folder, 0777, true);
@@ -44,6 +45,17 @@ class Teacher extends Controller {
         $data['folder_name'] = $folder;
 
         $this->view('teachers/home', $data);
+    }
+    public function add_note() {
+        $User = $this -> load_model('user_account');
+        $user_data = $User -> check_login();
+        
+        if(is_array($user_data)) {
+            $data['user_data'] = $user_data;
+        }
+        
+        $data['page_title'] = "Note Booker";
+        $this->view('teachers/add_note', $data);
     }
 
     public function enr_student() {

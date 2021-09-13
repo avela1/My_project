@@ -12,18 +12,6 @@ class Course_material extends Controller {
           echo json_encode("Folder already there!");
         }
 
-
-      }else if($_POST['action'] == 'update_folder'){
-
-        $folder = $_POST['folder'].'/'.$_POST['name'];
-        $oldfolder = $_POST['folder'].'/'.$_POST['oldVal'];
-
-        if(!file_exists($folder)) {
-            rename($oldfolder, $folder);
-            echo json_encode("Folder Renamed successfully!");
-        } else {
-          echo json_encode("Folder already there!");
-        }
       }else if($_POST['action'] == 'delete_folder'){
         if(file_exists($_POST['path'])) {
           $dir = $_POST['path'];

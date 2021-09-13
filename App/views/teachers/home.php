@@ -17,11 +17,11 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card bg-dark">
+                    <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <div class="card-title text-white"><i
-                                        class="fas fa-folder p-3"></i><?= $_GET['data-id']?> uploded files
+                                <div class="card-title text-white">
+                                    <i class="fas fa-folder p-3"></i><?= $_SESSION['crs_id']?> uploded files
                                 </div>
                                 <button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
                                     data-target="#folderModal">
@@ -40,7 +40,7 @@
                             <div class="accordion md-accordion accordion-blocks" id="accordionEx78" role="tablist"
                                 aria-multiselectable="true">
 
-                                <?php for($i = 0; $i < $count; $i++) :
+                                <?php for($i = 0; $i < $count; $i++):
                                      $files1 = array();
                                      $files = scandir($data['folder_name'].'/'.$data['folders'][$i]);
                                      foreach ($files as $file) {
@@ -59,8 +59,8 @@
                                                 aria-expanded="false"><i class="fas fa-pencil-alt"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-info">
+                                                <a class="dropdown-item"  data-name="<?= $data['folders'][$i]?>" href="<?=ROOT?>teacher/add_note?data-id=<?= $data['folders'][$i]?>">Add Note</a>
                                                 <a class="dropdown-item" data-toggle="modal" id="upload" data-name="<?= $data['folders'][$i]?>" href="#fileModal">Upload File</a>
-                                                <a class="dropdown-item" data-toggle="modal" id="renamefolder" data-name="<?= $data['folders'][$i]?>" href="#folderModal">Rename folder</a>
                                                 <a id = "deletefolder" data-path="<?= $data['folder_name'].'/'.$data['folders'][$i]?>" class="dropdown-item" href="#">Delete folder</a>
                                             </div>
                                         </div>
@@ -268,11 +268,6 @@
                     $('#folderModal').modal('hide');
                     alert(result);
                     $("#addfolderform")[0].reset();
-                } else if (result == 'Folder Name updated successfully!') {
-                    $('#folderModal').modal('hide');
-                    alert(result);
-                    $("#addfolderform")[0].reset();
-
                 } else if (result == 'Course material uploaded successully!') {
                     $('#fileModal').modal('hide');
                     alert(result);
@@ -319,7 +314,7 @@
             event.preventDefault();
             $data1 = new FormData(this);
             $data1.append("folder", "<?php echo $data['folder_name'] ?>");
-            $data1.append("crs_code", "<?= $_GET['data-id']?>");
+            $data1.append("crs_code", "<?= $_SESSION['crs_id']?>");
             $data1.append("foldername", $("#loc").val());
 
             $.ajax({
@@ -339,14 +334,6 @@
                     console.log("OOOPs something is wrong");
                 },
             });
-        });
-
-        $(document).on('click', '#renamefolder', function() {
-            var name1 = $(this).data('name');
-            $("#name").val(name1);
-            $("#oldVal").val(name1);
-            $("#action").attr("value", "update_folder");
-            $("#addButton").html("Update");
         });
 
         $(document).on('click', '#upload', function() {
@@ -389,7 +376,7 @@
             event.preventDefault();
             $data1 = new FormData(this);
             $data1.append("folder", "<?php echo $data['folder_name'] ?>");
-            $data1.append("crs_code", "<?= $_GET['data-id']?>");
+            $data1.append("crs_code", "<?= $_SESSION['crs_id']?>");
             $data1.append("foldername", $("#loc").val());
 
             $.ajax({
@@ -432,7 +419,6 @@
             }            
         });
        
-
     });
     </script>
 

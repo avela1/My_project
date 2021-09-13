@@ -49,7 +49,7 @@
                     </a>	
                 </li>
                 <li class="nav-item active">
-                    <a href="<?= ROOT ?>teacher/course_material">
+                    <a href="<?= ROOT ?>teacher/dashboard">
                         <i class="fas fa-book-reader"></i>
                         <p>Manage Course Material</p>
                     </a>
