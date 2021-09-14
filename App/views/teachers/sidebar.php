@@ -68,13 +68,6 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="<?= ROOT ?>teacher/message">
-                        <i class="far fa-envelope"></i>
-                        <p>Messages</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
                     <a data-toggle="" href="<?= ROOT ?>teacher/forum" class="collapsed" aria-expanded="false">
                         <i class="fas fa-comments"></i>
                         <p>Forums</p>

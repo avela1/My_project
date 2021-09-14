@@ -33,7 +33,7 @@
 		@media only screen and (min-width: 1000px) {
 			.sidebar {
 				position: fixed;
-				margin-top: 110px
+				margin-top: 110px;
 			}
 		}
 		

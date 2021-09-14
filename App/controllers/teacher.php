@@ -50,8 +50,12 @@ class Teacher extends Controller {
         }
 
         $data['folders'] = $folders1;
-        $data['folder'] = $folder;
         $data['folder_name'] = $path;
+
+
+        $data['folder'] = $folder;
+        $data['folder_path'] = $path;
+
 
         $this->view('teachers/home', $data);
     }

@@ -1,6 +1,13 @@
 <?php $this->view('includes/header', $data); ?>
 <?php $this->view('teachers/sidebar', $data); ?>
 
+<style type="text/css">
+    @media only screen and (max-width: 500px) {
+        #courseImage {width: 200px; height:200px}
+        video {width: 200px; height:200px}
+        audio {width: 200px; height:200px}
+    }
+</style>
 
 <div class="main-panel">
     <div class="content">
@@ -79,7 +86,6 @@
                                                     <div class="row">
                                                         <div class="col-sm-12">
                                                             <?php foreach($data['rows'] as $row):
-                                                                
                                                                 if($row-> folder == $data['folders'][$i]):
                                                                     if($row->FileName == ''): ?>
                                                                     <div class="jumbotron">
@@ -91,16 +97,69 @@
                                                                         </a>
                                                                         <?php  echo($row->note);?>
                                                                     </div>
-                                                                <?php
-                                                                    else:
-                                                                        
-                                                                        echo "file";
-                                                                endif;
-                                                            endif;
-                                                                endforeach;
-                                                                ?>
+                                                                    <?php
+                                                                        else:
+                                                                            $extension = pathinfo($row->FileName, PATHINFO_EXTENSION);
+                                                                            $imageextension = array("jpg", "jpeg", "gif", "png");
+                                                                            $videoextension = array("mp4", "mpeg", "ogg", "avi", "mov");
+                                                                            $audioextension = array("mp3", "wmv", "aac", "amr", "wav","m4a","flv");
+                                                                            if(in_array($extension, $imageextension)):
+                                                                        ?>
+                                                                    <div class="jumbotron">
+                                                                        <a type="button"  id="delete" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete note">
+                                                                            <i class="fas fa-pen-square text-danger "></i>
+                                                                        </a>
+                                                                        <a type="button"  id="update" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-toggle="modal" href="#fileModal" data-original-title="Edit note">
+                                                                            <i class="fas fa-pen-square text-primary "></i>
+                                                                        </a>
 
-                                                            <table id="add-row" class="display table table-striped table-hover dataTable"  role="grid" aria-describedby="add-row_info">
+                                                                        <img src="<?=ROOT.$data['folder_path'].'/'.$row->folder.'/'.$row -> FileName ?>"  id="courseImage" alt="..." style="width:300; height:300px">
+                                                                        <br/><p><b><?php echo($row-> note); ?></b></p>
+                                                                    </div>
+                                                                        <?php elseif(in_array($extension, $videoextension)): ?>
+                                                                    <div class="jumbotron">
+                                                                        <a type="button"  id="delete" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete note">
+                                                                            <i class="fas fa-pen-square text-danger "></i>
+                                                                        </a>
+                                                                        <a type="button"  id="update" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-toggle="modal" href="#fileModal" data-original-title="Edit note">
+                                                                            <i class="fas fa-pen-square text-primary "></i>
+                                                                        </a>
+                                                                        <video width="400" height="400" controls>
+                                                                            <source src="<?= ROOT.$data['folder_path'].'/'.$row->folder.'/'.$row -> FileName ?>" type="video/<?php echo $extension ?>">
+                                                                        </video>
+                                                                        <br/><p><b><?php echo($row-> note); ?></b></p>
+                                                                    </div>
+                                                                        <?php elseif(in_array($extension, $audioextension)): ?>
+                                                                    <div class="jumbotron">
+                                                                        <a type="button"  id="delete" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete note">
+                                                                            <i class="fas fa-pen-square text-danger "></i>
+                                                                        </a>
+                                                                        <a type="button"  id="update" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-toggle="modal" href="#fileModal" data-original-title="Edit note">
+                                                                            <i class="fas fa-pen-square text-primary "></i>
+                                                                        </a>
+                                                                        <audio controls>
+                                                                            <source src="<?= ROOT.$data['folder_path'].'/'.$row->folder.'/'.$row -> FileName ?>" type="audio/<?php echo $extension ?>">
+                                                                        </audio>
+                                                                        <br/><p><b><?php echo($row-> note); ?></b></p>
+                                                                    </div>
+                                                                        <?php else: ?>
+                                                                    <div class="jumbotron">
+
+                                                                            <a type="button" href="<?= ROOT.$data['folder_path'].'/'.$row->folder.'/'.$row -> FileName ?>" class="btn btn-link btn-info btn-lg" data-original-title="Download file"> 
+                                                                                <i class="fas fa-download"></i> <? echo $row -> FileName?>
+                                                                            </a>
+                                                                        <br/><p><b><?php echo($row-> note); ?></b></p>
+
+                                                                    </div>
+
+                                                                        <?php endif;  ?>
+                                                            <?php
+                                                                endif;
+                                                                endif;
+                                                            endforeach;
+                                                            ?>
+
+                                                            <!-- <table id="add-row" class="display table table-striped table-hover dataTable"  role="grid" aria-describedby="add-row_info">
                                                                 <thead>
                                                                     <tr role="row">
                                                                         <th ><i>File Name</th>
@@ -155,21 +214,8 @@
                                                                     <?php endforeach; ?>
                                                                 </tbody>
 
-                                                            </table>
-                                                        </div>
+                                                            </table> -->
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-12 col-md-7">
-                                                            <div class="dataTables_paginate paging_simple_numbers" id="add-row_paginate">
-                                                                <ul class="pagination">
-                                                                    <li class="paginate_button page-item previous disabled" id="add-row_previous"><a href="#"  aria-controls="add-row" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                                    </li>
-                                                                    <li class="paginate_button page-item active"><a  href="#" aria-controls="add-row"  data-dt-idx="1" tabindex="0"  class="page-link">1</a></li>
-                                                                    <li class="paginate_button page-item "><a href="#"  aria-controls="add-row" data-dt-idx="2"  tabindex="0" class="page-link">2</a></li>
-                                                                    <li class="paginate_button page-item next"  id="add-row_next"><a href="#"  aria-controls="add-row" data-dt-idx="3"  tabindex="0" class="page-link">Next</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
