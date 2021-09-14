@@ -30,19 +30,28 @@ class Teacher extends Controller {
         if($_SESSION['crs_id'] == ""){
             $_SESSION['crs_id'] = $_GET['data-id'];
         }
+        
         $course_id = $_SESSION['crs_id'];
-        $folder = "course_materials/$course_id";
-        if(!file_exists($folder)) {
+        $path = "course_materials/$course_id";
+        if(!file_exists($path)) {
             mkdir($folder, 0777, true);
         }
-        $folders = array_filter(glob("$folder/*"), 'is_dir');
+        $folders = array_filter(glob("$path/*"), 'is_dir');
         $folders1 = array();
+        $folder = array();
+
+        $DB = Database::newInstance();
+        $rows = $DB -> read("SELECT * FROM `crsmaterial` where `CrsCode` = '".$_SESSION['crs_id']."' ");
+        $data['rows'] = $rows;
 
         foreach($folders as $fold) {
-            array_push($folders1, str_replace("$folder/","", $fold) ); 
+            array_push($folders1, str_replace("$path/","", $fold) ); 
+            array_push($folder, str_replace("$path/","", $fold) ); 
         }
+
         $data['folders'] = $folders1;
-        $data['folder_name'] = $folder;
+        $data['folder'] = $folder;
+        $data['folder_name'] = $path;
 
         $this->view('teachers/home', $data);
     }

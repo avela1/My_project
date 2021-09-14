@@ -32,13 +32,11 @@
                         </div>
 
                         <div class="card-body">
-                            <?php if(is_array($data['folders'])): 
-                            if(count($data['folders']) <= 0):?>
-
-                            <h2 class="text-warning">You haven't upload anything yet</h2>
-                            <?php else: $count = sizeof($data['folders']); ?>
-                            <div class="accordion md-accordion accordion-blocks" id="accordionEx78" role="tablist"
-                                aria-multiselectable="true">
+                            <?php if(is_array($data['folder'])): 
+                            if(count($data['folder']) <= 0):?>
+                                <h2 class="text-warning">You haven't upload anything yet</h2>
+                            <?php else: $count = sizeof($data['folder']); ?>
+                            <div class="accordion md-accordion accordion-blocks" id="accordionEx78" role="tablist" aria-multiselectable="true">
 
                                 <?php for($i = 0; $i < $count; $i++):
                                      $files1 = array();
@@ -59,9 +57,9 @@
                                                 aria-expanded="false"><i class="fas fa-pencil-alt"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-info">
-                                                <a class="dropdown-item"  data-name="<?= $data['folders'][$i]?>" href="<?=ROOT?>teacher/add_note?data-id=<?= $data['folders'][$i]?>">Add Note</a>
-                                                <a class="dropdown-item" data-toggle="modal" id="upload" data-name="<?= $data['folders'][$i]?>" href="#fileModal">Upload File</a>
-                                                <a id = "deletefolder" data-path="<?= $data['folder_name'].'/'.$data['folders'][$i]?>" class="dropdown-item" href="#">Delete folder</a>
+                                                <a class="dropdown-item" href="<?=ROOT?>teacher/add_note?data-id=<?= $data['folder'][$i]?>">Add Note</a>
+                                                <a class="dropdown-item" data-toggle="modal" id="upload" data-name="<?= $data['folder'][$i]?>" href="#fileModal">Upload File</a>
+                                                <a id = "deletefolder" data-path="<?= $data['folder_name'].'/'.$data['folder'][$i]?>" class="dropdown-item" href="#">Delete folder</a>
                                             </div>
                                         </div>
                                        
@@ -80,6 +78,28 @@
                                                 <div id="add-row_wrapper"  class="dataTables_wrapper container-fluid dt-bootstrap4">
                                                     <div class="row">
                                                         <div class="col-sm-12">
+                                                            <?php foreach($data['rows'] as $row):
+                                                                
+                                                                if($row-> folder == $data['folders'][$i]):
+                                                                    if($row->FileName == ''): ?>
+                                                                    <div class="jumbotron">
+                                                                        <a type="button"  id="delete" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete note">
+                                                                            <i class="fas fa-pen-square text-danger "></i>
+                                                                        </a>
+                                                                        <a type="button"  id="update" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-toggle="modal" href="#fileModal" data-original-title="Edit note">
+                                                                            <i class="fas fa-pen-square text-primary "></i>
+                                                                        </a>
+                                                                        <?php  echo($row->note);?>
+                                                                    </div>
+                                                                <?php
+                                                                    else:
+                                                                        
+                                                                        echo "file";
+                                                                endif;
+                                                            endif;
+                                                                endforeach;
+                                                                ?>
+
                                                             <table id="add-row" class="display table table-striped table-hover dataTable"  role="grid" aria-describedby="add-row_info">
                                                                 <thead>
                                                                     <tr role="row">
@@ -227,20 +247,19 @@
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-12 col-lg-12">
+
                                             <div class="form-group">
                                                 <label for="fname">Folder Name</label>
-                                                <input id="loc" name="loc" type="text" class="form-control" disabled>
+                                                <input id="folder_name" name="folder_name" type="text" class="form-control" disabled>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="fname">File Name</label>
-                                                <input id="fname" name="fname" type="text" class="form-control"
-                                                    placeholder="Fill File Name" required>
-                                            </div>
-
                                             <div class="form-group">
                                                 <label for="fileloc">Load File</label>
                                                 <input type="file" name="fileloc" class="form-control-file" id="fileloc">
                                                 <input type="hidden" name='fpath' value="" id='fpath'>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="desk">Description</label>
+                                                <input id="desc" name="desc" type="text" class="form-control" placeholder="Enter Description of file">
                                             </div>
                                         </div>
                                     </div>
@@ -289,7 +308,6 @@
             event.preventDefault();
             $data1 = new FormData(this);
             $data1.append("folder", "<?php echo $data['folder_name'] ?>");
-
             $.ajax({
                 url: "<?=ROOT?>course_material/manage_folder",
                 type: 'POST',
@@ -313,9 +331,8 @@
         $(document).on('submit', '#uploadForm', function(event) {
             event.preventDefault();
             $data1 = new FormData(this);
-            $data1.append("folder", "<?php echo $data['folder_name'] ?>");
             $data1.append("crs_code", "<?= $_SESSION['crs_id']?>");
-            $data1.append("foldername", $("#loc").val());
+            $data1.append("foldername", $("#folder_name").val());
 
             $.ajax({
                 url: "<?=ROOT?>course_material/upload_file",
@@ -338,7 +355,7 @@
 
         $(document).on('click', '#upload', function() {
             var name1 = $(this).data('name');
-            $("#loc").val(name1);
+            $("#folder_name").val(name1);
         }); 
         $(document).on('click', '#delete', function() {
             var path = $(this).data('loc');

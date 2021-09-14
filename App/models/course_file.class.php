@@ -3,29 +3,48 @@
 
 Class Course_file {
 
+    public function upload_notes($POST = []) {
+
+        $DB = Database::getInstance();
+        $data = array();
+        $data['note'] = trim($POST['note']);			
+        $data['folder'] = trim($POST['folder']);			
+        $data['date'] = date("Y-m-d H:i:s");
+        $data['lectid'] = $_SESSION['ID'];
+        $data['crscode'] = trim($_SESSION['crs_id']);
+
+        $query = "INSERT INTO `crsmaterial`(`UploDate`, `CrsCode`, `LectId`, `note`, `folder`) VALUES (:date, :crscode, :lectid, :note, :folder)";
+        $result = $DB->write($query, $data);
+        if($result) {
+            return true;
+        } else {
+            $_SESSION['error'] = "file is not uploaded";
+            return false;
+        }
+    }
+
     public function upload($POST = [], $FILES = []) {
 
         $DB = Database::newInstance();
         $data = array();
-        $fname = trim($POST['fname']);			
+        show($FILES);
         $data['date'] = date("Y-m-d H:i:s");
         $data['lectid'] = $_SESSION['ID'];
         $data['crscode'] = trim($POST['crs_code']);
-        $location = $POST['folder'].'/'.$POST['foldername'];
+        $data['foldername'] = trim($POST['foldername']);
+        $data['description'] = trim($POST['desc']);
+
+        $path = "course_materials/".$data['crscode']."/".$data['foldername']."/";
+
+        // $path = $POST['folder'].'/'.$POST['foldername'];
 
         $files = array();
         $files = $FILES['fileloc'];
 
-        if(!file_exists($location)) {
-            mkdir($folder, 0777, true);
-        } 
-
-        $extension = pathinfo($files['name'], PATHINFO_EXTENSION);
-
-        $destination = $location.'/'.$fname.".".$extension;
-        $data['loc'] = $destination;
+        $destination = $path.$files['name'];
+        $data['filename'] = $files['name'];
         if(move_uploaded_file($files['tmp_name'], $destination)){
-            $query = "INSERT INTO `crsmaterial`(`FileLoc`, `UploDate`, `CrsCode`, `LectId`) VALUES (:loc, :date, :crscode, :lectid)";
+            $query = "INSERT INTO `crsmaterial`(`UploDate`, `CrsCode`, `LectId`, `note`, `folder`, `FileName`) VALUES (:date, :crscode, :lectid, :description, :foldername, :filename)";
             $result = $DB->write($query, $data);
             if($result) {
                 return true;

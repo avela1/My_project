@@ -30,13 +30,35 @@ class Course_material extends Controller {
         }
       }
     }
+    public function  upload_notes() {
+      $_SESSION['error'] = "";
+      $crs_file = $this -> load_model('course_file');
+      if(!empty($_POST['note'])) {
+          $crs_file->upload_notes($_POST);
 
+          if($_SESSION['error'] != "")
+          {
+              $arr = $_SESSION['error'];
+              $_SESSION['error'] = "";
+              show($arr);
+              
+          }else
+          {
+              $arr = "Note is successully! Uploaded!!!!";
+              echo json_encode($arr);
+          }
+      } else {
+          $arr = "Please enter some note!!!";
+          echo json_encode($arr);
+      }
+    }
     public function upload_file() {
       $_SESSION['error'] = "";
       $crs_file = $this -> load_model('course_file');
-      if(!empty($_FILES['fileloc']["name"])) {
-          $crs_file->upload($_POST, $_FILES);
 
+      if(!empty($_FILES['fileloc']["name"])) {
+
+          $crs_file->upload($_POST, $_FILES);
           if($_SESSION['error'] != "")
           {
               $arr = $_SESSION['error'];
