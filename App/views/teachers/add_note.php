@@ -21,13 +21,20 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <div class="card-title">
-                                <i class="fas fa-pen-square text-danger"></i> <?= ($_GET['data-id'])?>  Note   
+                                <?php $folder="";
+                                
+                                if(isset($_GET['data-id'])): 
+                                    $folder = $_GET['data-id'];
+                                    ?>
+                                    <i class="fas fa-pen-square text-danger"></i> <?= ($_GET['data-id'])?>  Note   
+                                <?php endif; ?>
                                 </div>
                             </div>
                         </div>
                         <form action="" method="post" id="upload-form" enctype="multipart/form-data">
                             <div class="card-body">     
                                 <textarea name="note" id="note"></textarea>
+                                <input type="hidden" name="checker" id="checker" value="<?= $folder ?>">
                             </div>
 
                             <div class="card-footer no-bd">
@@ -45,13 +52,12 @@
 	<script src="<?= ASSETS ?>/ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace("note");
-
         $(document).ready(function() {
 
             $(document).on('submit', '#upload-form', function(event) {
                 event.preventDefault();
                 $data = new FormData(this);
-                $data.append("folder", "<?= ($_GET['data-id'])?>");
+                $data.append("folder", "<?= $folder ?>");
                 console.log($data);
                 $.ajax({
                     url: "<?=ROOT?>course_material/upload_notes",
@@ -72,6 +78,13 @@
                     },
                 });
             });
+
+            
+            if($("#checker").val() == "") {
+                $data = localStorage.getItem('data');
+                console.log($data);
+                $("#note").val($data);
+            }
         });
     </script>
 </body>

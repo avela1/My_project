@@ -163,10 +163,11 @@ Class Course_file {
         //     return false;
         // }
     }
-    public function get_all(){
-
+    public function get_all($POST = []){
+        $data = array();
+        $id = $POST['id'];
         $DB = Database::newInstance();
-        $result = $DB->read("SELECT * FROM `crsmaterial` where `CrsCode` = 1");
+        $result = $DB->read("SELECT * FROM `crsmaterial` where `ID` = $id");
         return $result;
     }
 }

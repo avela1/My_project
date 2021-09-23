@@ -69,7 +69,6 @@
                                                 <a id = "deletefolder" data-path="<?= $data['folder_name'].'/'.$data['folder'][$i]?>" class="dropdown-item" href="#">Delete folder</a>
                                             </div>
                                         </div>
-                                       
                                         <a data-toggle="collapse" data-parent="#accordionEx78" href="#collapse79<?=$i?>"
                                             aria-expanded="true" aria-controls="collapse79<?=$i?>">
                                             <h5 class="mt-1 mb-0">
@@ -89,10 +88,10 @@
                                                                 if($row-> folder == $data['folders'][$i]):
                                                                     if($row->FileName == ''): ?>
                                                                     <div class="jumbotron">
-                                                                        <a type="button"  id="delete" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete note">
+                                                                        <a type="button"  id="delete_txt" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete note">
                                                                             <i class="fas fa-pen-square text-danger "></i>
                                                                         </a>
-                                                                        <a type="button"  id="update" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-toggle="modal" href="#fileModal" data-original-title="Edit note">
+                                                                        <a type="button"  id="update_txt" data-id="<?= $row->ID ?>" class="btn btn-link float-right" data-original-title="Edit note">
                                                                             <i class="fas fa-pen-square text-primary "></i>
                                                                         </a>
                                                                         <?php  echo($row->note);?>
@@ -106,10 +105,10 @@
                                                                             if(in_array($extension, $imageextension)):
                                                                         ?>
                                                                     <div class="jumbotron">
-                                                                        <a type="button"  id="delete" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete note">
+                                                                        <a type="button"  id="delete" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete file">
                                                                             <i class="fas fa-pen-square text-danger "></i>
                                                                         </a>
-                                                                        <a type="button"  id="update" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-toggle="modal" href="#fileModal" data-original-title="Edit note">
+                                                                        <a type="button"  id="update" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-toggle="modal" href="#fileModal" data-original-title="Edit file">
                                                                             <i class="fas fa-pen-square text-primary "></i>
                                                                         </a>
 
@@ -422,6 +421,25 @@
                 });
             }            
         });
+
+        $(document).on('click', '#update_txt', function (){
+            var id = $(this).data('id');
+            $data = new FormData();
+            $data.append("id", id);
+            $.ajax({
+                url: "<?=ROOT?>course_material/update_note",
+                method: "POST",
+                data: $data,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    localStorage.setItem('data', JSON.stringify(data));
+                    window.location = "<?=ROOT?>teacher/add_note";
+                }
+            });
+        });
+        
         $(document).on('click', '#update', function() {
             var name = $(this).data('name');
             var path = $(this).data('loc');
