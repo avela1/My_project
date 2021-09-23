@@ -52,11 +52,33 @@ class Course_material extends Controller {
           echo json_encode($arr);
       }
     }
-    public function  update_note() {
+    public function  getdata() {
       $crs_file = $this -> load_model('course_file');
       $data = $crs_file->get_all($_POST);
       print_r(json_encode($data));
     }
+    public function  update_note() {
+      $_SESSION['error'] = "";
+      $crs_file = $this -> load_model('course_file');
+      if(!empty($_POST['note'])) {
+          $crs_file->update_note($_POST);
+          if($_SESSION['error'] != "")
+          {
+              $arr = $_SESSION['error'];
+              $_SESSION['error'] = "";
+              show($arr);
+              
+          }else
+          {
+              $arr = "Note is updated successully!!!!";
+              echo json_encode($arr);
+          }
+      } else {
+          $arr = "Please enter some note!!!";
+          echo json_encode($arr);
+      }
+    }
+
     public function upload_file() {
       $_SESSION['error'] = "";
       $crs_file = $this -> load_model('course_file');
@@ -69,7 +91,6 @@ class Course_material extends Controller {
               $arr = $_SESSION['error'];
               $_SESSION['error'] = "";
               show($arr);
-              
           }else
           {
               $arr = "Course material uploaded successully!";

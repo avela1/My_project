@@ -22,6 +22,23 @@ Class Course_file {
             return false;
         }
     }
+    public function update_note($POST) {
+
+        $DB = Database::getInstance();
+        $data = array();
+        $data['note'] = trim($POST['note']);			
+        $data['id'] = trim($POST['noteid']);
+        $data['date'] = date("Y-m-d H:i:s");
+
+        $query = "UPDATE `crsmaterial` SET `note`= :note,`UploDate`= :date WHERE `ID` = :id";
+        $result = $DB->write($query, $data);
+        if($result) {
+            return true;
+        } else {
+            $_SESSION['error'] = "file is not updated";
+            return false;
+        }
+    }
 
     public function upload($POST = [], $FILES = []) {
 

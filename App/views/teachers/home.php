@@ -427,7 +427,7 @@
             $data = new FormData();
             $data.append("id", id);
             $.ajax({
-                url: "<?=ROOT?>course_material/update_note",
+                url: "<?=ROOT?>course_material/getdata",
                 method: "POST",
                 data: $data,
                 dataType: 'json',

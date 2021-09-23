@@ -35,6 +35,7 @@
                             <div class="card-body">     
                                 <textarea name="note" id="note"></textarea>
                                 <input type="hidden" name="checker" id="checker" value="<?= $folder ?>">
+                                <input type="hidden" name="noteid" id="noteid">
                             </div>
 
                             <div class="card-footer no-bd">
@@ -78,11 +79,37 @@
                 });
             });
 
-            
+            $(document).on('submit', '#update-form', function(event) {
+                event.preventDefault();
+                $data = new FormData(this);
+				// $data.append("id", $("#noteid").val());
+                $.ajax({
+                    url: "<?=ROOT?>course_material/update_note",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: $data,
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function() {
+                        console.log("waiting....");
+                    },
+                    success: function(response) {
+                        alert(response);
+                        window.location = "<?=ROOT?>teacher/dashboard";
+                    },
+                    error: function() {
+                        console.log("OOOPs something is wrong");
+                    },
+                });
+            });
+
             if($("#checker").val() == "") {
                 $data = localStorage.getItem('data');
                 $data = JSON.parse($data);
                 $("#note").val($data[0].note);
+                $("#noteid").val($data[0].ID);
+                $('#upload-form').attr("id", "update-form");
+                $("#addButton").text("Update");
             }
         });
     </script>
