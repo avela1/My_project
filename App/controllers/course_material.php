@@ -55,7 +55,7 @@ class Course_material extends Controller {
     public function  update_note() {
       $crs_file = $this -> load_model('course_file');
       $data = $crs_file->get_all($_POST);
-      echo (json_encode($data));
+      print_r(json_encode($data));
     }
     public function upload_file() {
       $_SESSION['error'] = "";

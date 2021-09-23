@@ -167,7 +167,7 @@ Class Course_file {
         $data = array();
         $id = $POST['id'];
         $DB = Database::newInstance();
-        $result = $DB->read("SELECT * FROM `crsmaterial` where `ID` = $id");
+        $result = $DB->read("SELECT `ID`, `CrsCode`, `LectId`, `note`, `folder` FROM `crsmaterial` where `ID` = $id");
         return $result;
     }
 }

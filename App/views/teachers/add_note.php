@@ -70,7 +70,6 @@
                         console.log("waiting....");
                     },
                     success: function(response) {
-                        // handle_result(response);
                         console.log(response);
                     },
                     error: function() {
@@ -82,8 +81,8 @@
             
             if($("#checker").val() == "") {
                 $data = localStorage.getItem('data');
-                console.log($data);
-                $("#note").val($data);
+                $data = JSON.parse($data);
+                $("#note").val($data[0].note);
             }
         });
     </script>
