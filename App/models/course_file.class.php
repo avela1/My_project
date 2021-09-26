@@ -44,7 +44,7 @@ Class Course_file {
 
         $DB = Database::newInstance();
         $data = array();
-        show($FILES);
+        
         $data['date'] = date("Y-m-d H:i:s");
         $data['lectid'] = $_SESSION['ID'];
         $data['crscode'] = trim($POST['crs_code']);
@@ -153,16 +153,26 @@ Class Course_file {
     }
     public function delete_file($POST = []) {
         $data = array();
-        $data['path'] = $POST['path'];
+        $data['id'] = $POST['id'];
         $DB = Database::newInstance();
-        $query = "DELETE FROM `crsmaterial` WHERE `FileLoc` = :path limit 1";
-        $result = $DB->write($query, $data);
-        if($result) {
-            unlink($POST['path']);
-            return true;
+
+        $query = false;
+        $query = "SELECT * FROM `crsmaterial` WHERE `ID` = :id LIMIT 1;";
+        $result = $DB->read($query, $data);
+        if($result[0]->FileName == ''){
+            $query = "DELETE FROM `crsmaterial` WHERE `ID` = :id LIMIT 1";
+            $res = $DB->write($query, $data);
         } else {
-            $_SESSION['error'] = "file is not deleted";
-            return false;
+            $query = "DELETE FROM `crsmaterial` WHERE `ID` = :id limit 1";
+            $res = $DB->write($query, $data);
+            if($result) {
+                $path = "course_materials/".$result[0]->CrsCode."/".$result[0]->folder."/".$result[0]->FileName;
+                unlink($path);
+                return true;
+            } else {
+                $_SESSION['error'] = "file is not deleted";
+                return false;
+            }
         }
     }
     public function delete_folder($POST = []) {

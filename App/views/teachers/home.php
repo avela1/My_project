@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <div class="card-title text-white">
+                                <div class="card-title">
                                     <i class="fas fa-folder p-3"></i><?= $_SESSION['crs_id']?> uploded files
                                 </div>
                                 <button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
@@ -66,7 +66,7 @@
                                             <div class="dropdown-menu dropdown-info">
                                                 <a class="dropdown-item" href="<?=ROOT?>teacher/add_note?data-id=<?= $data['folder'][$i]?>">Add Note</a>
                                                 <a class="dropdown-item" data-toggle="modal" id="upload" data-name="<?= $data['folder'][$i]?>" href="#fileModal">Upload File</a>
-                                                <a id = "deletefolder" data-path="<?= $data['folder_name'].'/'.$data['folder'][$i]?>" class="dropdown-item" href="#">Delete folder</a>
+                                                <a id = "deletefolder" data-path="<?= "course_materials/".$_SESSION['crs_id'].'/'.$data['folder'][$i] ?>" class="dropdown-item" href="#">Delete folder</a>
                                             </div>
                                         </div>
                                         <a data-toggle="collapse" data-parent="#accordionEx78" href="#collapse79<?=$i?>"
@@ -88,7 +88,7 @@
                                                                 if($row-> folder == $data['folders'][$i]):
                                                                     if($row->FileName == ''): ?>
                                                                     <div class="jumbotron">
-                                                                        <a type="button"  id="delete_txt" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete note">
+                                                                        <a type="button"  id="delete" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete note">
                                                                             <i class="fas fa-pen-square text-danger "></i>
                                                                         </a>
                                                                         <a type="button"  id="update_txt" data-id="<?= $row->ID ?>" class="btn btn-link float-right" data-original-title="Edit note">
@@ -158,62 +158,6 @@
                                                             endforeach;
                                                             ?>
 
-                                                            <!-- <table id="add-row" class="display table table-striped table-hover dataTable"  role="grid" aria-describedby="add-row_info">
-                                                                <thead>
-                                                                    <tr role="row">
-                                                                        <th ><i>File Name</th>
-                                                                        <th style="width: 10%">Action</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tfoot>
-                                                                    <tr>
-                                                                        <th rowspan="1" colspan="1">File Name</th>
-                                                                        </th>
-                                                                    </tr>
-                                                                </tfoot>
-                                                                <tbody>
-                                                                    <?php foreach ($files1 as $file):
-                                                                        $extension = pathinfo($file, PATHINFO_EXTENSION);
-                                                                        $icon = '';
-                                                                        if($extension ==='mp4') {
-                                                                            $icon = '<i class="fas fa-file-video text-warning p-3"></i>';
-                                                                        } elseif($extension ==='pdf'){
-                                                                            $icon = '<i class="fas fa-file-pdf text-danger p-3"></i>';
-                                                                        }elseif($extension ==='mp3'){
-                                                                            $icon = '<i class="fas fa-file-audio p-3"></i>';
-                                                                        }elseif($extension ==='doc' or $extension ==='docx'){
-                                                                            $icon = '<i class="fas fa-file-word text-primary p-3"></i>';
-                                                                        } elseif($extension ==='ppt' or $extension ==='pptx'){
-                                                                            $icon = '<i class="fas fa-file-powerpoint text-success p-3"></i>';
-                                                                        } elseif($extension ==='jpg' or $extension ==='jpeg' or $extension ==='gif' or $extension ==='png'){
-                                                                            $icon =  '<i class="fas fa-file-image text-info p-3"></i>';
-                                                                        }elseif($extension ==='zip' or $extension ==='rar') {
-                                                                            $icon = '<i class="fas fa-file-archive text-dark p-3"></i>';
-                                                                        } else {
-                                                                            $icon = '<i class="fas fa-file text-secondary p-3"></i>';
-                                                                        }
-                                                                    ?>
-
-                                                                    <tr role="row" class="odd">
-                                                                        <td class="sorting_1"> <a href="#"><?php echo $icon; print_r($file)?></a> </td>
-                                                                        <td>
-                                                                            <div class="form-button-action">
-                                                                                <a type="button" href="<?= ROOT.$data['folder_name'].'/'.$data['folders'][$i].'/'. $file ?>" class="btn btn-link btn-info btn-lg" data-original-title="Download file"> 
-                                                                                    <i class="fas fa-download"></i>
-                                                                                </a>
-                                                                                <a type="button"  id="update" data-name="<?= str_replace("$extension", "", $file)?>" data-loc="<?= $data['folder_name'].'/'.$data['folders'][$i].'/'. $file ?>"  data-folder="<?= $data['folders'][$i]?>" class="btn btn-link btn-primary"  data-toggle="modal" href="#fileModal" data-original-title="Update file">
-                                                                                    <i class="fa fa-edit"></i>
-                                                                                </a>
-                                                                                <a type="button"  data-toggle="tooltip" id='delete' data-loc="<?= $data['folder_name'].'/'.$data['folders'][$i].'/'. $file ?>" class="btn btn-link btn-danger" data-original-title="Delete file">
-                                                                                    <i class="fa fa-times"></i>
-                                                                                </a>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <?php endforeach; ?>
-                                                                </tbody>
-
-                                                            </table> -->
                                                     </div>
                                                     </div>
                                                 </div>
@@ -337,9 +281,9 @@
                     alert(result);
                     $("#uploadForm")[0].reset();
 
-                } else if (result == 'Course material deleted successully!') {
+                } else if (result == 'File deleted successully!') {
                     alert(result);
-                } else if (result == 'Course material updated successully!') {
+                } else if (result == 'File updated successully!') {
                     $('#fileModal').modal('hide');
                     alert(result);
                     $("#updateform")[0].reset();
@@ -365,7 +309,6 @@
                 },
                 success: function(response) {
                     handle_result(response);
-                    // console.log(response);
                 },
                 error: function() {
                     console.log("OOOPs something is wrong");
@@ -402,11 +345,12 @@
             var name1 = $(this).data('name');
             $("#folder_name").val(name1);
         }); 
+
+        
         $(document).on('click', '#delete', function() {
-            var path = $(this).data('loc');
+            var id = $(this).data('id');
             $data = new FormData();
-            $data.append("path", path);
-            
+            $data.append("id", id);
             if(confirm("Are you sure you want to delete??")) {
                 $.ajax({
                     url: "<?=ROOT?>course_material/delete_file",
@@ -419,8 +363,9 @@
                         handle_result(data);
                     }
                 });
-            }            
-        });
+            }
+        }); 
+        
 
         $(document).on('click', '#update_txt', function (){
             var id = $(this).data('id');
@@ -447,7 +392,6 @@
 
             $("#loc").val(folder);
             $("#fname").val(name);
-            // $("#fileloc").val(path);
             $("#fpath").val(path);
             $('#uploadForm').attr("id", "updateform");
             $("#uploadFile").html("Update");
@@ -481,6 +425,7 @@
 
         $(document).on('click', '#deletefolder', function() {
             var path = $(this).data('path');
+            console.log(path);
             $data = new FormData();
             $data.append("path", path);
             $data.append("action", 'delete_folder');

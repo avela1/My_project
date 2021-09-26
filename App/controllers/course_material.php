@@ -14,7 +14,7 @@ class Course_material extends Controller {
 
       }else if($_POST['action'] == 'delete_folder'){
         if(file_exists($_POST['path'])) {
-          $dir = $_POST['path'];
+          $dir = ROOT.$_POST['path'];
          
           if(count(glob("$dir/*")) != 0) {
             echo json_encode("Please Frist Delete Inside files please!");
@@ -126,13 +126,10 @@ class Course_material extends Controller {
       }
     }
     public function delete_file() {
-      // echo json_encode($_POST['path']);
       $_SESSION['error'] = "";
       $crs_file = $this -> load_model('course_file');
-
-      if(file_exists($_POST['path'])) {
+      if(!empty($_POST['id'])) {
         $crs_file->delete_file($_POST);
-        
         if($_SESSION['error'] != "")
           {
               $arr = $_SESSION['error'];
@@ -141,12 +138,11 @@ class Course_material extends Controller {
               
           }else
           {
-              $arr = "Course material deleted successully!";
+              $arr = "File deleted successully!";
               echo json_encode($arr);
           }
-        
       } else {
-        echo json_encode("wrong path to file");
+        echo json_encode("Can't delete file");
       }
      
     }
