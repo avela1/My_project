@@ -281,7 +281,6 @@
 				event.preventDefault();
 				var $data = new FormData(this);
 				$data.append("username", $("#username_u").val());
-				console.log($data);
 				$.ajax({
 					url: "<?=ROOT?>teachers_controller",
 					type: 'POST',

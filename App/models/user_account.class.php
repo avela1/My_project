@@ -85,6 +85,8 @@ class User_account {
             }
             
             $check = $db->read($sql, $arr);
+            $_SESSION['Batch'] = $check[0]->Batch;
+
 
             if(is_array($check)) {
                 return $check;
@@ -98,6 +100,7 @@ class User_account {
             unset($_SESSION['username']);
             unset($_SESSION['userrole']);
             unset($_SESSION['ID']);
+            unser($_SESSION['Batch']);
             header("Location: ". ROOT . "login");
             die;
         }

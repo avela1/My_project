@@ -54,7 +54,9 @@
                         </div>
                </div>
            </div>
-          
-        <?php $this->view('includes/footer'); ?>
+
+
+</div>          
+<?php $this->view('includes/footer'); ?>
 </body>
 </html>

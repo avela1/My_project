@@ -147,4 +147,19 @@ Class Course {
         $result = $DB->read("SELECT * FROM `courceinfo` where `CourseStatus` = 1");
         return $result;
     }
+    public function get_all_by_batch() {
+        
+        $DB = Database::newInstance();
+        $id =$_SESSION['Batch'];
+        $result = $DB->read("SELECT * FROM `courceinfo` where `CourseGivenYear` = $id");
+
+        return $result;
+    }
+    public function get_all_add() {
+        
+        $DB = Database::newInstance();
+        $id =$_SESSION['Batch'];
+        $result = $DB->read("SELECT * FROM `courceinfo` where `CourseGivenYear` != $id");
+        return $result;
+    }
 }

@@ -48,7 +48,7 @@
                     </a>	
                 </li>
                 <li class="nav-item active">
-                    <a href="<?= ROOT ?>student/reg_course">
+                    <a href="<?= ROOT ?>student/reg_crs">
                         <i class="far fa-edit"></i>
                         <p>Registrater for course</p>
                     </a>
