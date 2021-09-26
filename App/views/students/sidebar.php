@@ -18,7 +18,6 @@
                         </a>
                     <?php endif; ?>
 
-                    <div class="clearfix"></div>
 
                     <div class="collapse in" id="collapseExample">
                         <ul class="nav">
@@ -60,7 +59,6 @@
                         <p>Enrolled Courses</p>
                     </a>	
                 </li>
-                
             </ul>
         </div>
     </div>

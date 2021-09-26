@@ -1,9 +1,9 @@
 <?php
 
 class User_account {
+
     private $error = "";
-
-
+    
     public function login($POST) {
 
         $data = array();
@@ -92,6 +92,7 @@ class User_account {
         }
         return false;
     }
+
     public function logout() { 
         if(isset($_SESSION['username']) && isset($_SESSION['userrole'])) {
             unset($_SESSION['username']);
