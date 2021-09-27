@@ -13,10 +13,10 @@ class Course_material extends Controller {
         }
 
       }else if($_POST['action'] == 'delete_folder'){
+       
         if(file_exists($_POST['path'])) {
-          $dir = ROOT.$_POST['path'];
-          show($dir);
-          if(count(glob("$dir/*")) === 0) {
+          $dir = $_POST['path'];
+          if(count(glob("$dir/*")) != 0) {
             echo json_encode("Please Frist Delete Inside files please!");
           } else {
             if(rmdir($dir)) {
@@ -28,7 +28,6 @@ class Course_material extends Controller {
         }else {
          
           echo json_encode("Folder is not exist!!!");
-        
         }
       }
     }
