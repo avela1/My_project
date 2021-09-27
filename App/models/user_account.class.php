@@ -48,7 +48,6 @@ class User_account {
                     $result = $db -> read($sql1, $arry);
                     $_SESSION['ID'] = $result[0]->ID;
 
-
                     header("Location: ". ROOT . "student/");
                     die;
                 } else if($_SESSION['userrole'] == "Teacher") {
@@ -85,8 +84,9 @@ class User_account {
             }
             
             $check = $db->read($sql, $arr);
-            $_SESSION['Batch'] = $check[0]->Batch;
-
+            if($_SESSION['userrole'] == "Student"){
+                $_SESSION['Batch'] = $check[0]->Batch;
+            }
 
             if(is_array($check)) {
                 return $check;
@@ -100,7 +100,7 @@ class User_account {
             unset($_SESSION['username']);
             unset($_SESSION['userrole']);
             unset($_SESSION['ID']);
-            unser($_SESSION['Batch']);
+            unset($_SESSION['Batch']);
             header("Location: ". ROOT . "login");
             die;
         }

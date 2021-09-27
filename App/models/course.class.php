@@ -159,7 +159,24 @@ Class Course {
         
         $DB = Database::newInstance();
         $id =$_SESSION['Batch'];
-        $result = $DB->read("SELECT * FROM `courceinfo` where `CourseGivenYear` != $id");
+        $result = $DB->read("SELECT * FROM `courceinfo` where `CourseGivenYear` <= $id ORDER BY `CourseGivenYear` DESC");
+        return $result;
+    }
+    public function register($POST = []) {
+
+        $DB = Database::newInstance();
+        $checks = $POST['check_list'];
+       
+        foreach($checks as $check) {
+            $data['stud_id'] = $POST['stud_id'];
+            $data['checked'] = $check;
+            $query = "INSERT INTO `stud_crs`(`stud_id`, `crs_id`) VALUES (:stud_id, :checked)";
+            $result = $DB->write($query, $data);
+        }
+        $array = array();
+        $array['stud_id'] = $POST['stud_id'];
+        $query = "UPDATE `studentinfo` SET`registered`=1 WHERE `ID` = :stud_id";    
+        $result = $DB->write($query, $array);
         return $result;
     }
 }

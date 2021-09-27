@@ -47,18 +47,26 @@
                         <p>Home Page</p>
                     </a>	
                 </li>
-                <li class="nav-item active">
-                    <a href="<?= ROOT ?>student/reg_crs">
-                        <i class="far fa-edit"></i>
-                        <p>Registrater for course</p>
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a href="<?=ROOT?>student/enrolled_crs" class="collapsed" aria-expanded="false">
                     <i class="fas fa-list-ol"></i>
                         <p>Enrolled Courses</p>
                     </a>	
                 </li>
+                <li class="nav-item">
+                    <a href="<?= ROOT ?>teacher/sched_online">
+                        <i class="fas fa-video"></i>
+                        <p>Manage Online Lecturing</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a data-toggle="" href="<?= ROOT ?>forum/" aria-expanded="false">
+                        <i class="fas fa-comments"></i>
+                        <p>Forums</p>
+                    </a>
+                </li>
+                
             </ul>
         </div>
     </div>
