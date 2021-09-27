@@ -101,6 +101,7 @@ class User_account {
             unset($_SESSION['userrole']);
             unset($_SESSION['ID']);
             unset($_SESSION['Batch']);
+            unset($_SESSION['crs_id']);
             header("Location: ". ROOT . "login");
             die;
         }

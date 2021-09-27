@@ -268,7 +268,7 @@
 
     <script>
     $(document).ready(function() {
-
+        $('#collapse790').addClass('show');
         function handle_result(result) {
             if (result != "") {
 
@@ -425,7 +425,6 @@
 
         $(document).on('click', '#deletefolder', function() {
             var path = $(this).data('path');
-            console.log(path);
             $data = new FormData();
             $data.append("path", path);
             $data.append("action", 'delete_folder');

@@ -74,12 +74,6 @@
                                                                 if($row-> folder == $data['folders'][$i]):
                                                                     if($row->FileName == ''): ?>
                                                                     <div class="jumbotron">
-                                                                        <a type="button"  id="delete" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete note">
-                                                                            <i class="fas fa-pen-square text-danger "></i>
-                                                                        </a>
-                                                                        <a type="button"  id="update_txt" data-id="<?= $row->ID ?>" class="btn btn-link float-right" data-original-title="Edit note">
-                                                                            <i class="fas fa-pen-square text-primary "></i>
-                                                                        </a>
                                                                         <?php  echo($row->note);?>
                                                                     </div>
                                                                     <?php
@@ -91,24 +85,11 @@
                                                                             if(in_array($extension, $imageextension)):
                                                                         ?>
                                                                     <div class="jumbotron">
-                                                                        <a type="button"  id="delete" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete file">
-                                                                            <i class="fas fa-pen-square text-danger "></i>
-                                                                        </a>
-                                                                        <a type="button"  id="update" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-toggle="modal" href="#fileModal" data-original-title="Edit file">
-                                                                            <i class="fas fa-pen-square text-primary "></i>
-                                                                        </a>
-
                                                                         <img src="<?=ROOT.$data['folder_path'].'/'.$row->folder.'/'.$row -> FileName ?>"  id="courseImage" alt="..." style="width:300; height:300px">
                                                                         <br/><p><b><?php echo($row-> note); ?></b></p>
                                                                     </div>
                                                                         <?php elseif(in_array($extension, $videoextension)): ?>
                                                                     <div class="jumbotron">
-                                                                        <a type="button"  id="delete" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete note">
-                                                                            <i class="fas fa-pen-square text-danger "></i>
-                                                                        </a>
-                                                                        <a type="button"  id="update" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-toggle="modal" href="#fileModal" data-original-title="Edit note">
-                                                                            <i class="fas fa-pen-square text-primary "></i>
-                                                                        </a>
                                                                         <video width="400" height="400" controls>
                                                                             <source src="<?= ROOT.$data['folder_path'].'/'.$row->folder.'/'.$row -> FileName ?>" type="video/<?php echo $extension ?>">
                                                                         </video>
@@ -116,12 +97,6 @@
                                                                     </div>
                                                                         <?php elseif(in_array($extension, $audioextension)): ?>
                                                                     <div class="jumbotron">
-                                                                        <a type="button"  id="delete" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-original-title="delete note">
-                                                                            <i class="fas fa-pen-square text-danger "></i>
-                                                                        </a>
-                                                                        <a type="button"  id="update" data-id="<?= $row->ID ?>" class="btn btn-link float-right"  data-toggle="modal" href="#fileModal" data-original-title="Edit note">
-                                                                            <i class="fas fa-pen-square text-primary "></i>
-                                                                        </a>
                                                                         <audio controls>
                                                                             <source src="<?= ROOT.$data['folder_path'].'/'.$row->folder.'/'.$row -> FileName ?>" type="audio/<?php echo $extension ?>">
                                                                         </audio>
@@ -129,10 +104,6 @@
                                                                     </div>
                                                                         <?php else: ?>
                                                                     <div class="jumbotron">
-
-                                                                            <a type="button" href="<?= ROOT.$data['folder_path'].'/'.$row->folder.'/'.$row -> FileName ?>" class="btn btn-link btn-info btn-lg" data-original-title="Download file"> 
-                                                                                <i class="fas fa-download"></i> <? echo $row -> FileName?>
-                                                                            </a>
                                                                         <br/><p><b><?php echo($row-> note); ?></b></p>
 
                                                                     </div>
@@ -171,7 +142,13 @@
     </div>
     <?php $this->view('includes/footer'); ?>
 
-    </body>
 
+    <script>
+         $(document).ready(function() {
+            $('#collapse790').addClass('show');
+         });
+    </script>
+    </body>
+                                                            
     </html>
     

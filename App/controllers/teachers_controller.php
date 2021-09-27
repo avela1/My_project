@@ -55,7 +55,6 @@ class  teachers_controller extends Controller {
                 '<img src="'.ROOT.$value['Image'].'" class="rounded responsive" style = "width:50px; height:50px"/>',
                 $value['InstContactNo'],
                 $value['Qualification'],
-
                 '<div class="form-button-action">
                     
                     <a type="button" data-toggle="modal" href="#updateTech" class="btn btn-link btn-primary btn-lg  update" data-id="'.$value['Username'].'" info="'.str_replace('"',"'", json_encode($value)).'" data-original-title="Edit">

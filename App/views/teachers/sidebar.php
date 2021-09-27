@@ -68,7 +68,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a data-toggle="" href="<?= ROOT ?>teacher/forum" class="collapsed" aria-expanded="false">
+                    <a data-toggle="" href="<?= ROOT ?>forum/" class="collapsed" aria-expanded="false">
                         <i class="fas fa-comments"></i>
                         <p>Forums</p>
                     </a>

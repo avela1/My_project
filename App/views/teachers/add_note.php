@@ -71,7 +71,8 @@
                         console.log("waiting....");
                     },
                     success: function(response) {
-                        console.log(response);
+                        alert(response);
+                        window.location = "<?=ROOT?>teacher/dashboard";
                     },
                     error: function() {
                         console.log("OOOPs something is wrong");
