@@ -12,18 +12,6 @@ class Course_material extends Controller {
           echo json_encode("Folder already there!");
         }
 
-
-      }else if($_POST['action'] == 'update_folder'){
-
-        $folder = $_POST['folder'].'/'.$_POST['name'];
-        $oldfolder = $_POST['folder'].'/'.$_POST['oldVal'];
-
-        if(!file_exists($folder)) {
-            rename($oldfolder, $folder);
-            echo json_encode("Folder Renamed successfully!");
-        } else {
-          echo json_encode("Folder already there!");
-        }
       }else if($_POST['action'] == 'delete_folder'){
         if(file_exists($_POST['path'])) {
           $dir = $_POST['path'];
@@ -42,12 +30,11 @@ class Course_material extends Controller {
         }
       }
     }
-
-    public function upload_file() {
+    public function  upload_notes() {
       $_SESSION['error'] = "";
       $crs_file = $this -> load_model('course_file');
-      if(!empty($_FILES['fileloc']["name"])) {
-          $crs_file->upload($_POST, $_FILES);
+      if(!empty($_POST['note'])) {
+          $crs_file->upload_notes($_POST);
 
           if($_SESSION['error'] != "")
           {
@@ -55,6 +42,55 @@ class Course_material extends Controller {
               $_SESSION['error'] = "";
               show($arr);
               
+          }else
+          {
+              $arr = "Note is successully! Uploaded!!!!";
+              echo json_encode($arr);
+          }
+      } else {
+          $arr = "Please enter some note!!!";
+          echo json_encode($arr);
+      }
+    }
+    public function  getdata() {
+      $crs_file = $this -> load_model('course_file');
+      $data = $crs_file->get_all($_POST);
+      print_r(json_encode($data));
+    }
+    public function  update_note() {
+      $_SESSION['error'] = "";
+      $crs_file = $this -> load_model('course_file');
+      if(!empty($_POST['note'])) {
+          $crs_file->update_note($_POST);
+          if($_SESSION['error'] != "")
+          {
+              $arr = $_SESSION['error'];
+              $_SESSION['error'] = "";
+              show($arr);
+              
+          }else
+          {
+              $arr = "Note is updated successully!!!!";
+              echo json_encode($arr);
+          }
+      } else {
+          $arr = "Please enter some note!!!";
+          echo json_encode($arr);
+      }
+    }
+
+    public function upload_file() {
+      $_SESSION['error'] = "";
+      $crs_file = $this -> load_model('course_file');
+
+      if(!empty($_FILES['fileloc']["name"])) {
+
+          $crs_file->upload($_POST, $_FILES);
+          if($_SESSION['error'] != "")
+          {
+              $arr = $_SESSION['error'];
+              $_SESSION['error'] = "";
+              show($arr);
           }else
           {
               $arr = "Course material uploaded successully!";
