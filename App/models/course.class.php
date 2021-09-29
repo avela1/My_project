@@ -24,6 +24,7 @@ Class Course {
         if(!preg_match("/^[a-zA-Z 0-9._\-,]+$/", $data['CrsName']))
         {
             $_SESSION['error'] = "Please enter valid course name"; 
+            return false;
         } 
         
         $arr['CrsCode'] = $data['CrsCode'];
@@ -32,6 +33,8 @@ Class Course {
 
         if(is_array($check)){
             $_SESSION['error'] = "That Course code is already in use <br>";
+            return false;
+
         }
 
 
@@ -50,6 +53,8 @@ Class Course {
             $data["image"] = $destination;
         } else {
             $_SESSION['error'] = "image format is not supported";
+            return false;
+
         }
     
         if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){
@@ -85,6 +90,8 @@ Class Course {
         if(!preg_match("/^[a-zA-Z 0-9._\-,]+$/", $data['CrsName']))
         {
             $_SESSION['error'] = "Please enter valid course name"; 
+            return false;
+
         } 
         
         if($files['name'] != '') {
@@ -104,6 +111,8 @@ Class Course {
                 unlink($POST['oldimage']);
             } else {
                 $_SESSION['error'] = "image format is not supported";
+                return false;
+
             }
         } else {
             $data["image"] = $POST['oldimage'];
