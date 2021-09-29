@@ -177,18 +177,18 @@ Class Course_file {
     }
     public function delete_folder($POST = []) {
 
-        // $data = array();
-        // $data['path'] = $POST['path'];
-        // $DB = Database::newInstance();
-        // $query = "DELETE FROM `crsmaterial` WHERE `FileLoc` = :path limit 1";
-        // $result = $DB->write($query, $data);
-        // if($result) {
-        //     unlink($POST['path']);
-        //     return true;
-        // } else {
-        //     $_SESSION['error'] = "file is not deleted";
-        //     return false;
-        // }
+        $data = array();
+        $data['path'] = $POST['path'];
+        $DB = Database::newInstance();
+        $query = "DELETE FROM `crsmaterial` WHERE `FileLoc` = :path limit 1";
+        $result = $DB->write($query, $data);
+        if($result) {
+            unlink($POST['path']);
+            return true;
+        } else {
+            $_SESSION['error'] = "file is not deleted";
+            return false;
+        }
     }
     public function get_all($POST = []){
         $data = array();
@@ -196,5 +196,35 @@ Class Course_file {
         $DB = Database::newInstance();
         $result = $DB->read("SELECT `ID`, `CrsCode`, `LectId`, `note`, `folder` FROM `crsmaterial` where `ID` = $id");
         return $result;
+    }
+    public function schedule_class($POST = []) {
+
+        $data = array();
+        $data['crs_id'] = $POST['crs_id'];
+        $data['title'] = $POST['title'];
+        $data['url'] = $POST['link'];
+        $data['start_time'] = date("Y-m-d H:i:s", strtotime($POST['start_time']));
+        $data['end_time'] =  date("Y-m-d H:i:s",strtotime($POST['end_time']));
+
+        if(!filter_var($data['url'], FILTER_VALIDATE_URL))
+        {
+            $_SESSION['error'] = "Not correctly formatted URL";
+        }
+        if ($data['end_time']<= $data['start_time']) {
+            $_SESSION['error'] = "Ending time is not correct";
+        } 
+        
+        if($_SESSION['error'] === "") {
+
+            $DB = Database::newInstance();
+            $query = "INSERT INTO `online_schedule`(`crs_id`, `class_desc`, `class_url`, `start_time`, `end_time`) VALUES (:crs_id, :title, :url, :start_time, :end_time);";
+            $result = $DB->write($query, $data);
+            if($result) {
+                return true;
+            } else {
+                $_SESSION['error'] = "class is not scheduled";
+                return false;
+            }
+        }
     }
 }

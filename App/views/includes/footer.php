@@ -24,8 +24,15 @@
 <script src="<?= ASSETS ?>/js/core/jquery.3.2.1.min.js"></script>
 <script src="<?= ASSETS ?>/js/core/popper.min.js"></script>
 <script src="<?= ASSETS ?>/js/core/bootstrap.min.js"></script>
+
+
 <script src="<?= ASSETS ?>/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <script src="<?= ASSETS ?>/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 <script src="<?= ASSETS ?>/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 <script src="<?= ASSETS ?>/js/plugin/datatables/datatables.min.js"></script>
 <script src="<?= ASSETS ?>/js/atlantis.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>

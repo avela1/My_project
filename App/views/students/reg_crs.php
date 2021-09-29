@@ -94,6 +94,26 @@
 <script>
 
     $(document).ready(function() {
+        function handle_result(result) {
+            if(result != ""){
+
+                if(result == 'Teacher added successfully!')
+                {
+                    $('#userModal').modal('hide');
+                    alert(result);
+                    $('#add-row').DataTable().ajax.reload();
+                    
+                }else if(result == 'Teacher updated successfully!') {
+                    $('#updateTech').modal('hide');
+                    alert(result);
+                    $('#add-row').DataTable().ajax.reload();
+                }
+                
+                else {
+                    alert(result);
+                }
+            }
+        }
 
         $.ajax({
             url: "<?=ROOT?>student/available_crs",

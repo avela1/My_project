@@ -13,7 +13,7 @@ Class Student {
         $data['contact'] = trim($POST['contact']);			
         $data['username'] = trim($POST['username']);			
         $data['batch'] = trim($POST['batch']);					
-        $data['addedBy'] = 2;	
+        $data['addedBy'] = $_SESSION['ID'];	
         $data['date'] = date("Y-m-d H:i:s");
 
         $files = array();
@@ -124,15 +124,5 @@ Class Student {
         $result = $DB->read("SELECT `Username`, `Name`, `StudEmail`, `Image`, `StudContactNo`, `Batch` FROM `studentinfo` where `status` = 1");
         return $result;
     }
-
-    
-	public function delete($id)
-	{
-
-		$DB = Database::newInstance();
-		$id = (int)$id;
-		$query = "delete from products where id = '$id' limit 1";
-		$DB->write($query);
-	}
 
 }

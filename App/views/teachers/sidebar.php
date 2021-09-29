@@ -48,7 +48,7 @@
                         <p>Home Page</p>
                     </a>	
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="<?= ROOT ?>teacher/dashboard">
                         <i class="fas fa-book-reader"></i>
                         <p>Manage Course Material</p>

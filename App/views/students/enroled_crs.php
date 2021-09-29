@@ -9,7 +9,7 @@
         </div>
         <div class="content bg-white mt-4">
             <div class="row pt-3 pl-3">
-            <?php if(is_array($data['rows'])): ?>
+            <?php if(is_array($data['rows']) && !empty($data['rows'])): ?>
                 <?php foreach($data['rows'] as $row):?>
                 <div class="col-md-3 d-flex align-items-stretch" >
                     <div class="card card-post card-round bg-dark" >

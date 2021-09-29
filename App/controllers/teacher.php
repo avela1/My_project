@@ -72,10 +72,16 @@ class Teacher extends Controller {
     public function enr_student() {
         $User = $this -> load_model('user_account');
         $user_data = $User -> check_login();
-        
+        $db = Database::newInstance();
+
         if(is_array($user_data)) {
             $data['user_data'] = $user_data;
         }
+        $course_id = $_SESSION['crs_id'];
+        $query = "SELECT * FROM `studentinfo` INNER JOIN stud_crs ON stud_crs.`crs_id` = '".$course_id."'";
+        $result = $db -> read($query);
+       
+        $data['rows'] = $result;
         
         $data['page_title'] = "Teacher Home";
         $this->view('teachers/enr_student', $data);
@@ -83,11 +89,17 @@ class Teacher extends Controller {
 
     public function sched_online() {
         $User = $this -> load_model('user_account');
+        $db = Database::newInstance();
         $user_data = $User -> check_login();
-        
+        $course_id = $_SESSION['crs_id'];
+        $query = "SELECT * FROM `online_schedule` where `crs_id` = '".$course_id."'";
+        $result = $db -> read($query);
+        $data['rows'] = $result;
         if(is_array($user_data)) {
             $data['user_data'] = $user_data;
         }
+
+        
         $data['page_title'] = "Scheduled class";
         $this->view('teachers/sched_online', $data);
     }

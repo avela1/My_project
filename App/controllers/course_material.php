@@ -147,4 +147,25 @@ class Course_material extends Controller {
       }
      
     }
+
+    public function schedule_class() {
+      $_SESSION['error'] = "";
+      $crs_file = $this -> load_model('course_file');
+      if(!empty($_POST['title']) && !empty($_POST['start_time']) && !empty($_POST['end_time'])) {
+        $crs_file->schedule_class($_POST);
+        if($_SESSION['error'] != "")
+          {
+              $arr = $_SESSION['error'];
+              $_SESSION['error'] = "";
+              show($arr);
+              
+          }else
+          {
+              $arr = "Class scheduled successfully!";
+              echo json_encode($arr);
+          }
+      } else {
+        echo json_encode("Fill the form correctly!");
+      }
+    }
 }

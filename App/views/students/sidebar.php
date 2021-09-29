@@ -47,7 +47,7 @@
                         <p>Home Page</p>
                     </a>	
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="<?= ROOT ?>student/reg_crs">
                         <i class="far fa-edit"></i>
                         <p>Registrater for course</p>

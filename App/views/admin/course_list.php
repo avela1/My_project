@@ -168,7 +168,7 @@
 													<th>Credit Hrs</th>
 													<th>Given Year</th>
 													<th>Image</th>
-													<th>Crs Desc</th>
+													<th >Crs Desc</th>
 													<th>Assigned To</th>
 													<th style="width: 10%">Action</th>
 												</tr>

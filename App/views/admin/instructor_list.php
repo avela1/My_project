@@ -22,7 +22,7 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">List</a
+								<a href="#">List</a>
 							</li>
 						</ul>
 					</div>
@@ -215,15 +215,16 @@
 						$('#userModal').modal('hide');
 						alert(result);
 						$('#add-row').DataTable().ajax.reload();
-						
+						$("#addform")[0].reset();
 					}else if(result == 'Teacher updated successfully!') {
 						$('#updateTech').modal('hide');
 						alert(result);
 						$('#add-row').DataTable().ajax.reload();
+						$("#updateform")[0].reset();
 					}
 					
 					else {
-							alert(result);
+						alert(result);
 					}
 				}
 			}

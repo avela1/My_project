@@ -43,6 +43,7 @@ class Student extends Controller {
         }
         $query = "SELECT `ID` FROM `stud_crs` WHERE `stud_id`='".$user_data[0]->ID."'";
         $result = $db -> read($query);
+        
         $query = "SELECT * FROM `courceinfo` INNER JOIN stud_crs ON stud_crs.`stud_id` = '".$user_data[0]->ID."' where `ID` = '".$result[0]->ID."'";
         $result = $db -> read($query);
        
@@ -158,5 +159,12 @@ class Student extends Controller {
             $arr = "You have reached your course credit hour limit!! you must drop some courses";
             echo json_encode($arr);
         }
+    }
+    public function get_info_by_id() {
+
+        $id = trim($_POST['id']);			
+        $DB = Database::getInstance();
+        $result = $DB->read("SELECT `Username`,`Name`, `StudEmail`, `Image`, `StudContactNo`, `Batch` FROM `studentinfo` where `Username` = '$id'");
+        echo json_encode($result);
     }
 }

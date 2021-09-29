@@ -1,6 +1,6 @@
 
 
-<div class="sidebar sidebar-style-2 mt-10" data-background-color="dark">			
+<div class="sidebar sidebar-style-2 mt-10" data-background-color="blue">			
     <div class="sidebar-wrapper scrollbar scrollbar-inner ">
         <div class="sidebar-content">
             <div class="user">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <ul class="nav nav-primary">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="./index" class="collapsed" aria-expanded="false">
                         <i class="fas fa-home"></i>
                         <p>Home Page</p>

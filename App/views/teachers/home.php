@@ -217,6 +217,8 @@
                         </div>
                     </div>
                 </div>
+				<button type="hidden" class="btn btn-success" id="alert_demo_4" id="response"> </button>
+
                 <div class="modal fade" id="fileModal" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -267,6 +269,7 @@
     <?php $this->view('includes/footer'); ?>
 
     <script>
+       
     $(document).ready(function() {
         $('#collapse790').addClass('show');
         function handle_result(result) {
@@ -274,13 +277,12 @@
 
                 if (result == 'Folder created successfully!') {
                     $('#folderModal').modal('hide');
-                    alert(result);
                     $("#addfolderform")[0].reset();
+                    successalert();
                 } else if (result == 'Course material uploaded successully!') {
                     $('#fileModal').modal('hide');
-                    alert(result);
                     $("#uploadForm")[0].reset();
-
+                    alert(result);
                 } else if (result == 'File deleted successully!') {
                     alert(result);
                 } else if (result == 'File updated successully!') {

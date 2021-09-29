@@ -15,7 +15,6 @@
 					</div>
 				</div>
 				<div class="page-inner mt--5">
-
 					<div class="row">
 						<div class="col-md-6">
 							<div class="card card-dark bg-success-gradient">
