@@ -20,16 +20,19 @@ Class Student {
         $files = $FILES['photo'];
 
 
-        if(!preg_match("/^[a-zA-Z 0-9._\-,]+$/", $data['name']))
+        if(!preg_match("/^[a-zA-Z._\-,]+$/", $data['name']))
         {
-            $_SESSION['error'] .= "Please enter valid name"; 
+            $_SESSION['error'] = "Please enter valid name"; 
+            return;
         } 
         else if(!preg_match("/^[a-zA-Z 0-9_-]+@[a-zA-Z]+.[a-zA-Z]+$/", $data['email']))
         {
-            $_SESSION['error'] .= "Please enter a valid email";
+            $_SESSION['error'] = "Please enter a valid email";
+            return;
         } else if(empty($data['username']) || empty($data['email']))
         {
-            $_SESSION['error'] .= "Please enter a fill the form correctly";
+            $_SESSION['error'] = "Please enter a fill the form correctly";
+            return;
         } 
 
         
@@ -38,7 +41,8 @@ Class Student {
         $check = $DB->read($sql, $arr);
 
         if(is_array($check)){
-            $_SESSION['error'] .= "That username is already in use <br>";
+            $_SESSION['error'] = "That username is already in use <br>";
+            return;
         }
 
 
@@ -57,6 +61,7 @@ Class Student {
             $data["image"] = $destination;
         } else {
             $_SESSION['error'] = "image format is not supported";
+            return;
         }
       
         if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){

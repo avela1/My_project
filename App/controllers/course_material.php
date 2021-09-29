@@ -41,7 +41,7 @@ class Course_material extends Controller {
           {
               $arr = $_SESSION['error'];
               $_SESSION['error'] = "";
-              show($arr);
+              echo json_encode($arr);
               
           }else
           {
@@ -56,7 +56,7 @@ class Course_material extends Controller {
     public function  getdata() {
       $crs_file = $this -> load_model('course_file');
       $data = $crs_file->get_all($_POST);
-      print_r(json_encode($data));
+      echo (json_encode($data));
     }
     public function  update_note() {
       $_SESSION['error'] = "";
@@ -67,7 +67,7 @@ class Course_material extends Controller {
           {
               $arr = $_SESSION['error'];
               $_SESSION['error'] = "";
-              show($arr);
+              echo json_encode($arr);
               
           }else
           {
@@ -114,7 +114,7 @@ class Course_material extends Controller {
           {
               $arr = $_SESSION['error'];
               $_SESSION['error'] = "";
-              show($arr);
+              echo json_encode($arr);
               
           }else
           {
@@ -135,7 +135,7 @@ class Course_material extends Controller {
           {
               $arr = $_SESSION['error'];
               $_SESSION['error'] = "";
-              show($arr);
+              echo json_encode($arr);
               
           }else
           {
@@ -157,7 +157,7 @@ class Course_material extends Controller {
           {
               $arr = $_SESSION['error'];
               $_SESSION['error'] = "";
-              show($arr);
+              echo json_encode($arr);
               
           }else
           {

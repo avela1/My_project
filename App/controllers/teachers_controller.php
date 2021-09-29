@@ -6,6 +6,7 @@ class  teachers_controller extends Controller {
         $_SESSION['error'] = "";
         $_SESSION['crs_id'] ="";
         $teacher = $this -> load_model('teachers');
+        
         if($_REQUEST['action'] == 'add_teacher' && !empty($_POST)) {
             $teacher->create($_POST, $_FILES);
             if($_SESSION['error'] != "")
@@ -13,7 +14,7 @@ class  teachers_controller extends Controller {
 
                 $arr = $_SESSION['error'];
                 $_SESSION['error'] = "";
-                show($arr);
+                echo json_encode($arr);
                 
             }else
             {

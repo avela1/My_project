@@ -77,14 +77,6 @@
                         <p>Manage Courses</p>
                     </a>
                 </li>
-
-                <li class="nav-item">
-                    <a data-toggle="" href="#dashboard" class="collapsed" aria-expanded="false">
-                        <i class="fas fa-comments"></i>
-                        <p>Forums</p>
-                    </a>
-                </li>
-                
             </ul>
         </div>
     </div>

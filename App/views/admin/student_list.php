@@ -55,7 +55,7 @@
 														<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
-												<form method="POST" action="" id="addform" enctype="multipart/form-data">
+												<form method="POST" id="addform" enctype="multipart/form-data">
 													<div class="modal-body">
 														<div class="row" >
 															<div class="col-md-12 col-lg-12"  >
@@ -233,7 +233,7 @@
 					}
 					
 					else {
-						$("#error").html(result);
+						alert(result);
 					}
 				}
 			}
@@ -267,7 +267,7 @@
 						console.log("waiting....");
 					},
 					success: function(response){
-						handle_result(response);
+						alert(response);
 					},
 					error: function (){
 						console.log("OOOPs something is wrong");
@@ -299,6 +299,24 @@
 						handle_result(data);
 					}
 				);
+			});
+			$('#deleteStud').click(function() {
+				var id = $(this).data('id');
+				$data = new FormData();
+				$data.append("id", id);
+				if(confirm("Are you sure you want to delete the Student??")) {
+					$.ajax({
+						url: "<?=ROOT?>student_controller/delete",
+						method: "POST",
+						data: $data,
+						dataType: 'json',
+						processData: false,
+						contentType: false,
+						success: function(data) {
+							handle_result(data);
+						}
+					});
+				}            
 			});
 		});
 	</script>

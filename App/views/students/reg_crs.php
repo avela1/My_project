@@ -164,7 +164,7 @@
 						console.log("waiting....");
 					},
 					success: function(response){
-						alert(response);
+						handle_result(response);
 					},
 					error: function (){
 						console.log("OOOPs something is wrong");

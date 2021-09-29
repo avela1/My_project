@@ -8,7 +8,7 @@
 
 	<link rel="stylesheet" href="<?= ASSETS ?>/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?= ASSETS ?>/css/atlantis.min.css">
-	<link rel="stylesheet" href="<?= ASSETS ?>/css/datetimepicker.css">
+	<link rel="stylesheet" href="<?= ASSETS ?>/css/datetimepicker.min.css">
 	
 	<script src="<?= ASSETS ?>/js/plugin/webfont/webfont.min.js"></script>
 	

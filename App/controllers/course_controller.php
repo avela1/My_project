@@ -14,7 +14,7 @@ class  Course_controller extends Controller {
             {
                 $arr = $_SESSION['error'];
                 $_SESSION['error'] = "";
-                show($arr);
+                echo json_encode($arr);
                 
             }else
             {
@@ -38,7 +38,7 @@ class  Course_controller extends Controller {
             {
                 $arr = $_SESSION['error'];
                 $_SESSION['error'] = "";
-                show($arr);
+                echo json_encode($arr);
                 
             }else
             {
@@ -64,7 +64,7 @@ class  Course_controller extends Controller {
             {
                 $arr = $_SESSION['error'];
                 $_SESSION['error'] = "";
-                show($arr);
+                echo json_encode($arr);
                 
             }else
             {

@@ -8,10 +8,9 @@ class User_account {
 
         $data = array();
         $db = Database::getInstance();
-
+        $_SESSION['error'] ="";
         $data['username'] = trim($POST['username']);
         $data['password'] = md5(trim($POST['password']));
-        // $data['acc_status'] = 1;
 
 
         if(empty($data['username']) || empty($data['password'])) {
@@ -60,11 +59,15 @@ class User_account {
 
                     header("Location: ". ROOT . "teacher/");
                     die;
+                } else {
+                    $_SESSION['error'] ="incorrect username or password";
                 }
               
             }
+            $_SESSION['error'] ="incorrect username or password";
+        } else {
+            $_SESSION['error'] = "Please fill the form correctly.";
         }
-        $_SESSION['error'] = $this -> error;
     }
 
     public function check_login() {

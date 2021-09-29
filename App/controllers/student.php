@@ -167,4 +167,20 @@ class Student extends Controller {
         $result = $DB->read("SELECT `Username`,`Name`, `StudEmail`, `Image`, `StudContactNo`, `Batch` FROM `studentinfo` where `Username` = '$id'");
         echo json_encode($result);
     }
+    public function sched_online() {
+        $User = $this -> load_model('user_account');
+        $db = Database::newInstance();
+        $user_data = $User -> check_login();
+        $course_id = $_SESSION['crs_id'];
+        $query = "SELECT * FROM `online_schedule` where `crs_id` = '".$course_id."'";
+        $result = $db -> read($query);
+        $data['rows'] = $result;
+        if(is_array($user_data)) {
+            $data['user_data'] = $user_data;
+        }
+
+        
+        $data['page_title'] = "Scheduled class";
+        $this->view('students/schedule', $data);
+    }
 }

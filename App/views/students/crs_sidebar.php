@@ -54,9 +54,9 @@
                     </a>	
                 </li>
                 <li class="nav-item">
-                    <a href="<?= ROOT ?>teacher/sched_online">
+                    <a href="<?= ROOT ?>student/sched_online">
                         <i class="fas fa-video"></i>
-                        <p>Manage Online Lecturing</p>
+                        <p> Scheduled Class</p>
                     </a>
                 </li>
 

@@ -121,9 +121,12 @@ Class Course_file {
                     }
                 } else {
                     $_SESSION['error'] = "file is not exist";
+                    return;
                 }
             } else {
                 $_SESSION['error'] = "can't able to move file to the folder";
+                return;
+
             }
         } else {
             $extension = pathinfo($oldfolder, PATHINFO_EXTENSION);
@@ -145,9 +148,13 @@ Class Course_file {
                     }
                 } else {
                     $_SESSION['error'] = "file is not exist in database";
+                    return;
+
                 }
             }else{
                 $_SESSION['error'] = "file is not renamed in folder";
+                return;
+
             };
         }
     }
@@ -209,9 +216,13 @@ Class Course_file {
         if(!filter_var($data['url'], FILTER_VALIDATE_URL))
         {
             $_SESSION['error'] = "Not correctly formatted URL";
+            return;
+
         }
         if ($data['end_time']<= $data['start_time']) {
             $_SESSION['error'] = "Ending time is not correct";
+            return;
+
         } 
         
         if($_SESSION['error'] === "") {

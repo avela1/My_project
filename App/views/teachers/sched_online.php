@@ -162,7 +162,7 @@ $(document).ready(function() {
                 console.log("waiting....");
             },
             success: function(response) {
-                console.log(response);
+                alert(response);
             },
             error: function() {
                 console.log("OOOPs something is wrong");

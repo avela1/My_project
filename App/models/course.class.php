@@ -23,7 +23,7 @@ Class Course {
 
         if(!preg_match("/^[a-zA-Z 0-9._\-,]+$/", $data['CrsName']))
         {
-            $_SESSION['error'] .= "Please enter valid course name"; 
+            $_SESSION['error'] = "Please enter valid course name"; 
         } 
         
         $arr['CrsCode'] = $data['CrsCode'];
@@ -31,7 +31,7 @@ Class Course {
         $check = $DB->read($sql, $arr);
 
         if(is_array($check)){
-            $_SESSION['error'] .= "That Course code is already in use <br>";
+            $_SESSION['error'] = "That Course code is already in use <br>";
         }
 
 
@@ -84,7 +84,7 @@ Class Course {
 
         if(!preg_match("/^[a-zA-Z 0-9._\-,]+$/", $data['CrsName']))
         {
-            $_SESSION['error'] .= "Please enter valid course name"; 
+            $_SESSION['error'] = "Please enter valid course name"; 
         } 
         
         if($files['name'] != '') {

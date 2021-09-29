@@ -1,5 +1,10 @@
 <?php $this->view('includes/header', $data); ?>
-
+    <div class="panel-header bg-primary-gradient ">
+        <div class="page-inner py-5 ">
+            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            </div>
+        </div>
+    </div>
       <div class="row justify-content-center">
         <div class="col-xl-6 col-lg-6 col-md-6">
           <div class="card o-hidden border-0 shadow-lg my-5">
@@ -10,7 +15,7 @@
                     <div class="text-center">
                       <h1 class="h4 text-gray-900 mb-4">Login Here!</h1>
                     </div>
-
+                    <span style="font-size:18px; color:red;"> <?php echo($_SESSION['error']) ?> </span>
                     <form class="user" method="POST">
                       <div class="form-group">
                         <input
