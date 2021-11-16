@@ -21,12 +21,12 @@ Class Teachers {
         $files = $FILES['photo'];
 
 
-        if(!preg_match("/^[a-zA-Z._\-,]+$/", $data['name']))
-        {
-            $_SESSION['error'] = "Please enter valid name";
-            return; 
-        } 
-        else if(!preg_match("/^[a-zA-Z 0-9_-]+@[a-zA-Z]+.[a-zA-Z]+$/", $data['email']))
+        // if(!preg_match("/^[a-zA-Z_\-,]+$/", $data['name']))
+        // {
+        //     $_SESSION['error'] = "Please enter valid name";
+        //     return; 
+        // } 
+        if(!preg_match("/^[a-zA-Z 0-9_-]+@[a-zA-Z]+.[a-zA-Z]+$/", $data['email']))
         {
             $_SESSION['error'] = "Please enter a valid email";
             return; 
