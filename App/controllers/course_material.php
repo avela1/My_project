@@ -13,20 +13,21 @@ class Course_material extends Controller {
         }
 
       }else if($_POST['action'] == 'delete_folder'){
+       
         if(file_exists($_POST['path'])) {
           $dir = $_POST['path'];
-         
           if(count(glob("$dir/*")) != 0) {
             echo json_encode("Please Frist Delete Inside files please!");
           } else {
-            if(rmdir($_POST['path'])) {
+            if(rmdir($dir)) {
               echo json_encode("Folder Deleted successfully!!!");
-            };
-          }
+            }else {
+              echo json_encode("Folder can't deleted");
+            }
+          } 
         }else {
          
           echo json_encode("Folder is not exist!!!");
-        
         }
       }
     }
@@ -40,7 +41,11 @@ class Course_material extends Controller {
           {
               $arr = $_SESSION['error'];
               $_SESSION['error'] = "";
+<<<<<<< HEAD
               show($arr);
+=======
+              echo json_encode($arr);
+>>>>>>> newbranch
               
           }else
           {
@@ -55,7 +60,11 @@ class Course_material extends Controller {
     public function  getdata() {
       $crs_file = $this -> load_model('course_file');
       $data = $crs_file->get_all($_POST);
+<<<<<<< HEAD
       print_r(json_encode($data));
+=======
+      echo (json_encode($data));
+>>>>>>> newbranch
     }
     public function  update_note() {
       $_SESSION['error'] = "";
@@ -66,7 +75,11 @@ class Course_material extends Controller {
           {
               $arr = $_SESSION['error'];
               $_SESSION['error'] = "";
+<<<<<<< HEAD
               show($arr);
+=======
+              echo json_encode($arr);
+>>>>>>> newbranch
               
           }else
           {
@@ -113,7 +126,7 @@ class Course_material extends Controller {
           {
               $arr = $_SESSION['error'];
               $_SESSION['error'] = "";
-              show($arr);
+              echo json_encode($arr);
               
           }else
           {
@@ -126,28 +139,45 @@ class Course_material extends Controller {
       }
     }
     public function delete_file() {
-      // echo json_encode($_POST['path']);
       $_SESSION['error'] = "";
       $crs_file = $this -> load_model('course_file');
-
-      if(file_exists($_POST['path'])) {
+      if(!empty($_POST['id'])) {
         $crs_file->delete_file($_POST);
-        
         if($_SESSION['error'] != "")
           {
               $arr = $_SESSION['error'];
               $_SESSION['error'] = "";
-              show($arr);
+              echo json_encode($arr);
               
           }else
           {
-              $arr = "Course material deleted successully!";
+              $arr = "File deleted successully!";
               echo json_encode($arr);
           }
-        
       } else {
-        echo json_encode("wrong path to file");
+        echo json_encode("Can't delete file");
       }
      
+    }
+
+    public function schedule_class() {
+      $_SESSION['error'] = "";
+      $crs_file = $this -> load_model('course_file');
+      if(!empty($_POST['title']) && !empty($_POST['start_time']) && !empty($_POST['end_time'])) {
+        $crs_file->schedule_class($_POST);
+        if($_SESSION['error'] != "")
+          {
+              $arr = $_SESSION['error'];
+              $_SESSION['error'] = "";
+              echo json_encode($arr);
+              
+          }else
+          {
+              $arr = "Class scheduled successfully!";
+              echo json_encode($arr);
+          }
+      } else {
+        echo json_encode("Fill the form correctly!");
+      }
     }
 }

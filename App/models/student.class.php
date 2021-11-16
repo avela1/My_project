@@ -13,23 +13,26 @@ Class Student {
         $data['contact'] = trim($POST['contact']);			
         $data['username'] = trim($POST['username']);			
         $data['batch'] = trim($POST['batch']);					
-        $data['addedBy'] = 2;	
+        $data['addedBy'] = $_SESSION['ID'];	
         $data['date'] = date("Y-m-d H:i:s");
 
         $files = array();
         $files = $FILES['photo'];
 
 
-        if(!preg_match("/^[a-zA-Z 0-9._\-,]+$/", $data['name']))
+        if(!preg_match("/^[a-zA-Z._\-,]+$/", $data['name']))
         {
-            $_SESSION['error'] .= "Please enter valid name"; 
+            $_SESSION['error'] = "Please enter valid name"; 
+            return;
         } 
         else if(!preg_match("/^[a-zA-Z 0-9_-]+@[a-zA-Z]+.[a-zA-Z]+$/", $data['email']))
         {
-            $_SESSION['error'] .= "Please enter a valid email";
+            $_SESSION['error'] = "Please enter a valid email";
+            return;
         } else if(empty($data['username']) || empty($data['email']))
         {
-            $_SESSION['error'] .= "Please enter a fill the form correctly";
+            $_SESSION['error'] = "Please enter a fill the form correctly";
+            return;
         } 
 
         
@@ -38,7 +41,8 @@ Class Student {
         $check = $DB->read($sql, $arr);
 
         if(is_array($check)){
-            $_SESSION['error'] .= "That username is already in use <br>";
+            $_SESSION['error'] = "That username is already in use <br>";
+            return;
         }
 
 
@@ -57,6 +61,7 @@ Class Student {
             $data["image"] = $destination;
         } else {
             $_SESSION['error'] = "image format is not supported";
+            return;
         }
       
         if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){
@@ -124,15 +129,5 @@ Class Student {
         $result = $DB->read("SELECT `Username`, `Name`, `StudEmail`, `Image`, `StudContactNo`, `Batch` FROM `studentinfo` where `status` = 1");
         return $result;
     }
-
-    
-	public function delete($id)
-	{
-
-		$DB = Database::newInstance();
-		$id = (int)$id;
-		$query = "delete from products where id = '$id' limit 1";
-		$DB->write($query);
-	}
 
 }

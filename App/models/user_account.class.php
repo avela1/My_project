@@ -1,17 +1,16 @@
 <?php
 
 class User_account {
+
     private $error = "";
-
-
+    
     public function login($POST) {
 
         $data = array();
         $db = Database::getInstance();
-
+        $_SESSION['error'] ="";
         $data['username'] = trim($POST['username']);
         $data['password'] = md5(trim($POST['password']));
-        // $data['acc_status'] = 1;
 
 
         if(empty($data['username']) || empty($data['password'])) {
@@ -48,7 +47,6 @@ class User_account {
                     $result = $db -> read($sql1, $arry);
                     $_SESSION['ID'] = $result[0]->ID;
 
-
                     header("Location: ". ROOT . "student/");
                     die;
                 } else if($_SESSION['userrole'] == "Teacher") {
@@ -61,11 +59,15 @@ class User_account {
 
                     header("Location: ". ROOT . "teacher/");
                     die;
+                } else {
+                    $_SESSION['error'] ="incorrect username or password";
                 }
               
             }
+            $_SESSION['error'] ="incorrect username or password";
+        } else {
+            $_SESSION['error'] = "Please fill the form correctly.";
         }
-        $_SESSION['error'] = $this -> error;
     }
 
     public function check_login() {
@@ -85,6 +87,9 @@ class User_account {
             }
             
             $check = $db->read($sql, $arr);
+            if($_SESSION['userrole'] == "Student"){
+                $_SESSION['Batch'] = $check[0]->Batch;
+            }
 
             if(is_array($check)) {
                 return $check;
@@ -92,11 +97,14 @@ class User_account {
         }
         return false;
     }
+
     public function logout() { 
         if(isset($_SESSION['username']) && isset($_SESSION['userrole'])) {
             unset($_SESSION['username']);
             unset($_SESSION['userrole']);
             unset($_SESSION['ID']);
+            unset($_SESSION['Batch']);
+            unset($_SESSION['crs_id']);
             header("Location: ". ROOT . "login");
             die;
         }

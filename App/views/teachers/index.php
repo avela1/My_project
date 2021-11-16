@@ -40,5 +40,11 @@
            </div>
           
         <?php $this->view('includes/footer'); ?>
+        <script>
+            $(document).ready(function() {
+                $('#wrapper').addClass('sidebar_minimize');
+            });
+        </script>
 </body>
 </html>
+

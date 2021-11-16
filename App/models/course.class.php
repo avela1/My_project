@@ -23,7 +23,8 @@ Class Course {
 
         if(!preg_match("/^[a-zA-Z 0-9._\-,]+$/", $data['CrsName']))
         {
-            $_SESSION['error'] .= "Please enter valid course name"; 
+            $_SESSION['error'] = "Please enter valid course name"; 
+            return false;
         } 
         
         $arr['CrsCode'] = $data['CrsCode'];
@@ -31,7 +32,9 @@ Class Course {
         $check = $DB->read($sql, $arr);
 
         if(is_array($check)){
-            $_SESSION['error'] .= "That Course code is already in use <br>";
+            $_SESSION['error'] = "That Course code is already in use <br>";
+            return false;
+
         }
 
 
@@ -50,6 +53,8 @@ Class Course {
             $data["image"] = $destination;
         } else {
             $_SESSION['error'] = "image format is not supported";
+            return false;
+
         }
     
         if(!isset($_SESSION['error']) || $_SESSION['error'] == ""){
@@ -84,7 +89,9 @@ Class Course {
 
         if(!preg_match("/^[a-zA-Z 0-9._\-,]+$/", $data['CrsName']))
         {
-            $_SESSION['error'] .= "Please enter valid course name"; 
+            $_SESSION['error'] = "Please enter valid course name"; 
+            return false;
+
         } 
         
         if($files['name'] != '') {
@@ -104,6 +111,8 @@ Class Course {
                 unlink($POST['oldimage']);
             } else {
                 $_SESSION['error'] = "image format is not supported";
+                return false;
+
             }
         } else {
             $data["image"] = $POST['oldimage'];
@@ -145,6 +154,38 @@ Class Course {
 
         $DB = Database::newInstance();
         $result = $DB->read("SELECT * FROM `courceinfo` where `CourseStatus` = 1");
+        return $result;
+    }
+    public function get_all_by_batch() {
+        
+        $DB = Database::newInstance();
+        $id =$_SESSION['Batch'];
+        $result = $DB->read("SELECT * FROM `courceinfo` where `CourseGivenYear` = $id");
+
+        return $result;
+    }
+    public function get_all_add() {
+        
+        $DB = Database::newInstance();
+        $id =$_SESSION['Batch'];
+        $result = $DB->read("SELECT * FROM `courceinfo` where `CourseGivenYear` <= $id ORDER BY `CourseGivenYear` DESC");
+        return $result;
+    }
+    public function register($POST = []) {
+
+        $DB = Database::newInstance();
+        $checks = $POST['check_list'];
+       
+        foreach($checks as $check) {
+            $data['stud_id'] = $POST['stud_id'];
+            $data['checked'] = $check;
+            $query = "INSERT INTO `stud_crs`(`stud_id`, `crs_id`) VALUES (:stud_id, :checked)";
+            $result = $DB->write($query, $data);
+        }
+        $array = array();
+        $array['stud_id'] = $POST['stud_id'];
+        $query = "UPDATE `studentinfo` SET`registered`=1 WHERE `ID` = :stud_id";    
+        $result = $DB->write($query, $array);
         return $result;
     }
 }

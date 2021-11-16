@@ -1,6 +1,5 @@
 <?php $this->view('includes/header', $data); ?>
 <link rel="stylesheet" href="<?= ASSETS ?>/css/main.css">
-<?php $this->view('teachers/sidebar', $data); ?>
 
 <div class="main-panel">
     <div class="content">

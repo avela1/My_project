@@ -43,7 +43,7 @@
 									<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
-												<div class="modal-header no-bd">
+												<div class="modal-header">
 													<h5 class="modal-title">
 														<span class="fw-mediumbold">
 														New</span> 
@@ -55,25 +55,27 @@
 														<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
-												<form method="POST" action="" id="addform" enctype="multipart/form-data">
-													<div class="modal-body bg-dark">
+												<form method="POST" id="addform" enctype="multipart/form-data">
+													<div class="modal-body">
 														<div class="row" >
 															<div class="col-md-12 col-lg-12"  >
+																<h3 id="error" type="text" class="text-danger"></h3>
+
 																<div class="form-group">
 																	<label for="name">Full Name</label>
-																	<input name="name" id="name" type="text" class="form-control" placeholder="Fill Name" required>
+																	<input name="name" id="name" type="text" class="form-control" placeholder="Fill Name" required >
 																</div>
 																<div class="form-group">
 																	<label for="email">Email Address</label>
-																	<input name="email" type="email" class="form-control" id="email" placeholder="Enter Email" required>
+																	<input name="email" type="email" class="form-control" id="email" placeholder="Enter Email" required >
 																</div>
 																<div class="form-group">
 																	<label for="exampleFormControlFile1">Load Photo</label>
-																	<input name="photo" type="file" class="form-control-file" id="image" required>
+																	<input name="photo" type="file" class="form-control-file" id="image" required >
 																</div>
 																<div class="form-group">
 																	<label for="exampleFormControlFile1">Contact Number</label>
-																	<input name="contact" type="number" class="form-control-file" id="contact" required>
+																	<input name="contact" type="number" class="form-control-file" id="contact" required >
 																</div>
 					
 																<div class="form-group">
@@ -265,7 +267,7 @@
 						console.log("waiting....");
 					},
 					success: function(response){
-						handle_result(response);
+						alert(response);
 					},
 					error: function (){
 						console.log("OOOPs something is wrong");
@@ -297,6 +299,24 @@
 						handle_result(data);
 					}
 				);
+			});
+			$('#deleteStud').click(function() {
+				var id = $(this).data('id');
+				$data = new FormData();
+				$data.append("id", id);
+				if(confirm("Are you sure you want to delete the Student??")) {
+					$.ajax({
+						url: "<?=ROOT?>student_controller/delete",
+						method: "POST",
+						data: $data,
+						dataType: 'json',
+						processData: false,
+						contentType: false,
+						success: function(data) {
+							handle_result(data);
+						}
+					});
+				}            
 			});
 		});
 	</script>

@@ -48,8 +48,8 @@
                         <p>Home Page</p>
                     </a>	
                 </li>
-                <li class="nav-item active">
-                    <a href="<?= ROOT ?>teacher/course_material">
+                <li class="nav-item">
+                    <a href="<?= ROOT ?>teacher/dashboard">
                         <i class="fas fa-book-reader"></i>
                         <p>Manage Course Material</p>
                     </a>
@@ -68,14 +68,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="<?= ROOT ?>teacher/message">
-                        <i class="far fa-envelope"></i>
-                        <p>Messages</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a data-toggle="" href="<?= ROOT ?>teacher/forum" class="collapsed" aria-expanded="false">
+                    <a data-toggle="" href="<?= ROOT ?>forum/" class="collapsed" aria-expanded="false">
                         <i class="fas fa-comments"></i>
                         <p>Forums</p>
                     </a>
